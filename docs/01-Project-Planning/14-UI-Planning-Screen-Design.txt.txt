@@ -1,0 +1,165 @@
+=========================================
+UI PLANNING & SCREEN DESIGN
+=========================================
+
+1. What is UI Planning?
+
+UI Planning is the process of deciding how the application's screens, pages, navigation, and user experience will be designed before development starts.
+
+-----------------------------------------
+2. Main User Panels
+-----------------------------------------
+
+1. Public Panel
+2. Customer Panel
+3. Driver Panel
+4. Admin Panel
+
+-----------------------------------------
+3. Public Panel Pages
+-----------------------------------------
+
+- Landing Page
+- About Us
+- Contact Us
+- Login
+- Register
+- Forgot Password (Future)
+
+-----------------------------------------
+4. Customer Panel Pages
+-----------------------------------------
+
+Dashboard
+
+Profile
+
+Search Bus
+
+Bus Details
+
+Seat Selection
+
+Booking Confirmation
+
+Payment
+
+My Bookings
+
+Booking Details
+
+Live Tracking
+
+Notifications
+
+Settings
+
+-----------------------------------------
+5. Driver Panel Pages
+-----------------------------------------
+
+Dashboard
+
+Assigned Trips
+
+Trip Details
+
+Passenger List
+
+Update Bus Location
+
+Notifications
+
+Profile
+
+Settings
+
+-----------------------------------------
+6. Admin Panel Pages
+-----------------------------------------
+
+Dashboard
+
+Manage Users
+
+Manage Drivers
+
+Manage Buses
+
+Manage Routes
+
+Manage Cities
+
+Manage Bus Stops
+
+Manage Schedules
+
+Manage Seats
+
+Manage Bookings
+
+Manage Payments
+
+Reports
+
+Notifications
+
+Settings
+
+-----------------------------------------
+7. Common Components
+-----------------------------------------
+
+Header
+
+Navbar
+
+Sidebar
+
+Footer
+
+Breadcrumb
+
+Loader
+
+Search Box
+
+Pagination
+
+Modal Dialog
+
+Toast Notifications
+
+Confirmation Dialog
+
+-----------------------------------------
+8. UI Design Goals
+-----------------------------------------
+
+- Responsive Design
+- Clean Layout
+- Modern Interface
+- User-Friendly Navigation
+- Consistent Colors
+- Reusable Components
+- Fast Loading Pages
+- Accessibility Support
+
+-----------------------------------------
+9. Technologies
+-----------------------------------------
+
+Frontend:
+Angular 19
+
+UI Framework:
+Bootstrap 5
+
+Icons:
+Bootstrap Icons
+
+-----------------------------------------
+10. Conclusion
+-----------------------------------------
+
+A proper UI plan ensures that development is faster, the user experience is better, and the application remains consistent across all screens.

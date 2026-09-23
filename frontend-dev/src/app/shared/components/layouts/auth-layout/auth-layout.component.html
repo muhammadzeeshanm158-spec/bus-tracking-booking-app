@@ -1,0 +1,38 @@
+<!-- ========================================================================= -->
+<!-- AUTHENTICATION / APP SHELL LAYOUT TEMPLATE (Responsive & Documented)     -->
+<!-- ========================================================================= -->
+<div class="h-screen bg-slate-100 flex overflow-hidden">
+
+  <!-- 1. LEFT BRANDING SECTION (Sirf large screens par dikhega, attractive blue gradient background ke sath) -->
+  <div class="hidden lg:flex w-2/5 h-screen sticky top-0 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white shrink-0">
+    <div class="flex flex-col justify-center px-12 xl:px-16 w-full">
+      
+      <!-- App Logo / Bus Emoji Box (Rounded glassmorphism container) -->
+      <div class="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center text-2xl ring-1 ring-white/20 shadow-lg">
+        🚌
+      </div>
+
+      <!-- Main Application Title -->
+      <h1 class="mt-6 text-3xl xl:text-4xl font-extrabold tracking-tight leading-tight">
+        Bus Tracking
+      </h1>
+
+      <!-- Application Subtitle -->
+      <h2 class="text-2xl xl:text-3xl font-bold tracking-tight text-blue-100 mt-0.5">
+        Booking App
+      </h2>
+
+      <!-- App Description / Tagline (User ko app ka maqsad samझाने ke liye) -->
+      <p class="mt-4 text-xs xl:text-sm text-blue-100/90 leading-relaxed max-w-sm font-medium">
+        Track buses in real time, manage bookings, and travel smarter with one modern, high-performance platform.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- 2. RIGHT ROUTER VIEW SECTION (Jahan Login, Register ya baqi auth pages responsive padding ke sath load honge) -->
+  <div class="flex-1 h-screen overflow-y-auto flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-slate-50/50">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

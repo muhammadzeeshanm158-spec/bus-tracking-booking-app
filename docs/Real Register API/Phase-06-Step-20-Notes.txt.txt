@@ -1,0 +1,52 @@
+=================================================
+
+PHASE 6
+
+STEP 20
+
+REMOVE DEBUG LOGS
+
+=================================================
+
+Objective
+
+Remove unnecessary console.log() statements
+used during development.
+
+=================================================
+
+Why?
+
+Debug logs help during development but
+should not remain in production code.
+
+Too many logs make debugging difficult.
+
+=================================================
+
+Current
+
+console.log("Original Password:", password);
+
+console.log("Hashed Password:", hashedPassword);
+
+=================================================
+
+Target
+
+Remove unnecessary debug logs.
+
+Keep only important server and error logs.
+
+=================================================
+
+Learning
+
+Debug logs are temporary.
+
+Production code should contain only useful
+logs.
+
+Clean code is easier to maintain.
+
+=================================================

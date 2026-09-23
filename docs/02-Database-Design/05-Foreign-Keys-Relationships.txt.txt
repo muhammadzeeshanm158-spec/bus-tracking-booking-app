@@ -1,0 +1,128 @@
+=========================================
+FOREIGN KEYS & RELATIONSHIPS
+=========================================
+
+1. What is a Foreign Key?
+
+A Foreign Key is a column in one table that references the Primary Key of another table. It creates a relationship between two tables.
+
+-----------------------------------------
+2. Why are Foreign Keys Important?
+-----------------------------------------
+
+- Connect database tables.
+- Maintain data integrity.
+- Prevent invalid references.
+- Reduce duplicate data.
+- Make JOIN operations possible.
+
+-----------------------------------------
+3. Primary Key vs Foreign Key
+-----------------------------------------
+
+Primary Key:
+- Uniquely identifies a record.
+- Exists in its own table.
+
+Foreign Key:
+- References the Primary Key of another table.
+- Creates a relationship between tables.
+
+-----------------------------------------
+4. Foreign Keys in Our Project
+-----------------------------------------
+
+Users
+Primary Key:
+- id
+
+Roles
+Primary Key:
+- id
+
+users.role_id
+→ references roles.id
+
+-----------------------------------------
+
+Drivers
+
+drivers.user_id
+→ references users.id
+
+-----------------------------------------
+
+Schedules
+
+schedules.bus_id
+→ references buses.id
+
+schedules.route_id
+→ references routes.id
+
+schedules.driver_id
+→ references drivers.id
+
+-----------------------------------------
+
+Seats
+
+seats.bus_id
+→ references buses.id
+
+-----------------------------------------
+
+Bookings
+
+bookings.user_id
+→ references users.id
+
+bookings.schedule_id
+→ references schedules.id
+
+-----------------------------------------
+
+Booking Details
+
+booking_details.booking_id
+→ references bookings.id
+
+booking_details.seat_id
+→ references seats.id
+
+-----------------------------------------
+
+Payments
+
+payments.booking_id
+→ references bookings.id
+
+-----------------------------------------
+
+Bus Locations
+
+bus_locations.bus_id
+→ references buses.id
+
+-----------------------------------------
+
+Notifications
+
+notifications.user_id
+→ references users.id
+
+-----------------------------------------
+5. Benefits
+-----------------------------------------
+
+- Data consistency
+- Better security
+- Easier reporting
+- Easier JOIN queries
+- Prevent orphan records
+
+-----------------------------------------
+6. Conclusion
+-----------------------------------------
+
+Foreign Keys connect tables together and make relational databases powerful and organized.

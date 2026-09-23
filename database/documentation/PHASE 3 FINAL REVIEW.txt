@@ -1,0 +1,15 @@
+=========================================
+PHASE 3 FINAL REVIEW
+=========================================
+
+1. Database Created Successfully
+
+2. Tables Created Successfully
+
+3. Relationships Created
+
+4. Seed Data Inserted
+
+5. Database Tested
+
+6. Ready for Backend Development

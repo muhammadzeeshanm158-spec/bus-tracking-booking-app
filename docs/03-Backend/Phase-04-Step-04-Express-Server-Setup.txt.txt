@@ -1,0 +1,103 @@
+=================================================
+PHASE 4 – STEP 4
+
+EXPRESS SERVER SETUP
+
+=================================================
+
+What is Express.js?
+
+Express.js is a Node.js framework.
+
+It is used to build APIs and Backend Applications.
+
+-------------------------------------------------
+
+What is a Server?
+
+A server is a program that receives requests from clients
+and sends responses back.
+
+Example:
+
+Browser
+
+↓
+
+Request
+
+↓
+
+Express Server
+
+↓
+
+Response
+
+-------------------------------------------------
+
+What is server.js?
+
+server.js is the entry point of the application.
+
+Responsibilities:
+
+- Start the server
+- Listen on a Port
+- Load Express App
+
+-------------------------------------------------
+
+What is app.js?
+
+app.js is the heart of the application.
+
+Responsibilities:
+
+- Create Express Application
+- Register Middlewares
+- Register Routes
+
+-------------------------------------------------
+
+Backend Flow
+
+Client
+
+↓
+
+server.js
+
+↓
+
+app.js
+
+↓
+
+Routes
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Repositories
+
+↓
+
+Database
+
+-------------------------------------------------
+
+Software House Rule
+
+server.js should only start the server.
+
+Business logic should never be written inside server.js.
+
+=================================================

@@ -1,0 +1,31 @@
+=================================
+
+PHASE 09
+
+STEP 05
+
+Secure User Routes
+
+=================================
+
+Never expose
+Admin APIs
+without middleware.
+
+Correct Flow
+
+Request
+
+↓
+
+Authentication
+
+↓
+
+Authorization
+
+↓
+
+Controller
+
+=================================

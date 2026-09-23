@@ -1,0 +1,51 @@
+=================================================
+PHASE 4 – STEP 11
+
+ENVIRONMENT VALIDATION &
+CONFIGURATION MANAGEMENT
+
+=================================================
+
+What is Environment Configuration?
+
+Environment Configuration means storing
+application settings outside the source code.
+
+Examples
+
+PORT
+
+DB_HOST
+
+DB_PORT
+
+DB_USER
+
+DB_PASSWORD
+
+DB_NAME
+
+JWT_SECRET
+
+-------------------------------------------------
+
+Why use .env?
+
+1. Security
+
+2. Easy Configuration
+
+3. Different Settings for Development
+
+4. Different Settings for Production
+
+-------------------------------------------------
+
+Software House Rule
+
+Never hardcode sensitive information inside
+the source code.
+
+Always use environment variables.
+
+=================================================

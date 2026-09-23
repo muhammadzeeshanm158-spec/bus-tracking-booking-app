@@ -1,0 +1,34 @@
+<!-- ========================================================================= -->
+<!-- DASHBOARD LAYOUT COMPONENT TEMPLATE                                       -->
+<!-- ========================================================================= -->
+<div class="h-screen bg-slate-100 flex flex-col overflow-hidden">
+
+  <!-- 1. HEADER SECTION (Top Navigation Bar) -->
+  <header class="h-16 shrink-0 z-50 bg-white border-b border-slate-200/80 shadow-xs">
+    <app-navbar></app-navbar>
+  </header>
+
+  <!-- 2. MAIN CONTAINER (Sidebar aur Content area ka wrapper) -->
+  <div class="flex flex-1 overflow-hidden relative">
+
+    <!-- Sidebar Component (Yeh DOM mein hamesha rahega, state iske andar manage hogi) -->
+    <app-sidebar class="shrink-0 h-full z-40"></app-sidebar>
+
+    <!-- Content & Footer Wrapper (Right side ka scrolling area) -->
+    <div class="flex-1 flex flex-col h-full overflow-y-auto">
+      
+      <!-- Main Router Outlet Area -->
+      <main class="flex-1 p-4 sm:p-6 bg-slate-50/50">
+        <router-outlet></router-outlet>
+      </main>
+
+      <!-- Footer Section -->
+      <footer class="shrink-0">
+        <app-footer></app-footer>
+      </footer>
+
+    </div>
+
+  </div>
+
+</div>

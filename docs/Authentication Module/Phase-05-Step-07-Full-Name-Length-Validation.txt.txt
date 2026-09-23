@@ -1,0 +1,37 @@
+=================================================
+
+PHASE 5 – STEP 7
+
+FULL NAME LENGTH VALIDATION
+
+=================================================
+
+Purpose
+
+Validate full_name length.
+
+=================================================
+
+Validation Rules
+
+1. Remove Extra Spaces
+
+2. Minimum Length = 3
+
+3. Maximum Length = 150
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

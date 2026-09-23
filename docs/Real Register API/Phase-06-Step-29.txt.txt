@@ -1,0 +1,45 @@
+=================================================
+
+PHASE 6
+
+STEP 29
+
+USE ASYNCHANDLER IN CONTROLLER
+
+=================================================
+
+Objective
+
+Wrap controller with asyncHandler.
+
+Remove try-catch block.
+
+=================================================
+
+Current
+
+Controller handles errors manually.
+
+Target
+
+asyncHandler handles all async errors.
+
+=================================================
+
+Benefits
+
+✓ Clean Controller
+
+✓ No Duplicate try-catch
+
+✓ Professional Architecture
+
+=================================================
+
+Learning
+
+Controller only contains business logic.
+
+asyncHandler catches async errors.
+
+=================================================

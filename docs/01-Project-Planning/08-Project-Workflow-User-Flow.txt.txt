@@ -1,0 +1,127 @@
+=========================================
+PROJECT WORKFLOW & USER FLOW
+=========================================
+
+1. What is Project Workflow?
+
+Project Workflow is the complete process that shows how the system works from start to finish.
+
+-----------------------------------------
+2. What is User Flow?
+
+User Flow is the path that a user follows while using the application to complete a task.
+
+-----------------------------------------
+3. Customer Workflow
+-----------------------------------------
+
+Step 1:
+Open the website.
+
+Step 2:
+Register a new account or log in.
+
+Step 3:
+Search buses by source, destination, and travel date.
+
+Step 4:
+View available buses.
+
+Step 5:
+Select a bus.
+
+Step 6:
+View bus details.
+
+Step 7:
+Select available seats.
+
+Step 8:
+Confirm booking.
+
+Step 9:
+Make payment.
+
+Step 10:
+Booking is successfully completed.
+
+Step 11:
+View or download the ticket.
+
+Step 12:
+Track the live location of the bus.
+
+Step 13:
+View booking history.
+
+-----------------------------------------
+4. Driver Workflow
+-----------------------------------------
+
+Step 1:
+Login.
+
+Step 2:
+View assigned trips.
+
+Step 3:
+Start the trip.
+
+Step 4:
+Update the current bus location.
+
+Step 5:
+View passenger list.
+
+Step 6:
+Complete the trip.
+
+-----------------------------------------
+5. Admin Workflow
+-----------------------------------------
+
+Step 1:
+Login.
+
+Step 2:
+Open dashboard.
+
+Step 3:
+Manage users.
+
+Step 4:
+Manage drivers.
+
+Step 5:
+Manage buses.
+
+Step 6:
+Manage routes.
+
+Step 7:
+Manage schedules.
+
+Step 8:
+Manage bookings.
+
+Step 9:
+Manage payments.
+
+Step 10:
+View reports.
+
+-----------------------------------------
+6. Benefits of User Flow
+-----------------------------------------
+
+- Better planning
+- Better user experience
+- Easy UI design
+- Easy API planning
+- Easy database design
+
+-----------------------------------------
+7. Conclusion
+-----------------------------------------
+
+A clear user flow helps developers build a simple, organized, and user-friendly application.

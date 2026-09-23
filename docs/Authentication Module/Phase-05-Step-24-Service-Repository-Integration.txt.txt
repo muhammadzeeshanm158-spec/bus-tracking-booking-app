@@ -1,0 +1,39 @@
+=================================================
+
+PHASE 5 – STEP 24
+
+SERVICE → REPOSITORY INTEGRATION
+
+=================================================
+
+Purpose
+
+Connect Service Layer with Repository Layer
+
+=================================================
+
+Architecture
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+
+=================================================
+
+Current Goal
+
+Service calls Repository
+
+Repository returns response
+
+Service returns response to Controller
+
+=================================================

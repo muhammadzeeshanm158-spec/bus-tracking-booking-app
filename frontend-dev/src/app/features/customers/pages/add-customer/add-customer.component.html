@@ -1,0 +1,315 @@
+<!-- ================================================================= -->
+<!-- ADD NEW CUSTOMER COMPONENT TEMPLATE                               -->
+<!-- ================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER & BACK NAVIGATION BUTTON -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Add New Customer
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Register a new passenger into the bus booking system.
+      </p>
+    </div>
+
+    <!-- Back to Customers List Button -->
+    <a
+      routerLink="/customers"
+      class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:text-slate-900 active:scale-95 self-start sm:self-auto">
+      <span class="material-symbols-outlined text-base text-slate-500">arrow_back</span>
+      <span>Back to Customers</span>
+    </a>
+  </div>
+
+  <!-- SERVER ERROR ALERT (Agar Backend se koi error aaye toh show hoga) -->
+  @if (errorMessage) {
+    <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">error</span>
+        <span>{{ errorMessage }}</span>
+      </div>
+      <button type="button" (click)="errorMessage = ''" class="text-rose-500 hover:text-rose-700">
+        <span class="material-symbols-outlined text-base">close</span>
+      </button>
+    </div>
+  }
+
+  <!-- 2. FORM CARD CONTAINER -->
+  <div class="rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-xs">
+    
+    <!-- Reactive Form Binding: [formGroup] aur (ngSubmit) -->
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+      <!-- =================================================================== -->
+      <!-- SECTION 1: PERSONAL INFORMATION (Naam, Email, Phone, CNIC, etc.)    -->
+      <!-- =================================================================== -->
+      <div>
+        <div class="mb-4 flex items-center gap-3 border-b border-slate-100 pb-3">
+          <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+            <span class="material-symbols-outlined text-lg">person</span>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-slate-800">
+              Personal Information
+            </h2>
+            <p class="text-[10px] text-slate-500 mt-0.5">Basic details of the passenger</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Full Name Field -->
+          <div>
+            <label for="fullName" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Full Name <span class="text-rose-500">*</span>
+            </label>
+            <input
+              id="fullName"
+              type="text"
+              formControlName="name"
+              placeholder="e.g. Muhammad Ali"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              [ngClass]="{'border-rose-500! bg-rose-50/30!': f['name'].touched && f['name'].invalid}" />
+
+            <!-- Name Validation Error Messages -->
+            @if (f['name'].touched && f['name'].invalid) {
+              <div class="mt-1 text-[10px] text-rose-500 font-medium">
+                @if (f['name'].errors?.['required']) {
+                  <span>Full name is required.</span>
+                }
+                @if (f['name'].errors?.['minlength']) {
+                  <span>Minimum 3 characters required.</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Email Address Field -->
+          <div>
+            <label for="email" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Email Address <span class="text-rose-500">*</span>
+            </label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="e.g. ali@example.com"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              [ngClass]="{'border-rose-500! bg-rose-50/30!': f['email'].touched && f['email'].invalid}" />
+
+            <!-- Email Validation Error Messages -->
+            @if (f['email'].touched && f['email'].invalid) {
+              <div class="mt-1 text-[10px] text-rose-500 font-medium">
+                @if (f['email'].errors?.['required']) {
+                  <span>Email address is required.</span>
+                }
+                @if (f['email'].errors?.['email']) {
+                  <span>Enter a valid email address.</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Phone Number Field -->
+          <div>
+            <label for="phoneNumber" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Phone Number <span class="text-rose-500">*</span>
+            </label>
+            <input
+              id="phoneNumber"
+              type="tel"
+              formControlName="phone_number"
+              placeholder="e.g. 03001234567"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              [ngClass]="{'border-rose-500! bg-rose-50/30!': f['phone_number'].touched && f['phone_number'].invalid}" />
+
+            <!-- Phone Validation Error Messages -->
+            @if (f['phone_number'].touched && f['phone_number'].invalid) {
+              <div class="mt-1 text-[10px] text-rose-500 font-medium">
+                @if (f['phone_number'].errors?.['required']) {
+                  <span>Phone number is required.</span>
+                }
+                @if (f['phone_number'].errors?.['invalidPhone']) {
+                  <span>Enter valid Pakistani format (e.g. 03001234567).</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- CNIC / Identity Number Field -->
+          <div>
+            <label for="identityNumber" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              CNIC / Passport Number
+            </label>
+            <input
+              id="identityNumber"
+              type="text"
+              formControlName="cnic"
+              placeholder="e.g. 42101-1234567-1"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 font-mono outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              [ngClass]="{'border-rose-500! bg-rose-50/30!': f['cnic'].touched && f['cnic'].invalid}" />
+
+            <!-- CNIC Validation Error Messages -->
+            @if (f['cnic'].touched && f['cnic'].invalid) {
+              <div class="mt-1 text-[10px] text-rose-500 font-medium">
+                @if (f['cnic'].errors?.['invalidCnic']) {
+                  <span>CNIC must be 13 digits (e.g. 42101-1234567-1).</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Gender Dropdown Selection -->
+          <div>
+            <label for="gender" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Gender <span class="text-rose-500">*</span>
+            </label>
+            <select
+              id="gender"
+              formControlName="gender"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Date of Birth Field -->
+          <div>
+            <label for="dateOfBirth" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Date of Birth
+            </label>
+            <input
+              id="dateOfBirth"
+              type="date"
+              formControlName="dob"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SECTION 2: EMERGENCY & LOCATION DETAILS                             -->
+      <!-- =================================================================== -->
+      <div>
+        <div class="mb-4 flex items-center gap-3 border-b border-slate-100 pb-3">
+          <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+            <span class="material-symbols-outlined text-lg">contact_phone</span>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-slate-800">
+              Emergency & Location Details
+            </h2>
+            <p class="text-[10px] text-slate-500 mt-0.5">Contact information for emergency scenarios</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Emergency Contact Name Field -->
+          <div>
+            <label for="emergencyContactName" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Emergency Contact Name
+            </label>
+            <input
+              id="emergencyContactName"
+              type="text"
+              formControlName="emergency_contact_name"
+              placeholder="e.g. Usman Ali (Brother)"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20" />
+          </div>
+
+          <!-- Emergency Phone Number Field -->
+          <div>
+            <label for="emergencyContactPhone" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Emergency Phone Number
+            </label>
+            <input
+              id="emergencyContactPhone"
+              type="tel"
+              formControlName="emergency_contact_phone"
+              placeholder="e.g. 03217654321"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+              [ngClass]="{'border-rose-500! bg-rose-50/30!': f['emergency_contact_phone'].touched && f['emergency_contact_phone'].invalid}" />
+
+            <!-- Emergency Phone Validation Error Messages -->
+            @if (f['emergency_contact_phone'].touched && f['emergency_contact_phone'].invalid) {
+              <div class="mt-1 text-[10px] text-rose-500 font-medium">
+                @if (f['emergency_contact_phone'].errors?.['invalidPhone']) {
+                  <span>Enter valid phone number format.</span>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Account Status Dropdown Field (Updated Values to match Title-case) -->
+          <div>
+            <label for="accountStatus" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Account Status
+            </label>
+            <select
+              id="accountStatus"
+              formControlName="status"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <!-- Full Residential Address Textarea Field -->
+          <div class="md:col-span-2 lg:col-span-3">
+            <label for="residentialAddress" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Full Residential Address
+            </label>
+            <textarea
+              id="residentialAddress"
+              formControlName="address"
+              rows="2.5"
+              placeholder="e.g. House # 12, Street 4, Sector F-8, Islamabad"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SECTION 3: ACTION FOOTER (Cancel & Submit Buttons)                  -->
+      <!-- =================================================================== -->
+      <div class="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end border-t border-slate-100 pt-4">
+        
+        <!-- Cancel / Discard Button -->
+        <a
+          routerLink="/customers"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 active:scale-95">
+          <span class="material-symbols-outlined text-base">close</span>
+          <span>Cancel</span>
+        </a>
+
+        <!-- Submit Button (With Loading State & Disabled Attribute) -->
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+          
+          @if (isSubmitting) {
+            <!-- Spinner / Loader -->
+            <svg class="animate-spin -ml-1 mr-1 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span>Saving...</span>
+          } @else {
+            <span class="material-symbols-outlined text-base">save</span>
+            <span>Save Customer</span>
+          }
+
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

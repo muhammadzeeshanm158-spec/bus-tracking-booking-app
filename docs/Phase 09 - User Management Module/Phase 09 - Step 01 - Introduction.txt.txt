@@ -1,0 +1,33 @@
+=================================
+
+PHASE 09
+
+STEP 01
+
+User Management Module
+
+=================================
+
+What is User Management?
+
+User Management is a system
+that allows an administrator
+to manage application users.
+
+---------------------------------
+
+Common Features
+
+✓ View Users
+
+✓ Search Users
+
+✓ Filter Users
+
+✓ Sort Users
+
+✓ Update User
+
+✓ Delete User
+
+=================================

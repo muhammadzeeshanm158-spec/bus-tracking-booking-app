@@ -1,0 +1,159 @@
+=========================================
+ENTITY IDENTIFICATION
+=========================================
+
+1. What is an Entity?
+
+An Entity is a real-world object, person, place, or concept about which the application stores information in the database.
+
+-----------------------------------------
+2. Why is Entity Identification Important?
+-----------------------------------------
+
+- Identifies the main objects of the system.
+- Helps create database tables.
+- Makes relationship design easier.
+- Reduces database redesign.
+
+-----------------------------------------
+3. Main Entities of the Bus Tracking & Booking System
+-----------------------------------------
+
+1. User
+
+Purpose:
+Stores customer, admin, and driver account information.
+
+-----------------------------------------
+
+2. Role
+
+Purpose:
+Stores different user roles.
+
+Examples:
+- Admin
+- Customer
+- Driver
+
+-----------------------------------------
+
+3. Bus
+
+Purpose:
+Stores bus details.
+
+-----------------------------------------
+
+4. Driver
+
+Purpose:
+Stores driver information.
+
+-----------------------------------------
+
+5. Route
+
+Purpose:
+Stores travel routes.
+
+-----------------------------------------
+
+6. City
+
+Purpose:
+Stores city information.
+
+-----------------------------------------
+
+7. Bus Stop
+
+Purpose:
+Stores bus stop information.
+
+-----------------------------------------
+
+8. Schedule
+
+Purpose:
+Stores departure and arrival schedules.
+
+-----------------------------------------
+
+9. Seat
+
+Purpose:
+Stores bus seat information.
+
+-----------------------------------------
+
+10. Booking
+
+Purpose:
+Stores booking records.
+
+-----------------------------------------
+
+11. Booking Detail
+
+Purpose:
+Stores booked seat details.
+
+-----------------------------------------
+
+12. Payment
+
+Purpose:
+Stores payment information.
+
+-----------------------------------------
+
+13. Bus Location
+
+Purpose:
+Stores live GPS location of buses.
+
+-----------------------------------------
+
+14. Notification
+
+Purpose:
+Stores notifications sent to users.
+
+-----------------------------------------
+4. Entity Summary
+-----------------------------------------
+
+User
+
+Role
+
+Bus
+
+Driver
+
+Route
+
+City
+
+Bus Stop
+
+Schedule
+
+Seat
+
+Booking
+
+Booking Detail
+
+Payment
+
+Bus Location
+
+Notification
+
+-----------------------------------------
+5. Conclusion
+-----------------------------------------
+
+Each entity represents a separate database table. These entities will be connected through relationships in the next steps.

@@ -1,0 +1,41 @@
+=================================================
+
+PHASE 6
+
+STEP 8
+
+EXECUTE EMAIL DUPLICATE CHECK QUERY
+
+=================================================
+
+Purpose
+
+Execute SQL Query to Check
+Whether Email Already Exists
+
+=================================================
+
+Current Goal
+
+Repository will execute
+
+SELECT * FROM users
+WHERE email = ?
+
+=================================================
+
+Flow
+
+Client
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+MySQL Query
+   ↓
+Database
+
+=================================================

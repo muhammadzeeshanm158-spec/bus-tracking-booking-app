@@ -1,0 +1,209 @@
+<!-- ========================================================================= -->
+<!-- VIEW BOOKING RECEIPT COMPONENT TEMPLATE                                   -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. LOADING STATE CHECK -->
+  @if (isLoading) {
+    <div class="p-8 text-center text-slate-500 font-medium text-xs">
+      Loading booking receipt...
+    </div>
+  } 
+  <!-- 2. ERROR STATE CHECK -->
+  @else if (errorMessage) {
+    <div class="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs">
+      {{ errorMessage }}
+    </div>
+  } 
+  <!-- 3. SUCCESS STATE: RENDER BOOKING DATA -->
+  @else if (bookingData) {
+
+    <!-- ======================================================================= -->
+    <!-- TOP ACTION BAR (Hidden during Window Print using print:hidden class)    -->
+    <!-- ======================================================================= -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 print:hidden">
+      
+      <!-- Back Link & PNR Title Section -->
+      <div class="flex items-center gap-3">
+        <a 
+          routerLink="/bookings" 
+          class="p-2 bg-white rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition flex items-center justify-center shadow-xs"
+          title="Back to Bookings">
+          <span class="material-symbols-outlined text-lg">arrow_back</span>
+        </a>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 tracking-tight">Booking Receipt</h1>
+          <p class="text-slate-500 text-xs mt-0.5">
+            Booking ID / PNR: <strong class="text-blue-600 font-mono font-bold">#{{ bookingData.id }}</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons (Print & Edit) -->
+      <div class="flex items-center gap-2.5">
+        <!-- Print Trigger Button -->
+        <button 
+          type="button"
+          (click)="printTicket()" 
+          class="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800 active:scale-95 transition cursor-pointer shadow-xs">
+          <span class="material-symbols-outlined text-base">print</span>
+          Print Ticket
+        </button>
+
+        <!-- Edit Ticket Navigation Link -->
+        <a 
+          [routerLink]="['/bookings/edit', bookingData.id]" 
+          class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold transition shadow-xs">
+          <span class="material-symbols-outlined text-base text-slate-500">edit</span>
+          Edit
+        </a>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- PRINTABLE E-TICKET CARD CONTAINER                                       -->
+    <!-- ======================================================================= -->
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden print:border-none print:shadow-none print:rounded-none">
+      
+      <!-- Ticket Header Banner (Company Branding & Payment Status Badge) -->
+      <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 print:bg-black">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shrink-0">
+            <span class="material-symbols-outlined text-xl">directions_bus</span>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold tracking-tight">Express Bus Transport</h2>
+            <p class="text-slate-400 text-[10px]">Official Passenger E-Ticket</p>
+          </div>
+        </div>
+
+        <div class="text-left sm:text-right">
+          <!-- Dynamic Payment Status Badge Styling using ngClass -->
+          <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                [ngClass]="{
+                  'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30': (bookingData.paymentStatus || bookingData.payment_status) === 'Paid',
+                  'bg-amber-500/20 text-amber-400 border border-amber-500/30': (bookingData.paymentStatus || bookingData.payment_status) === 'Pending',
+                  'bg-rose-500/20 text-rose-400 border border-rose-500/30': (bookingData.paymentStatus || bookingData.payment_status) === 'Refunded'
+                }">
+            Payment {{ bookingData.paymentStatus || bookingData.payment_status }}
+          </span>
+          <p class="text-[10px] text-slate-400 mt-1">Booked on: {{ (bookingData.createdAt || bookingData.created_at) | date:'mediumDate' }}</p>
+        </div>
+      </div>
+
+      <!-- Ticket Body Content Grid -->
+      <div class="p-5 md:p-6 space-y-5">
+        
+        <!-- Route & Timing Visual Summary Card -->
+        <div class="bg-slate-50 p-4 md:p-5 rounded-xl border border-slate-200/60 flex flex-col md:flex-row items-center justify-between gap-4 print:border-slate-300">
+          
+          <!-- Departure Info -->
+          <div class="text-center md:text-left space-y-0.5">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Departure</p>
+            <h3 class="text-lg font-black text-slate-900">{{ bookingData.departureTime || bookingData.departure_time }}</h3>
+            <p class="text-xs font-bold text-slate-800">{{ bookingData.routeOrigin || bookingData.route_origin }}</p>
+            <p class="text-[11px] text-slate-500">Travel Date: {{ bookingData.travelDate || bookingData.travel_date }}</p>
+          </div>
+
+          <!-- Bus Route Graphic Line & Bus Number Indicator -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+              Direct Route
+            </span>
+            <div class="flex items-center gap-2 text-slate-300 my-0.5">
+              <span class="w-10 md:w-12 h-0.5 bg-slate-300"></span>
+              <span class="material-symbols-outlined text-lg text-blue-600">directions_bus</span>
+              <span class="w-10 md:w-12 h-0.5 bg-slate-300"></span>
+            </div>
+            <span class="text-[10px] text-slate-500 font-medium">{{ bookingData.busNumber || bookingData.bus_number }}</span>
+          </div>
+
+          <!-- Arrival Info -->
+          <div class="text-center md:text-right space-y-0.5">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Destination</p>
+            <h3 class="text-lg font-black text-slate-900">Terminal Arrival</h3>
+            <p class="text-xs font-bold text-slate-800">{{ bookingData.routeDestination || bookingData.route_destination }}</p>
+            <p class="text-[11px] text-slate-500">Express Service</p>
+          </div>
+        </div>
+
+        <!-- Information Breakdown Two-Column Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1">
+          
+          <!-- Column 1: Passenger Personal Details -->
+          <div class="space-y-2.5">
+            <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-1.5">
+              Passenger Info
+            </h4>
+            
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">Passenger Name:</span>
+              <span class="font-bold text-slate-900">{{ bookingData.customerName || bookingData.customer_name }}</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">Contact Number:</span>
+              <span class="font-semibold text-slate-800">{{ bookingData.customerPhone || bookingData.customer_phone }}</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">CNIC / ID:</span>
+              <span class="font-semibold text-slate-800">{{ bookingData.cnicNumber || bookingData.cnic_number || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Bus & Assigned Seat Information -->
+          <div class="space-y-2.5">
+            <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 pb-1.5">
+              Bus & Seat Info
+            </h4>
+            
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">Bus Assigned:</span>
+              <span class="font-bold text-slate-900">{{ bookingData.busNumber || bookingData.bus_number }}</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">Seat Number(s):</span>
+              <div class="flex flex-wrap gap-1">
+                @for (seat of (bookingData.seatNumbers || bookingData.seat_numbers); track seat) {
+                  <span class="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[10px] border border-blue-100">
+                    {{ seat }}
+                  </span>
+                }
+              </div>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-500">Payment Method:</span>
+              <span class="font-semibold text-slate-800 uppercase">{{ bookingData.paymentMethod || bookingData.payment_method || 'Cash' }}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Fare, Total Amount & Booking Status Summary Card -->
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200/60 flex items-center justify-between">
+          <div>
+            <p class="text-[10px] text-slate-500 font-medium">Total Amount</p>
+            <p class="text-base font-bold text-blue-600">PKR {{ bookingData.totalAmount | number }}</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] text-slate-400 font-mono font-semibold">ID: {{ bookingData.id }}</p>
+            <p class="text-[11px] font-semibold mt-0.5"
+               [ngClass]="{
+                 'text-emerald-600': bookingData.bookingStatus === 'Confirmed',
+                 'text-amber-600': bookingData.bookingStatus === 'Pending',
+                 'text-rose-600': bookingData.bookingStatus === 'Cancelled'
+               }">
+              Status: {{ bookingData.bookingStatus }}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Ticket Footer Term & Condition Note -->
+      <div class="p-3 bg-slate-50 border-t border-slate-100 text-center text-[11px] text-slate-500">
+        Please present this ticket receipt at the terminal counter at least 15 minutes prior to departure. Have a safe journey!
+      </div>
+
+    </div>
+  }
+</div>

@@ -1,0 +1,75 @@
+=========================================
+SYSTEM ARCHITECTURE & HIGH-LEVEL DESIGN
+=========================================
+
+1. What is System Architecture?
+
+System Architecture is the overall structure of a software application. It defines how different parts of the system communicate and work together.
+
+-----------------------------------------
+2. What is High-Level Design (HLD)?
+
+High-Level Design (HLD) describes the major components of the system and their relationships. It provides a complete overview of the application before development begins.
+
+-----------------------------------------
+3. Components of Our System
+-----------------------------------------
+
+1. Frontend
+   Technology:
+   - Angular 19
+   - Bootstrap 5
+
+2. Backend
+   Technology:
+   - Node.js
+   - Express.js
+
+3. Database
+   Technology:
+   - MySQL
+
+-----------------------------------------
+4. Data Flow
+-----------------------------------------
+
+Step 1:
+The user opens the Angular application.
+
+Step 2:
+The user performs an action (Login, Register, Search Bus, Book Ticket).
+
+Step 3:
+Angular sends an HTTP request to the Express.js backend.
+
+Step 4:
+The backend validates the request.
+
+Step 5:
+The backend communicates with the MySQL database.
+
+Step 6:
+The database returns the requested data.
+
+Step 7:
+The backend prepares the response.
+
+Step 8:
+Angular receives the response and updates the user interface.
+
+-----------------------------------------
+5. Advantages of This Architecture
+-----------------------------------------
+
+- Separation of frontend and backend
+- Easy maintenance
+- Better security
+- Reusable APIs
+- Scalable application
+- Easy testing
+
+-----------------------------------------
+6. Conclusion
+-----------------------------------------
+
+A well-designed architecture makes the application organized, secure, scalable, and easy to maintain.

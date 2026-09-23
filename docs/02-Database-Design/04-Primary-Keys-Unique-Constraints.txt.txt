@@ -1,0 +1,120 @@
+=========================================
+PRIMARY KEYS & UNIQUE CONSTRAINTS
+=========================================
+
+1. What is a Primary Key?
+
+A Primary Key is a column that uniquely identifies each record in a table.
+
+Rules:
+- Must be unique.
+- Cannot contain NULL values.
+- Every table should have one Primary Key.
+- Usually uses AUTO_INCREMENT.
+
+-----------------------------------------
+2. What is AUTO_INCREMENT?
+
+AUTO_INCREMENT automatically generates the next number whenever a new record is inserted.
+
+Example:
+
+1
+2
+3
+4
+5
+
+-----------------------------------------
+3. What is a Unique Constraint?
+
+A Unique Constraint ensures that duplicate values are not allowed in a column.
+
+Example:
+
+Email
+Phone Number
+Bus Number
+Registration Number
+
+-----------------------------------------
+4. Primary Keys in Our Project
+-----------------------------------------
+
+users
+- id (Primary Key)
+
+roles
+- id (Primary Key)
+
+buses
+- id (Primary Key)
+
+drivers
+- id (Primary Key)
+
+routes
+- id (Primary Key)
+
+cities
+- id (Primary Key)
+
+bus_stops
+- id (Primary Key)
+
+schedules
+- id (Primary Key)
+
+seats
+- id (Primary Key)
+
+bookings
+- id (Primary Key)
+
+booking_details
+- id (Primary Key)
+
+payments
+- id (Primary Key)
+
+bus_locations
+- id (Primary Key)
+
+notifications
+- id (Primary Key)
+
+-----------------------------------------
+5. Columns with UNIQUE Constraint
+-----------------------------------------
+
+users
+- email
+- phone_number
+
+buses
+- bus_number
+- registration_number
+
+drivers
+- license_number
+
+bookings
+- booking_number
+
+payments
+- transaction_id
+
+-----------------------------------------
+6. Best Practices
+-----------------------------------------
+
+- Use "id" as the Primary Key.
+- Keep Primary Keys simple.
+- Apply UNIQUE only where duplicate values are not allowed.
+- Use AUTO_INCREMENT for numeric IDs.
+
+-----------------------------------------
+7. Conclusion
+-----------------------------------------
+
+Primary Keys uniquely identify records, while Unique Constraints prevent duplicate values in important columns.

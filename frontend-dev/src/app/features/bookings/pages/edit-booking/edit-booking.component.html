@@ -1,0 +1,211 @@
+<!-- ========================================================================= -->
+<!-- EDIT BOOKING COMPONENT                                                    -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-7xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- TOP NAVIGATION & HEADER -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <a 
+        routerLink="/bookings" 
+        class="p-2 bg-white rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition flex items-center justify-center shadow-xs"
+        title="Back to Bookings">
+        <span class="material-symbols-outlined text-lg">arrow_back</span>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-lg font-bold text-slate-900 tracking-tight">Edit Booking #{{ bookingId }}</h1>
+          <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/85">
+            {{ editForm.get('bookingStatus')?.value | titlecase }}
+          </span>
+        </div>
+        <p class="text-slate-500 text-xs mt-0.5">Modify ticket details, seat assignment, or payment status.</p>
+      </div>
+    </div>
+
+    <a 
+      routerLink="/bookings/view/{{ bookingId }}" 
+      class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold transition shadow-xs">
+      <span class="material-symbols-outlined text-base text-slate-500">receipt_long</span>
+      View Ticket Receipt
+    </a>
+  </div>
+
+  <!-- ERROR MESSAGE ALERT -->
+  @if (errorMessage) {
+    <div class="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-medium">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- LOADING STATE -->
+  @if (isLoading) {
+    <div class="p-8 text-center text-slate-500 text-xs">
+      Loading booking details...
+    </div>
+  }
+
+  <!-- MAIN FORM CONTAINER -->
+  @if (!isLoading) {
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs p-4 md:p-6">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        
+        <!-- SECTION 1: SCHEDULE & ROUTE ASSIGNMENT -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2.5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-blue-600 text-base">alt_route</span>
+            Schedule & Trip Info
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="route-select" class="block text-xs font-semibold text-slate-700 mb-1">
+                Route & Timing <span class="text-rose-500">*</span>
+              </label>
+              <select 
+                id="route-select" 
+                formControlName="routeSelection"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer">
+                <option value="Lahore ➔ Islamabad (08:00 AM • BS-102)">Lahore ➔ Islamabad (08:00 AM • BS-102)</option>
+                <option value="Karachi ➔ Multan (09:00 PM • BS-205)">Karachi ➔ Multan (09:00 PM • BS-205)</option>
+                <option value="Peshawar ➔ Rawalpindi (02:00 PM • BS-309)">Peshawar ➔ Rawalpindi (02:00 PM • BS-309)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="assigned-seats" class="block text-xs font-semibold text-slate-700 mb-1">
+                Assigned Seats <span class="text-rose-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none">
+                  airline_seat_recline_normal
+                </span>
+                <input 
+                  id="assigned-seats"
+                  type="text" 
+                  formControlName="assignedSeats"
+                  placeholder="e.g. 12, 13" 
+                  class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+              </div>
+              <p class="text-[10px] text-slate-400 mt-1">Separate multiple seat numbers with commas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: PASSENGER INFORMATION -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2.5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-blue-600 text-base">person</span>
+            Passenger Information
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label for="passenger-name" class="block text-xs font-semibold text-slate-700 mb-1">
+                Passenger Name <span class="text-rose-500">*</span>
+              </label>
+              <input 
+                id="passenger-name"
+                type="text" 
+                formControlName="customerName"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+            </div>
+
+            <div>
+              <label for="phone-number" class="block text-xs font-semibold text-slate-700 mb-1">
+                Phone Number <span class="text-rose-500">*</span>
+              </label>
+              <input 
+                id="phone-number"
+                type="text" 
+                formControlName="customerPhone"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+            </div>
+
+            <div>
+              <label for="cnic-number" class="block text-xs font-semibold text-slate-700 mb-1">
+                CNIC / ID Number <span class="text-[10px] text-slate-400 font-normal">(Optional)</span>
+              </label>
+              <!-- formControlName matches 'cnic' now -->
+              <input 
+                id="cnic-number"
+                type="text" 
+                formControlName="cnic"
+                placeholder="xxxxx-xxxxxxx-x"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: PAYMENT & STATUS UPDATES -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2.5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-blue-600 text-base">payments</span>
+            Payment & Status
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label for="total-fare" class="block text-xs font-semibold text-slate-700 mb-1">
+                Total Fare (PKR) <span class="text-rose-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[11px] font-bold pointer-events-none">
+                  PKR
+                </span>
+                <input 
+                  id="total-fare"
+                  type="number" 
+                  formControlName="totalAmount"
+                  class="w-full pl-10 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+              </div>
+            </div>
+
+            <div>
+              <label for="payment-method" class="block text-xs font-semibold text-slate-700 mb-1">Payment Method</label>
+              <select 
+                id="payment-method" 
+                formControlName="paymentMethod"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer">
+                <option value="easypaisa">EasyPaisa</option>
+                <option value="jazzcash">JazzCash</option>
+                <option value="cash">Cash on Terminal</option>
+                <option value="card">Credit / Debit Card</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="booking-status" class="block text-xs font-semibold text-slate-700 mb-1">
+                Booking Status <span class="text-rose-500">*</span>
+              </label>
+              <select 
+                id="booking-status" 
+                formControlName="bookingStatus"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer">
+                <option value="Confirmed" class="text-emerald-700 font-medium">Confirmed & Paid</option>
+                <option value="Pending" class="text-amber-700 font-medium">Pending</option>
+                <option value="Cancelled" class="text-rose-700 font-medium">Cancelled / Refunded</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: FORM ACTION BUTTONS -->
+        <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100">
+          <a 
+            routerLink="/bookings" 
+            class="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 font-medium text-xs hover:bg-slate-50 transition cursor-pointer">
+            Cancel
+          </a>
+          <button 
+            type="submit" 
+            [disabled]="isSubmitting"
+            class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium text-xs shadow-md shadow-blue-600/20 active:scale-95 transition cursor-pointer">
+            {{ isSubmitting ? 'Saving...' : 'Save Changes' }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  }
+</div>

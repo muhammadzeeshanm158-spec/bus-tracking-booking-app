@@ -1,0 +1,151 @@
+<!-- =================================================================        -->
+<!-- BUS MANAGEMENT LIST COMPONENT TEMPLATE                                   -->
+<!-- =================================================================        -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER SECTION & ADD BUS CTA BUTTON -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Bus Management
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Manage fleet details, seating capacities, and vehicle status.
+      </p>
+    </div>
+
+    <!-- Navigate to Add New Bus Form -->
+    <a 
+      routerLink="/bus/add"  
+      class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/20 transition-all duration-200 hover:bg-blue-700 active:scale-95">
+      <span class="material-symbols-outlined text-base">add</span>
+      <span>Add New Bus</span>
+    </a>
+  </div>
+
+  <!-- 2. SEARCH & FILTER CONTROLS -->
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+    
+    <!-- Search Input Field (By Registration Number or Bus Name) -->
+    <div class="relative md:col-span-2">
+      <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+        search
+      </span>
+      <input
+        type="text"
+        (input)="onSearch($event)"
+        [value]="searchTerm"
+        placeholder="Search by Registration Number or Bus Name..."
+        class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-3.5 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-xs">
+    </div>
+
+    <!-- Filter Dropdown (By Bus Type category) -->
+    <select 
+      (change)="onTypeFilter($event)"
+      class="cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-700 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 shadow-xs">
+      <option value="">All Bus Types</option>
+      <option value="Standard">Standard</option>
+      <option value="Executive">Executive</option>
+      <option value="Luxury">Luxury</option>
+    </select>
+  </div> 
+
+  <!-- 3. BUS DATA TABLE CONTAINER CARD -->
+  <div class="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-xs">
+    <div class="overflow-x-auto">
+     <table class="w-full text-left border-collapse">
+        
+        <!-- Table Column Headers -->
+        <thead>
+          <tr class="bg-slate-900 text-white text-[10px] uppercase tracking-wider font-semibold">
+            <th class="px-4 py-3">Bus No</th>
+            <th class="px-4 py-3">Reg No</th>
+            <th class="px-4 py-3">Bus Name</th>
+            <th class="px-4 py-3">Type</th>
+            <th class="px-4 py-3 text-center">Seats</th>
+            <th class="px-4 py-3 text-center">Status</th>
+            <th class="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <!-- Table Body Content -->
+        <tbody class="divide-y divide-slate-100 text-xs">
+
+          <!-- State A: Loading Indicator Check -->
+          @if (isLoading) {
+            <tr>
+              <td colspan="7" class="px-4 py-8 text-center text-slate-500 font-medium text-xs">
+                Loading fleet data...
+              </td>
+            </tr>
+          } 
+          <!-- State B: Empty Search Result Check -->
+          @else if (filteredBuses.length === 0) {
+            <tr>
+              <td colspan="7" class="px-4 py-8 text-center text-slate-500 font-medium text-xs">
+                No buses found matching your search criteria.
+              </td>
+            </tr>
+          } 
+          <!-- State C: Loop Through Filtered Buses Array -->
+          @else {
+            @for (bus of filteredBuses; track bus.id) {
+              <tr class="transition-colors hover:bg-slate-50/80">
+                
+                <!-- Bus Number / Code Column (Theek kar diya gaya hai) -->
+                <td class="px-4 py-3 font-bold text-blue-600 font-mono uppercase">{{ bus.bus_number }}</td>
+
+                <!-- Registration Number Column -->
+                <td class="px-4 py-3 font-medium text-slate-700 font-mono uppercase">{{ bus.registration_number }}</td>
+                
+                <!-- Bus Fleet Name Column -->
+                <td class="px-4 py-3 font-semibold text-slate-800">{{ bus.bus_name }}</td>
+                
+                <!-- Bus Category / Type Column -->
+                <td class="px-4 py-3 text-slate-600">{{ bus.bus_type }}</td>
+                
+                <!-- Total Seat Capacity Column -->
+                <td class="px-4 py-3 text-center font-medium text-slate-700">{{ bus.total_seats }}</td>
+                
+                <!-- Operational Status Badge Column -->
+                <td class="px-4 py-3 text-center">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
+                        [ngClass]="{
+                          'bg-emerald-50 text-emerald-700 border border-emerald-200/60': bus.is_active,
+                          'bg-rose-50 text-rose-700 border border-rose-200/60': !bus.is_active
+                        }">
+                    <span class="w-1.5 h-1.5 rounded-full"
+                          [ngClass]="{
+                            'bg-emerald-500': bus.is_active,
+                            'bg-rose-500': !bus.is_active
+                          }"></span>
+                    {{ bus.is_active ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+
+                <!-- Row Actions Column -->
+                <td class="px-4 py-3">
+                  <div class="flex items-center justify-center gap-1">
+                    <a [routerLink]="['/bus/view', bus.id]" title="View Details" class="cursor-pointer rounded-lg p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition">
+                      <span class="material-symbols-outlined text-base">visibility</span>
+                    </a>
+                    
+                    <a [routerLink]="['/bus/edit', bus.id]" title="Edit Bus" class="cursor-pointer rounded-lg p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition">
+                      <span class="material-symbols-outlined text-base">edit</span>
+                    </a>
+                    
+                    <button type="button" (click)="deleteBus(bus.id?.toString())" title="Delete Bus" class="cursor-pointer rounded-lg p-1.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
+                      <span class="material-symbols-outlined text-base">delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

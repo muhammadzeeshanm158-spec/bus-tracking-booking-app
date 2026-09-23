@@ -1,0 +1,30 @@
+=================================
+
+PHASE 8
+
+STEP 15
+
+Protecting Routes
+
+=================================
+
+A route can have multiple
+middlewares.
+
+Example:
+
+Request
+
+↓
+
+Authentication Middleware
+
+↓
+
+Authorization Middleware
+
+↓
+
+Controller
+
+=================================

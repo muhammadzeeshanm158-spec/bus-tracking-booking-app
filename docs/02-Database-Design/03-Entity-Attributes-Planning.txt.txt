@@ -1,0 +1,188 @@
+=========================================
+ENTITY ATTRIBUTES PLANNING
+=========================================
+
+1. What are Attributes?
+
+Attributes are the properties or characteristics of an entity. In a database table, attributes become columns.
+
+-----------------------------------------
+2. Why are Attributes Important?
+-----------------------------------------
+
+- Define what data will be stored.
+- Help create database tables.
+- Improve data organization.
+- Reduce duplicate data.
+
+-----------------------------------------
+3. User Entity Attributes
+-----------------------------------------
+
+Entity:
+User
+
+Attributes:
+
+- id
+- role_id
+- full_name
+- email
+- password
+- phone_number
+- gender
+- date_of_birth
+- address
+- profile_image
+- account_status
+- created_at
+- updated_at
+
+-----------------------------------------
+4. Role Entity Attributes
+-----------------------------------------
+
+Entity:
+Role
+
+Attributes:
+
+- id
+- role_name
+- description
+- created_at
+- updated_at
+
+-----------------------------------------
+5. Bus Entity Attributes
+-----------------------------------------
+
+Entity:
+Bus
+
+Attributes:
+
+- id
+- bus_number
+- bus_name
+- bus_type
+- total_seats
+- registration_number
+- model
+- status
+- created_at
+- updated_at
+
+-----------------------------------------
+6. Driver Entity Attributes
+-----------------------------------------
+
+Entity:
+Driver
+
+Attributes:
+
+- id
+- user_id
+- license_number
+- experience_years
+- joining_date
+- status
+- created_at
+- updated_at
+
+-----------------------------------------
+7. Route Entity Attributes
+-----------------------------------------
+
+Entity:
+Route
+
+Attributes:
+
+- id
+- source_city_id
+- destination_city_id
+- distance_km
+- estimated_time
+- fare
+- status
+- created_at
+- updated_at
+
+-----------------------------------------
+8. City Entity Attributes
+-----------------------------------------
+
+Entity:
+City
+
+Attributes:
+
+- id
+- city_name
+- state
+- country
+- created_at
+- updated_at
+
+-----------------------------------------
+9. Seat Entity Attributes
+-----------------------------------------
+
+Entity:
+Seat
+
+Attributes:
+
+- id
+- bus_id
+- seat_number
+- seat_type
+- status
+- created_at
+- updated_at
+
+-----------------------------------------
+10. Booking Entity Attributes
+-----------------------------------------
+
+Entity:
+Booking
+
+Attributes:
+
+- id
+- booking_number
+- user_id
+- schedule_id
+- booking_date
+- total_amount
+- booking_status
+- created_at
+- updated_at
+
+-----------------------------------------
+11. Payment Entity Attributes
+-----------------------------------------
+
+Entity:
+Payment
+
+Attributes:
+
+- id
+- booking_id
+- payment_method
+- payment_status
+- transaction_id
+- paid_amount
+- payment_date
+- created_at
+- updated_at
+
+-----------------------------------------
+12. Conclusion
+-----------------------------------------
+
+Attributes define what information each entity stores. Every attribute will become a column in the database table.

@@ -1,0 +1,107 @@
+=================================================
+
+PHASE 5 – STEP 4
+
+REGISTER VALIDATION
+
+=================================================
+
+Purpose
+
+Validate user input before
+processing registration.
+
+=================================================
+
+Validation Rules
+
+1. full_name
+
+Required
+
+Minimum 3 characters
+
+Maximum 150 characters
+
+-------------------------------------------------
+
+2. email
+
+Required
+
+Valid Email Format
+
+Maximum 255 characters
+
+-------------------------------------------------
+
+3. phone_number
+
+Required
+
+Minimum 11 digits
+
+Maximum 20 characters
+
+-------------------------------------------------
+
+4. password
+
+Required
+
+Minimum 8 characters
+
+Maximum 255 characters
+
+-------------------------------------------------
+
+5. gender
+
+Required
+
+Allowed Values
+
+Male
+
+Female
+
+Other
+
+=================================================
+
+Validation Flow
+
+Client
+
+↓
+
+Request
+
+↓
+
+Validation
+
+↓
+
+If Invalid
+
+↓
+
+Return Error
+
+↓
+
+If Valid
+
+↓
+
+Controller
+
+=================================================
+
+Software House Rule
+
+Always validate request data
+before Controller.
+
+=================================================

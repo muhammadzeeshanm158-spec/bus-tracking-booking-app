@@ -1,0 +1,54 @@
+=========================================
+ROLES TABLE
+=========================================
+
+1. What is Roles Table?
+
+The roles table stores different user roles in the system.
+
+-----------------------------------------
+
+2. Project Roles
+
+Admin
+
+Customer
+
+Driver
+
+-----------------------------------------
+
+3. Why do we use Roles Table?
+
+- Avoid duplicate role names.
+- Easy role management.
+- Better security.
+- Supports Role-Based Access Control (RBAC).
+
+-----------------------------------------
+
+4. Columns
+
+id
+
+role_name
+
+description
+
+created_at
+
+updated_at
+
+-----------------------------------------
+
+5. Best Practice
+
+Keep role names unique.
+
+Example:
+
+Admin
+
+Customer
+
+Driver

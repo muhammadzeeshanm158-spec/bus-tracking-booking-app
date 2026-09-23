@@ -1,0 +1,237 @@
+<!-- ========================================================================= -->
+<!-- SCHEDULES MANAGEMENT (LIST) COMPONENT TEMPLATE                            -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. HEADER SECTION (Page Title, Description & Create Button) -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Schedules Management</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Overview & List
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Manage bus timings, route allocations and driver assignments.
+      </p>
+    </div>
+    
+    <!-- New Schedule Create Button -->
+
+    @if(currentUserRole === "admin"){
+
+      <a 
+
+  routerLink="/schedules/add" 
+  class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-3.5 py-1.5 font-medium text-white shadow-xs transition-all duration-200 hover:bg-blue-700 active:scale-95 text-xs w-fit">
+  <span class="material-symbols-outlined text-base">add</span>
+  <span>Create New Schedule</span>
+</a>
+    }
+  
+  </div>
+
+  <!-- 2. STATS OVERVIEW CARDS (Dashboard Summary Counters) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    
+    <!-- Card 1: Total Schedules Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shrink-0">
+        <span class="material-symbols-outlined text-xl">event</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Total Schedules</p>
+        <h3 class="text-lg font-bold text-slate-800 mt-0.5 leading-tight">{{ schedules.length || 0 }}</h3>
+      </div>
+    </div>
+
+    <!-- Card 2: Active / Running (On-Time) Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 shrink-0">
+        <span class="material-symbols-outlined text-xl">departure_board</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Active / Running</p>
+        <h3 class="text-lg font-bold text-slate-800 mt-0.5 leading-tight">{{ activeCount }}</h3>
+      </div>
+    </div>
+
+    <!-- Card 3: Upcoming Today (Scheduled) Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 shrink-0">
+        <span class="material-symbols-outlined text-xl">schedule</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Upcoming Today</p>
+        <h3 class="text-lg font-bold text-slate-800 mt-0.5 leading-tight">{{ upcomingCount }}</h3>
+      </div>
+    </div>
+
+    <!-- Card 4: Cancelled / Delayed Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 shrink-0">
+        <span class="material-symbols-outlined text-xl">cancel</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Cancelled / Delayed</p>
+        <h3 class="text-lg font-bold text-slate-800 mt-0.5 leading-tight">{{ cancelledCount }}</h3>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. FILTERS SECTION (Search & Dropdown Filters) -->
+  <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+      
+      <!-- Search Input (Route, Bus number, Code, Driver name) -->
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none">search</span>
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange()"
+          placeholder="Search Schedule..." 
+          class="w-full pl-9 pr-3.5 py-2 rounded-xl border border-slate-200 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30 placeholder-slate-400" />
+      </div>
+
+      <!-- Route Select Dropdown Filter -->
+      <div>
+        <select 
+          #routeSelect
+          (change)="onFilterChange(routeSelect.value)"
+          class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30">
+          <option value="" class="text-slate-500">All Routes</option>
+          @for (route of routes; track route.id || route.name) {
+            <option [value]="route.id || route.name">{{ route.name || route }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Date Filter Input -->
+      <div>
+        <input 
+          type="date" 
+          [(ngModel)]="selectedDate"
+          (change)="onFilterChange('')"
+          class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30" />
+      </div>
+
+      <!-- Status Select Dropdown Filter -->
+      <div>
+        <select 
+          [(ngModel)]="selectedStatus" 
+          (change)="onFilterChange('')"
+          class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30">
+          <option value="" class="text-slate-500">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Upcoming">Upcoming</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+          <option value="Delayed">Delayed</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. SCHEDULES TABLE (Data Grid) -->
+  <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-50/80 border-b border-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            <th class="py-3 px-4">Route Details</th>
+            <th class="py-3 px-4">Bus & Driver</th>
+            <th class="py-3 px-4">Timings</th>
+            <th class="py-3 px-4">Fare</th>
+            <th class="py-3 px-4">Status</th>
+            <th class="py-3 px-4 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+          
+          <!-- Loop through displaySchedules (Filtered or Full list) -->
+          @for (item of displaySchedules; track item.id || item.routeName) {
+            <tr class="hover:bg-slate-50/50 transition-all duration-150">
+              
+              <!-- Route Column -->
+              <td class="py-3 px-4">
+                <div class="font-bold text-slate-900">{{ item.routeName || 'N/A' }}</div>
+                <div class="text-[10px] text-slate-500 font-medium mt-0.5">Route details unavailable</div>
+              </td>
+              
+              <!-- Bus & Driver Column -->
+              <td class="py-3 px-4">
+                <div class="font-semibold text-slate-800">
+                  {{ item.busNumber }} 
+                  @if (item.busType) {
+                    <span class="text-[10px] text-slate-500">({{ item.busType }})</span>
+                  }
+                </div>
+                <div class="text-[10px] text-slate-500 font-medium flex items-center gap-1 mt-0.5">
+                  <span class="material-symbols-outlined text-[12px] text-slate-400">badge</span> 
+                  {{ item.driverName || 'Unassigned' }}
+                </div>
+              </td>
+              
+              <!-- Timings Column (Departure - Arrival & Date) -->
+              <td class="py-3 px-4">
+                <div class="font-semibold text-slate-800">{{ item.departureTime }} - {{ item.arrivalTime }}</div>
+                <div class="text-[10px] text-slate-500 font-medium mt-0.5">{{ item.departureDate || 'Daily' }}</div>
+              </td>
+              
+              <!-- Ticket Fare Column -->
+              <td class="py-3 px-4">
+                <span class="font-bold text-slate-900 font-mono">PKR {{ item.fare | number }}</span>
+              </td>
+              
+              <!-- Status Badge Column -->
+              <td class="py-3 px-4">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold border tracking-wide uppercase" [ngClass]="getStatusBadgeClass(item.status)">
+                  <span class="w-1.5 h-1.5 rounded-full" [ngClass]="getStatusDotClass(item.status)"></span>
+                  {{ item.status }}
+                </span>
+              </td>
+              
+              <!-- Actions Column (View, Edit, Delete Buttons) -->
+              <td class="py-3 px-4 text-right">
+                <div class="flex items-center justify-end gap-1">
+                  
+                  <!-- View Details Button -->
+                  <a [routerLink]="['/schedules/view', item.id]" class="p-1.5 text-slate-400 hover:text-emerald-600 rounded-lg hover:bg-emerald-50 transition-all duration-200 cursor-pointer" title="View Details">
+                    <span class="material-symbols-outlined text-base block">visibility</span>
+                  </a>
+
+                  <!-- Edit Schedule Button -->
+                  <a [routerLink]="['/schedules/edit', item.id]" class="p-1.5 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-200 cursor-pointer" title="Edit Schedule">
+                    <span class="material-symbols-outlined text-base block">edit</span>
+                  </a>
+
+                  <!-- Delete Schedule Button -->
+                  <button (click)="deleteSchedule(item.id)" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-all duration-200 cursor-pointer" title="Delete Schedule">
+                    <span class="material-symbols-outlined text-base block">delete</span>
+                  </button>
+
+                </div>
+              </td>
+            </tr>
+          }
+
+          <!-- Empty State (Jab koi record filter match na kare) -->
+          @if (displaySchedules.length === 0) {
+            <tr>
+              <td colspan="6" class="text-center py-10 text-slate-400 font-medium text-xs">
+                <span class="material-symbols-outlined text-3xl block mb-1.5 text-slate-300">event_busy</span>
+                No schedules found matching your current filters.
+              </td>
+            </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

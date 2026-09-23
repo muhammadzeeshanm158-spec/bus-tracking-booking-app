@@ -1,0 +1,51 @@
+=================================================
+
+PHASE 6
+
+STEP 24
+
+USE ApiError IN SERVICE LAYER
+
+=================================================
+
+Objective
+
+Replace manual error responses with
+ApiError.
+
+=================================================
+
+Current
+
+return errorResponse(
+   "Email already exists"
+);
+
+=================================================
+
+Target
+
+throw new ApiError(
+   409,
+   "Email already exists"
+);
+
+=================================================
+
+Also
+
+throw new ApiError(
+   409,
+   "Phone number already exists"
+);
+
+=================================================
+
+Learning
+
+Service Layer should throw errors.
+
+Error Middleware should catch and
+send the response.
+
+=================================================

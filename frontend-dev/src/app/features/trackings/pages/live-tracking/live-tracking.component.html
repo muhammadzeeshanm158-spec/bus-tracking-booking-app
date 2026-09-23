@@ -1,0 +1,204 @@
+<!-- ========================================================================= -->
+<!-- FLEET LIVE TRACKING COMPONENT TEMPLATE                                   -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- Success / Error Feedback Alerts -->
+  @if (errorMessage) {
+    <div class="p-3 bg-rose-50 border-l-4 border-rose-500 text-rose-700 rounded-xl shadow-xs text-xs font-semibold flex items-center justify-between">
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  <!-- 1. HEADER SECTION -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Operations</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">Fleet Live Tracking</h1>
+      <p class="mt-0.5 text-xs text-slate-500">Monitor all active buses, routes, and operational status in real-time.</p>
+    </div>
+
+    <!-- Quick Actions / Live GPS Feed Active Indicator -->
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200/60 rounded-full text-[10px] font-semibold">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+        GPS Feed Active
+      </span>
+      
+      <!-- Refresh Button -->
+      <button 
+        type="button" 
+        (click)="fetchLiveTrackings()"
+        class="flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-medium rounded-xl transition-all duration-200 text-xs shadow-xs cursor-pointer">
+        <span class="material-symbols-outlined text-base">refresh</span>
+        <span>Refresh</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. TOP STATS SUMMARY BAR -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+    
+    <!-- Stat Card 1: Total Active Fleet Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Active Fleet</p>
+        <p class="text-xl font-bold text-slate-900 mt-0.5">{{ trackingList.length }} <span class="text-[10px] text-slate-500 font-medium">Buses</span></p>
+        <p class="text-[10px] text-emerald-600 font-semibold mt-1">Operational</p>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center ring-1 ring-blue-500/10 shrink-0">
+        <span class="material-symbols-outlined text-xl">directions_bus</span>
+      </div>
+    </div>
+
+    <!-- Stat Card 2: On Schedule Buses Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">On Schedule</p>
+        <p class="text-xl font-bold text-emerald-600 mt-0.5">
+          {{ onTimeBusesCount }}
+        </p>
+        <p class="text-[10px] text-slate-500 font-medium mt-1">Within ETA window</p>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center ring-1 ring-emerald-500/10 shrink-0">
+        <span class="material-symbols-outlined text-xl">check_circle</span>
+      </div>
+    </div>
+
+    <!-- Stat Card 3: Delayed Buses Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Delayed Buses</p>
+        <p class="text-xl font-bold text-amber-600 mt-0.5">
+          {{ delayedBusesCount }}
+        </p>
+        <p class="text-[10px] text-amber-600 font-semibold mt-1">Requires monitoring</p>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center ring-1 ring-amber-500/10 shrink-0">
+        <span class="material-symbols-outlined text-xl">warning</span>
+      </div>
+    </div>
+
+    <!-- Stat Card 4: Stopped / Maintenance / Reached Buses Count -->
+    <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Stopped / Reached</p>
+        <p class="text-xl font-bold text-slate-700 mt-0.5">
+          {{ stoppedReachedBusesCount }}
+        </p>
+        <p class="text-[10px] text-slate-500 font-medium mt-1">At terminal / paused</p>
+      </div>
+      <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center ring-1 ring-slate-900/5 shrink-0">
+        <span class="material-symbols-outlined text-xl">build</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. MAIN INTERACTIVE TRACKING MAP SECTION -->
+  <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col h-80 relative">
+    <div class="p-3 border-b border-slate-100 bg-slate-50/80 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-blue-600 text-base">map</span>
+        <span class="font-bold text-slate-900 text-xs">Interactive Fleet Map</span>
+      </div>
+      <div class="flex items-center gap-3 text-[10px] font-medium">
+        <span class="flex items-center gap-1.5 text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Moving / On Time
+        </span>
+        <span class="flex items-center gap-1.5 text-slate-600">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> Delayed / Stopped
+        </span>
+      </div>
+    </div>
+
+    <!-- Leaflet Map Container -->
+    <div class="relative flex-1 bg-slate-100 w-full h-full">
+      <div id="map" class="w-full h-full z-10"></div>
+    </div>
+  </div>
+
+  <!-- 4. ACTIVE BUSES CARDS GRID OR LOADING SPINNER -->
+  @if (isLoading) {
+    <!-- Loading Spinner -->
+    <div class="text-center py-12 bg-white rounded-xl shadow-xs border border-slate-200/80">
+      <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent mx-auto mb-2"></div>
+      <p class="text-slate-500 font-medium text-xs">Loading live tracking data...</p>
+    </div>
+  } @else {
+
+    <!-- Buses Cards Responsive Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      @for (bus of trackingList; track bus.id) {
+        <div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 space-y-3">
+          
+          <!-- Bus Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200/60 px-2 py-0.5 rounded uppercase tracking-wide">{{ bus.busNumber }}</span>
+              <h3 class="font-bold text-slate-900 text-xs mt-1.5 truncate max-w-56">{{ bus.routeOrigin }} ➔ {{ bus.routeDestination }}</h3>
+              <p class="text-[10px] text-slate-500 font-medium mt-0.5">Current City: {{ bus.currentCity }}</p>
+            </div>
+            
+            <!-- Dynamic Status Badge -->
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1.5 shrink-0"
+                  [ngClass]="{
+                    'bg-emerald-50 text-emerald-700 border-emerald-200/60': bus.status === 'On Time',
+                    'bg-amber-50 text-amber-700 border-amber-200/60': bus.status === 'Delayed',
+                    'bg-slate-100 text-slate-700 border-slate-200': bus.status === 'Stopped' || bus.status === 'Reached'
+                  }">
+              <span class="w-1.5 h-1.5 rounded-full"
+                    [ngClass]="{
+                      'bg-emerald-500 animate-pulse': bus.status === 'On Time',
+                      'bg-amber-500': bus.status === 'Delayed',
+                      'bg-slate-400': bus.status !== 'On Time' && bus.status !== 'Delayed'
+                    }"></span> 
+              {{ bus.status }}
+            </span>
+          </div>
+
+          <!-- Bus Metric Details Grid -->
+          <div class="grid grid-cols-2 gap-2.5 py-2.5 border-y border-slate-100 text-xs">
+            <div>
+              <p class="text-slate-400 font-medium text-[10px]">Current Speed</p>
+              <p class="font-bold text-slate-900 mt-0.5 text-xs">{{ bus.speedKmH }} km/h</p>
+            </div>
+            <div>
+              <p class="text-slate-400 font-medium text-[10px]">Driver</p>
+              <p class="font-bold text-slate-900 mt-0.5 text-xs truncate">{{ bus.driverName }}</p>
+            </div>
+            <div>
+              <p class="text-slate-400 font-medium text-[10px]">Distance Left</p>
+              <p class="font-bold text-slate-900 mt-0.5 text-xs">{{ bus.distanceRemainingKm }} km</p>
+            </div>
+            <div>
+              <p class="text-slate-400 font-medium text-[10px]">Next Stop ETA</p>
+              <p class="font-bold text-emerald-600 mt-0.5 text-xs">{{ bus.estimatedArrivalTime }}</p>
+            </div>
+          </div>
+
+          <!-- Footer Actions -->
+          <div class="flex items-center justify-between pt-0.5 text-xs">
+            <span class="text-[10px] text-slate-400 font-mono">Updated: {{ bus.lastUpdated }}</span>
+            <a
+              [routerLink]="['/tracking/detail', bus.id]"
+              class="px-2.5 py-1.5 bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 font-semibold rounded-lg text-xs transition-colors duration-150 flex items-center gap-1 cursor-pointer">
+              <span>View Detail</span>
+              <span class="material-symbols-outlined text-sm">chevron_right</span>
+            </a>
+          </div>
+
+        </div>
+      } @empty {
+        <!-- Empty State -->
+        <div class="col-span-full text-center py-12 bg-white rounded-xl shadow-xs border border-slate-200/80">
+          <p class="text-slate-500 font-medium text-xs">No active tracking buses found.</p>
+        </div>
+      }
+    </div>
+
+  }
+
+</div>

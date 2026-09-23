@@ -1,0 +1,43 @@
+======================================
+
+PHASE 6
+
+STEP 28
+
+CALLING THE CONTROLLER
+
+======================================
+
+Goal
+
+Execute the controller passed
+to asyncHandler.
+
+======================================
+
+Syntax
+
+fn(req, res, next)
+
+======================================
+
+Meaning
+
+fn = Controller
+
+req = Request Object
+
+res = Response Object
+
+next = Next Middleware
+
+======================================
+
+Learning
+
+asyncHandler acts as a wrapper.
+
+It receives a controller and
+executes it.
+
+======================================

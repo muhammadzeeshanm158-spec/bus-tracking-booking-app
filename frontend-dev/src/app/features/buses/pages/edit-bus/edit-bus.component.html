@@ -1,0 +1,160 @@
+<!-- =================================================================        -->
+<!-- EDIT BUS COMPONENT TEMPLATE                                           -->
+<!-- =================================================================        -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER & BACK NAVIGATION BUTTON -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Edit Bus
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Update bus information and specifications.
+      </p>
+    </div>
+
+    <!-- Back to Bus List Button -->
+    <a
+      routerLink="/bus"
+      class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 hover:text-slate-900 active:scale-95">
+      <span class="material-symbols-outlined text-base text-slate-500">arrow_back</span>
+      <span>Back to List</span>
+    </a>
+  </div>
+
+  <!-- Error Message Alert -->
+  @if (errorMessage) {
+    <div class="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-medium">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- 2. FORM CARD CONTAINER -->
+  <div class="rounded-xl border border-slate-200/80 bg-white p-4 md:p-6 shadow-xs">
+
+    <!-- Form Title Banner & Icon -->
+    <div class="mb-6 flex items-center gap-3 border-b border-slate-100 pb-4">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+        <span class="material-symbols-outlined text-xl">edit_note</span>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold text-slate-800">
+          Edit Bus Information
+        </h2>
+        <p class="text-[10px] text-slate-500 mt-0.5">
+          Modify details for the selected vehicle in your fleet.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. REACTIVE FORM BINDING -->
+    <form [formGroup]="editBusForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+
+        <!-- Bus Number Field -->
+        <div>
+          <label for="bus_number" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Bus Number / Code <span class="text-rose-500">*</span>
+          </label>
+          <input
+            id="bus_number"
+            type="text"
+            formControlName="bus_number"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+        </div>
+
+        <!-- Bus Name Field -->
+        <div>
+          <label for="bus_name" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Bus Name / Fleet Name <span class="text-rose-500">*</span>
+          </label>
+          <input
+            id="bus_name"
+            type="text"
+            formControlName="bus_name"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+        </div>
+
+        <!-- Bus Type Dropdown Field -->
+        <div>
+          <label for="bus_type" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Bus Class / Type <span class="text-rose-500">*</span>
+          </label>
+          <select
+            id="bus_type"
+            formControlName="bus_type"
+            class="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+            <option value="" disabled>Select Bus Type</option>
+            <option value="Standard">Standard</option>
+            <option value="Executive">Executive</option>
+            <option value="Luxury">Luxury</option>
+          </select>
+        </div>
+
+        <!-- Registration Number Field -->
+        <div>
+          <label for="registration_number" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            License Plate / Reg # <span class="text-rose-500">*</span>
+          </label>
+          <input
+            id="registration_number"
+            type="text"
+            formControlName="registration_number"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 font-mono uppercase outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+        </div>
+
+        <!-- Total Seats Number Field -->
+        <div>
+          <label for="total_seats" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Total Capacity (Seats) <span class="text-rose-500">*</span>
+          </label>
+          <input
+            id="total_seats"
+            type="number"
+            min="1"
+            formControlName="total_seats"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+        </div>
+
+        <!-- Operational Status Dropdown Field -->
+        <div>
+          <label for="is_active" class="mb-1 block text-xs font-bold text-slate-600 uppercase tracking-wider">
+            Operational Status <span class="text-rose-500">*</span>
+          </label>
+          <select
+            id="is_active"
+            formControlName="is_active"
+            class="w-full cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Inactive</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- 4. FORM ACTION BUTTONS (Cancel & Update) -->
+      <div class="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end border-t border-slate-100 pt-4">
+
+        <!-- Cancel Button -->
+        <a
+          routerLink="/bus"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 active:scale-95">
+          Cancel
+        </a>
+
+        <!-- Submit / Update Button -->
+        <button
+          type="submit"
+          [disabled]="isSubmitting"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/20 transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:opacity-50">
+          <span class="material-symbols-outlined text-base">save</span>
+          <span>{{ isSubmitting ? 'Updating...' : 'Update Bus' }}</span>
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+
+</div>

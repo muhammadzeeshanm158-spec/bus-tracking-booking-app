@@ -1,0 +1,85 @@
+=================================================
+
+PHASE 6
+
+STEP 9
+
+SERVICE LAYER
+
+DUPLICATE EMAIL CHECK
+
+=================================================
+
+Purpose
+
+Check if Email Already Exists
+
+=================================================
+
+Flow
+
+Client
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+Database
+
+Repository returns
+
+emailExists = true
+
+OR
+
+emailExists = false
+
+=================================================
+
+Business Logic
+
+If emailExists = true
+
+↓
+
+Return
+
+{
+  success: false,
+  message: "Email already exists"
+}
+
+If emailExists = false
+
+↓
+
+Continue Registration Process
+
+=================================================
+
+Responsibility
+
+Repository
+
+↓
+
+Only Fetch Data
+
+Service
+
+↓
+
+Make Business Decision
+
+=================================================
+
+Key Learning
+
+Repository never decides.
+
+Service always decides what should happen
+based on the repository result.
+
+=================================================

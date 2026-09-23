@@ -1,0 +1,42 @@
+=========================================
+SCHEDULES TABLE
+=========================================
+
+1. What is Schedules Table?
+
+The schedules table stores bus trip schedules.
+
+-----------------------------------------
+
+2. Why do we need Schedules Table?
+
+- Assign bus
+- Assign driver
+- Assign route
+- Manage departure
+- Manage arrival
+- Store fare
+
+-----------------------------------------
+
+3. Columns
+
+id
+bus_id
+driver_id
+route_id
+departure_datetime
+arrival_datetime
+fare
+available_seats
+status
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- Use Foreign Keys.
+- Store Date and Time together.
+- Never store bus names directly.

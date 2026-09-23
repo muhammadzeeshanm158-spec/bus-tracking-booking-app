@@ -1,0 +1,61 @@
+=================================================
+
+PHASE 7
+
+STEP 2
+
+LOGIN API PLANNING
+
+=================================================
+
+Objective
+
+Plan the Login API.
+
+=================================================
+
+Endpoint
+
+POST /api/v1/auth/login
+
+=================================================
+
+Request
+
+Email
+
+Password
+
+=================================================
+
+Success Response
+
+Login successful
+
+JWT Token
+
+User Information
+
+=================================================
+
+Error Response
+
+Email is required
+
+Password is required
+
+Email not found
+
+Invalid password
+
+User account is inactive
+
+=================================================
+
+Learning
+
+Before coding, define
+request, response,
+and error cases.
+
+=================================================

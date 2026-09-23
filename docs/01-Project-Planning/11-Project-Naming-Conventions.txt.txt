@@ -1,0 +1,189 @@
+=========================================
+PROJECT NAMING CONVENTIONS
+=========================================
+
+1. What are Naming Conventions?
+
+Naming Conventions are a set of rules used to give meaningful and consistent names to files, folders, variables, functions, classes, APIs, and database objects.
+
+-----------------------------------------
+2. Why are Naming Conventions Important?
+-----------------------------------------
+
+- Improve code readability.
+- Make the project consistent.
+- Help team members understand the code.
+- Make maintenance easier.
+- Reduce confusion.
+
+-----------------------------------------
+3. Project Name
+-----------------------------------------
+
+Project Name:
+Bus Tracking & Booking System
+
+Project Folder:
+bus-tracking-booking-system
+
+-----------------------------------------
+4. Frontend Naming Rules
+-----------------------------------------
+
+Folders:
+Use lowercase with hyphens.
+
+Examples:
+- login
+- customer-dashboard
+- booking-history
+
+Components:
+Use PascalCase for class names.
+
+Example:
+LoginComponent
+CustomerDashboardComponent
+BookingHistoryComponent
+
+Component File Names:
+Use lowercase with hyphens.
+
+Examples:
+login.component.ts
+customer-dashboard.component.ts
+booking-history.component.ts
+
+Services:
+Use PascalCase for class names.
+
+Examples:
+AuthService
+BookingService
+BusService
+
+Service File Names:
+auth.service.ts
+booking.service.ts
+bus.service.ts
+
+-----------------------------------------
+5. Backend Naming Rules
+-----------------------------------------
+
+Folders:
+Use lowercase.
+
+Examples:
+controllers
+routes
+models
+services
+middlewares
+
+Files:
+Use lowercase.
+
+Examples:
+auth.controller.js
+booking.controller.js
+bus.routes.js
+
+Functions:
+Use camelCase.
+
+Examples:
+loginUser()
+registerUser()
+createBooking()
+cancelBooking()
+
+Variables:
+Use camelCase.
+
+Examples:
+userName
+bookingDate
+busNumber
+
+Constants:
+Use UPPER_CASE.
+
+Examples:
+JWT_SECRET
+PORT
+MAX_FILE_SIZE
+
+-----------------------------------------
+6. Database Naming Rules
+-----------------------------------------
+
+Tables:
+Use lowercase and plural names.
+
+Examples:
+users
+drivers
+buses
+routes
+bookings
+
+Columns:
+Use snake_case.
+
+Examples:
+user_id
+driver_id
+bus_name
+booking_date
+
+Primary Key:
+id
+
+Foreign Keys:
+user_id
+driver_id
+bus_id
+route_id
+
+-----------------------------------------
+7. API Naming Rules
+-----------------------------------------
+
+Use nouns and lowercase.
+
+Examples:
+
+POST   /api/auth/login
+
+POST   /api/auth/register
+
+GET    /api/buses
+
+GET    /api/bookings
+
+POST   /api/bookings
+
+PUT    /api/bookings/:id
+
+DELETE /api/bookings/:id
+
+-----------------------------------------
+8. Git Branch Naming
+-----------------------------------------
+
+main
+
+develop
+
+feature/login
+
+feature/booking
+
+bugfix/payment
+
+-----------------------------------------
+9. Conclusion
+-----------------------------------------
+
+Following naming conventions keeps the project clean, professional, and easy to understand for every developer.

@@ -1,0 +1,70 @@
+=========================================
+SOFTWARE DEVELOPMENT LIFE CYCLE (SDLC)
+=========================================
+
+1. What is SDLC?
+
+SDLC (Software Development Life Cycle) is a step-by-step process used to plan, design, develop, test, deploy, and maintain a software application.
+
+The main purpose of SDLC is to build high-quality software in a structured and organized way.
+
+-----------------------------------------
+2. Why is SDLC Important?
+-----------------------------------------
+
+Without SDLC:
+- Project planning becomes difficult.
+- Requirements may be missed.
+- Development becomes unorganized.
+- More bugs are introduced.
+- Time and cost increase.
+
+With SDLC:
+- Project is well planned.
+- Team members understand their tasks.
+- Development is organized.
+- Software quality improves.
+- Project is completed on time.
+
+-----------------------------------------
+3. SDLC Phases
+-----------------------------------------
+
+Phase 1: Requirement Gathering
+Understand what the client wants.
+
+Phase 2: Project Planning
+Plan the project, features, timeline, technologies, and resources.
+
+Phase 3: System Design
+Design the database, architecture, UI, and APIs.
+
+Phase 4: Development
+Write frontend and backend code.
+
+Phase 5: Testing
+Find and fix bugs before release.
+
+Phase 6: Deployment
+Deploy the application to a live server.
+
+Phase 7: Maintenance
+Fix issues, improve performance, and add new features after deployment.
+
+-----------------------------------------
+4. Benefits of SDLC
+-----------------------------------------
+
+- Better planning
+- Better code quality
+- Easy maintenance
+- Faster development
+- Reduced project risk
+- Better teamwork
+- Easy future updates
+
+-----------------------------------------
+5. Conclusion
+-----------------------------------------
+
+SDLC is the foundation of every professional software project. It ensures that the software is developed in a systematic, efficient, and maintainable way.

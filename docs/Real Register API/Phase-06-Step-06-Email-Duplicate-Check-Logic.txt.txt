@@ -1,0 +1,41 @@
+=================================================
+
+PHASE 6
+
+STEP 6
+
+EMAIL DUPLICATE CHECK LOGIC
+
+=================================================
+
+Purpose
+
+Prevent Duplicate Email Registration
+
+=================================================
+
+Why?
+
+One Email = One Account
+
+=================================================
+
+Flow
+
+Client
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+Check Email Exists?
+   ↓
+Yes → Return Error
+
+No → Continue Registration
+
+=================================================

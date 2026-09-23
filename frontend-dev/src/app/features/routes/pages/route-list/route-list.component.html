@@ -1,0 +1,220 @@
+<!-- ========================================================================= -->
+<!-- ROUTE MANAGEMENT LIST COMPONENT TEMPLATE                                  -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-7xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+  <!-- 1. PAGE HEADER -->
+  <div class="flex items-center justify-between">
+    <div>
+      <div
+        class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5"
+      >
+        <span class="text-blue-600">Routes Management</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Route Directory
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Manage all bus routes, source, destination, and fare details.
+      </p>
+    </div>
+
+    <!-- Add Route Button -->
+    <button
+      routerLink="/routes/add"
+      class="flex items-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-3.5 py-1.5 text-white font-medium shadow-xs transition-all duration-200 hover:bg-blue-700 active:scale-95 text-xs"
+    >
+      <span class="material-symbols-outlined text-base">add</span>
+      Add Route
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div
+      class="py-12 text-center bg-white rounded-xl border border-slate-200/80 shadow-xs flex flex-col items-center justify-center gap-2"
+    >
+      <div
+        class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"
+      ></div>
+      <p class="text-slate-500 font-medium text-xs">Loading routes...</p>
+    </div>
+  }
+
+  <!-- Error Banner -->
+  @if (errorMessage) {
+    <div
+      class="p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-xl text-xs flex items-center gap-2"
+    >
+      <span class="material-symbols-outlined text-base">error</span>
+      <p class="font-medium">{{ errorMessage }}</p>
+    </div>
+  }
+
+  <!-- Main Content Container -->
+  @if (!isLoading) {
+    <!-- Search & Filter Controls -->
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+      <!-- Search Input Field -->
+      <div class="relative md:col-span-2">
+        <span
+          class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base"
+        >
+          search
+        </span>
+        <input
+          type="text"
+          placeholder="Search by Route Name, Source or Destination..."
+          class="w-full rounded-xl border border-slate-200 bg-white py-2 pl-10 pr-3.5 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20"
+        />
+      </div>
+
+      <!-- Status Filter Dropdown -->
+      <select
+        class="cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20"
+      >
+        <option value="">All Statuses</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+
+    <!-- Routes Table Container -->
+    <div
+      class="overflow-x-auto rounded-xl border border-slate-200/80 bg-white shadow-xs"
+    >
+      <table
+        class="min-w-full divide-y divide-slate-100 text-left text-xs whitespace-nowrap"
+      >
+        <!-- Table Header -->
+        <thead
+          class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200"
+        >
+          <tr>
+            <th class="px-4 py-3">Route Name</th>
+            <th class="px-3 py-3">Source ID</th>
+            <th class="px-3 py-3">Destination ID</th>
+            <th class="px-3 py-3 text-center">Distance</th>
+            <th class="px-3 py-3 text-center">Est. Time</th>
+            <th class="px-3 py-3 text-center">Fare</th>
+            <th class="px-3 py-3 text-center">Status</th>
+            <th class="px-4 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+          <!-- FIXED: Track using getRouteId helper method instead of route.id directly -->
+          @for (route of routes; track getRouteId(route)) {
+            <tr class="transition-colors duration-150 hover:bg-slate-50/80">
+              <!-- Route Name Badge -->
+              <td class="px-4 py-3">
+                <span
+                  class="inline-flex py-0.5 px-2 rounded-md bg-blue-50 text-blue-700 font-bold font-mono text-[11px] border border-blue-100"
+                >
+                  {{ route.routeName || getRouteId(route) || "N/A" }}
+                </span>
+              </td>
+
+              <!-- Source City ID -->
+              <td class="px-3 py-3 font-bold text-slate-800">
+                {{ route.sourceCityId }}
+              </td>
+
+              <!-- Destination City ID -->
+              <td class="px-3 py-3 font-bold text-slate-800">
+                {{ route.destinationCityId }}
+              </td>
+
+              <!-- Total Distance (KM) -->
+              <td class="px-3 py-3 text-center text-slate-600 font-mono">
+                {{ route.distanceKm }} KM
+              </td>
+
+              <!-- Estimated Time Duration -->
+              <td class="px-3 py-3 text-center text-slate-600">
+                {{ route.estimatedHours }}
+              </td>
+
+              <!-- Fare Price -->
+              <td class="px-3 py-3 text-center text-slate-600 font-mono">
+                Rs. {{ route.farePrice }}
+              </td>
+
+              <!-- Status Badge -->
+              <td class="px-3 py-3 text-center">
+                <span
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border"
+                  [ngClass]="{
+                    'bg-emerald-50 text-emerald-700 border-emerald-200':
+                      route.status === 'Active',
+                    'bg-rose-50 text-rose-700 border-rose-200':
+                      route.status === 'Inactive',
+                  }"
+                >
+                  {{ route.status }}
+                </span>
+              </td>
+
+              <!-- Action Buttons -->
+              <td class="px-4 py-3">
+                <div class="flex justify-center items-center gap-1">
+                  <!-- View Details Button -->
+                  <button
+                    [routerLink]="['/routes/view', getRouteId(route)]"
+                    title="View Details"
+                    class="cursor-pointer rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-blue-600 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >visibility</span
+                    >
+                  </button>
+
+                  <!-- Edit Route Button -->
+                  <button
+                    [routerLink]="['/routes/edit', getRouteId(route)]"
+                    title="Edit Route"
+                    class="cursor-pointer rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-emerald-600 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >edit</span
+                    >
+                  </button>
+
+                  <!-- Delete Route Button -->
+                  <button
+                    type="button"
+                    (click)="deleteRoute(getRouteId(route))"
+                    title="Delete Route"
+                    class="cursor-pointer rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-rose-600 transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-base"
+                      >delete</span
+                    >
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <!-- Empty State -->
+            <tr>
+              <td colspan="8" class="px-4 py-12 text-center text-slate-400">
+                <div class="flex flex-col items-center justify-center gap-1.5">
+                  <span
+                    class="material-symbols-outlined text-3xl text-slate-300"
+                    >alt_route</span
+                  >
+                  <p class="text-xs font-medium text-slate-500">
+                    No routes found.
+                  </p>
+                  <p class="text-[10px] text-slate-400">
+                    Click "Add Route" to create a new one.
+                  </p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

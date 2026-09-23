@@ -1,0 +1,47 @@
+=================================================
+
+PHASE 6
+
+STEP 5
+
+USERS TABLE REVIEW
+
+=================================================
+
+Purpose
+
+Verify Users Table Structure
+
+=================================================
+
+Current Goal
+
+Review Users Table Columns
+
+Verify Data Types
+
+Verify Constraints
+
+=================================================
+
+Required Columns
+
+id
+
+role_id
+
+full_name
+
+email
+
+phone_number
+
+password
+
+gender
+
+created_at
+
+updated_at
+
+=================================================

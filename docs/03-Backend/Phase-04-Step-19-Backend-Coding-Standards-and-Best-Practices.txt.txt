@@ -1,0 +1,36 @@
+=================================================
+PHASE 4 – STEP 19
+
+BACKEND CODING STANDARDS
+& BEST PRACTICES
+
+=================================================
+
+What are Coding Standards?
+
+Coding Standards are rules that every
+developer follows to write clean,
+consistent and maintainable code.
+
+-------------------------------------------------
+
+Why Coding Standards?
+
+1. Easy to Read
+
+2. Easy to Maintain
+
+3. Team Friendly
+
+4. Less Bugs
+
+5. Professional Code
+
+-------------------------------------------------
+
+Software House Rule
+
+Every developer writes code in the
+same style.
+
+=================================================

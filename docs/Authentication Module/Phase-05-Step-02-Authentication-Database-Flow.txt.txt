@@ -1,0 +1,107 @@
+=================================================
+
+PHASE 5 – STEP 2
+
+AUTHENTICATION DATABASE FLOW
+
+=================================================
+
+Authentication uses the users table.
+
+The users table stores all user
+information required for login and
+registration.
+
+=================================================
+
+Users Table
+
+id
+
+full_name
+
+email
+
+phone_number
+
+password
+
+role_id
+
+gender
+
+is_active
+
+created_at
+
+updated_at
+
+=================================================
+
+Column Usage
+
+id
+Primary Key
+
+--------------------------------------------
+
+full_name
+User Name
+
+--------------------------------------------
+
+email
+Used for Login
+
+Must be Unique
+
+--------------------------------------------
+
+phone_number
+Contact Number
+
+Must be Unique
+
+--------------------------------------------
+
+password
+Hashed Password
+
+Never Store Plain Password
+
+--------------------------------------------
+
+role_id
+User Role
+
+Admin
+
+Customer
+
+Driver
+
+--------------------------------------------
+
+gender
+User Gender
+
+--------------------------------------------
+
+is_active
+1 = Active User
+
+0 = Inactive User
+
+--------------------------------------------
+
+created_at
+
+Record Created Date
+
+--------------------------------------------
+
+updated_at
+
+Record Updated Date
+
+=================================================

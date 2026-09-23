@@ -1,0 +1,29 @@
+=================================
+
+PHASE 09
+
+STEP 03
+
+User Module Folder Structure
+
+=================================
+
+src
+
+├── controllers
+│      user.controller.js
+│
+├── services
+│      user.service.js
+│
+├── repositories
+│      user.repository.js
+│
+├── routes
+│      v1
+│         user.routes.js
+│
+└── validations
+       user.validation.js
+
+=================================

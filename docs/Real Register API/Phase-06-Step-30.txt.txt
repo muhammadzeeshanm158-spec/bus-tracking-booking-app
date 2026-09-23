@@ -1,0 +1,75 @@
+=================================================
+
+PHASE 6
+
+STEP 30
+
+TEST COMPLETE ERROR HANDLING FLOW
+
+=================================================
+
+Objective
+
+Verify the complete error handling flow.
+
+=================================================
+
+Flow
+
+Request
+
+↓
+
+Validation
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+↓
+
+Response
+
+OR
+
+↓
+
+Error Middleware
+
+=================================================
+
+Learning
+
+Every layer has its own responsibility.
+
+Validation
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+=================================================

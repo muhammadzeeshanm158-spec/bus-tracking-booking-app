@@ -1,0 +1,197 @@
+<div class="p-4 max-w-7xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- Error Alert Banner -->
+  @if (errorMessage) {
+    <div class="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-xs font-medium">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- TOP NAVIGATION & HEADER SECTION -->
+  <div class="flex items-center gap-3">
+    <a 
+      routerLink="/bookings" 
+      class="p-2 bg-white rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition flex items-center justify-center shadow-xs"
+      title="Back to Bookings">
+      <span class="material-symbols-outlined text-lg">arrow_back</span>
+    </a>
+    <div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">New Ticket Booking</h1>
+      <p class="text-slate-500 text-xs mt-0.5">Select a schedule, choose bus seats, and enter passenger details.</p>
+    </div>
+  </div>
+
+  <!-- Main Grid Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    
+    <!-- LEFT COLUMN: SEAT LAYOUT & SELECTION GRID (7 Cols) -->
+    <div class="lg:col-span-7 bg-white rounded-xl border border-slate-200/80 shadow-xs p-4 space-y-4">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+        <div>
+          <h2 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Select Seats</h2>
+          <p class="text-[11px] text-slate-500 mt-0.5">Bus: BS-102 (Luxury AC - 45 Seats)</p>
+        </div>
+        
+        <!-- Legend Indicators -->
+        <div class="flex items-center gap-3 text-[11px] font-medium">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-white border border-slate-300"></span>
+            <span class="text-slate-600">Available</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-blue-600"></span>
+            <span class="text-slate-600">Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bus Interior Deck Visual Layout -->
+      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 max-w-sm mx-auto">
+        <div class="flex justify-end pb-4 border-b border-slate-200 mb-4">
+          <div class="px-2.5 py-1.5 bg-slate-200 text-slate-600 rounded-lg flex items-center gap-1.5 text-[11px] font-semibold">
+            <span class="material-symbols-outlined text-base">airline_seat_recline_extra</span>
+            Driver Cabin
+          </div>
+        </div>
+
+     <!-- Dynamic Seats Matrix -->
+<div class="grid grid-cols-5 gap-2 text-center">
+  @for (seat of availableSeats; track seat; let i = $index) {
+    @if (i > 0 && i % 4 === 2) {
+      <div class="text-[11px] text-slate-400 flex items-center justify-center font-mono tracking-wider col-span-1">AISLE</div>
+    }
+    
+    <button 
+      type="button" 
+      (click)="toggleSeat(seat)"
+      [disabled]="isSeatBooked(seat)"
+      [class.bg-blue-600]="isSeatSelected(seat)"
+      [class.text-white]="isSeatSelected(seat)"
+      [class.bg-slate-200]="isSeatBooked(seat)"
+      [class.text-slate-400]="isSeatBooked(seat)"
+      [class.cursor-not-allowed]="isSeatBooked(seat)"
+      [class.bg-white]="!isSeatSelected(seat) && !isSeatBooked(seat)"
+      [class.border-slate-200]="!isSeatSelected(seat) && !isSeatBooked(seat)"
+      [class.text-slate-700]="!isSeatSelected(seat) && !isSeatBooked(seat)"
+      class="py-2 border rounded-lg font-bold text-xs shadow-xs active:scale-95 transition cursor-pointer">
+      {{ seat }}
+    </button>
+  }
+</div>
+      </div>
+
+      <!-- Selected Seats Summary Badge -->
+      <div class="p-3 bg-blue-50/70 border border-blue-100 rounded-xl flex items-center justify-between text-xs">
+        <span class="text-slate-600">Selected Seats: <strong class="text-blue-600 font-bold">{{ selectedSeats.join(', ') || 'None' }}</strong></span>
+        <span class="text-slate-600">Total Count: <strong class="text-slate-900 font-bold">{{ selectedSeats.length }} Seats</strong></span>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: PASSENGER DETAILS & PAYMENT FORM (5 Cols) -->
+    <div class="lg:col-span-5 bg-white rounded-xl border border-slate-200/80 shadow-xs p-4 space-y-4">
+      <h2 class="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2.5">Booking & Passenger Details</h2>
+
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="space-y-3">
+        
+        <!-- Select Schedule / Route Dropdown -->
+        <div>
+          <label for="routeSelect" class="block text-xs font-semibold text-slate-700 mb-1">Select Schedule / Route <span class="text-rose-500">*</span></label>
+          <select id="routeSelect" formControlName="scheduleId" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 focus:bg-white text-slate-800 transition cursor-pointer">
+            <option value="" disabled>Select a schedule</option>
+            <option value="1">Lahore ➔ Islamabad (08:00 AM)</option>
+            <option value="2">Karachi ➔ Multan (09:00 PM)</option>
+            <option value="3">Peshawar ➔ Rawalpindi (02:00 PM)</option>
+          </select>
+        </div>
+
+        <!-- Passenger Full Name Input -->
+        <div>
+          <label for="passengerName" class="block text-xs font-semibold text-slate-700 mb-1">Passenger Full Name <span class="text-rose-500">*</span></label>
+          <input 
+            id="passengerName"
+            formControlName="customerName"
+            type="text" 
+            placeholder="e.g. Usman Ahmed" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+        </div>
+
+        <!-- Phone Number & CNIC Grid Inputs -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="phoneNumber" class="block text-xs font-semibold text-slate-700 mb-1">Phone Number <span class="text-rose-500">*</span></label>
+            <input 
+              id="phoneNumber"
+              formControlName="customerPhone"
+              type="text" 
+              placeholder="03001234567" 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+          </div>
+
+          <div>
+            <label for="cnicId" class="block text-xs font-semibold text-slate-700 mb-1">CNIC / ID <span class="text-[10px] text-slate-400 font-normal">(Optional)</span></label>
+            <!-- Fixed: formControlName corrected from 'cnicId' to 'cnic' -->
+            <input 
+              id="cnicId"
+              formControlName="cnic"
+              type="text" 
+              placeholder="35201-XXXXXXX-X" 
+              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+          </div>
+        </div>
+
+        <!-- Payment Method & Payment Status Select Dropdowns -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="paymentMethod" class="block text-xs font-semibold text-slate-700 mb-1">Payment Method</label>
+            <select id="paymentMethod" formControlName="paymentMethod" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 focus:bg-white text-slate-800 transition cursor-pointer">
+              <option value="cash">Cash on Terminal</option>
+              <option value="easypaisa">EasyPaisa</option>
+              <option value="jazzcash">JazzCash</option>
+              <option value="card">Credit / Debit Card</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="paymentStatus" class="block text-xs font-semibold text-slate-700 mb-1">Payment Status</label>
+            <select id="paymentStatus" formControlName="paymentStatus" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 focus:bg-white text-slate-800 transition cursor-pointer">
+              <option value="Paid">Paid & Confirmed</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Total Fare Calculation & Breakdown Card -->
+        <div class="pt-3 border-t border-slate-100 space-y-1.5">
+          <div class="flex justify-between text-[11px] text-slate-500">
+            <span>Seat Price (PKR 2,500 x {{ selectedSeats.length }})</span>
+            <span class="font-semibold text-slate-700">PKR {{ selectedSeats.length * seatPrice }}</span>
+          </div>
+          <div class="flex justify-between text-[11px] text-slate-500">
+            <span>Service Charges / Tax</span>
+            <span class="font-semibold text-slate-700">PKR 0</span>
+          </div>
+          <div class="flex justify-between text-xs font-bold text-slate-900 pt-2 border-t border-slate-100">
+            <span>Total Amount</span>
+            <span class="text-blue-600">PKR {{ selectedSeats.length * seatPrice }}</span>
+          </div>
+        </div>
+
+        <!-- Form Submit & Cancel Action Buttons -->
+        <div class="pt-2 flex items-center gap-2">
+          <a routerLink="/bookings" class="w-1/2 py-2 border border-slate-200 text-slate-600 font-medium rounded-xl text-center text-xs hover:bg-slate-50 transition cursor-pointer">
+            Cancel
+          </a>
+          <button 
+            type="submit" 
+            [disabled]="isSubmitting"
+            class="w-1/2 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl text-xs shadow-md shadow-blue-600/20 active:scale-95 transition cursor-pointer disabled:opacity-50">
+            {{ isSubmitting ? 'Processing...' : 'Issue Ticket' }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

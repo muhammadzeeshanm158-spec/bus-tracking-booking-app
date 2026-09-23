@@ -1,0 +1,77 @@
+=================================================
+
+PHASE 6
+
+STEP 15
+
+TEST REGISTER API
+
+VERIFY DATABASE
+
+=================================================
+
+Purpose
+
+Verify That
+
+1. API Works Correctly
+
+2. User Is Saved In Database
+
+3. Password Is Hashed
+
+=================================================
+
+Testing Flow
+
+Postman
+
+↓
+
+Register API
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+MySQL
+
+↓
+
+Response
+
+=================================================
+
+Verification
+
+✓ API Response
+
+✓ User Inserted
+
+✓ Hashed Password Stored
+
+✓ No Plain Password
+
+=================================================
+
+Professional Rule
+
+Always Verify
+
+Server
+
+AND
+
+Database
+
+=================================================

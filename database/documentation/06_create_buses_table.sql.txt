@@ -1,0 +1,38 @@
+=========================================
+BUSES TABLE
+=========================================
+
+1. What is Buses Table?
+
+The buses table stores information about all buses.
+
+-----------------------------------------
+
+2. Why do we need Buses Table?
+
+- Bus management
+- Seat capacity
+- Bus type
+- Bus availability
+
+-----------------------------------------
+
+3. Columns
+
+id
+bus_number
+bus_name
+bus_type
+total_seats
+registration_number
+is_active
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- Bus number should be unique.
+- Registration number should be unique.
+- Total seats must be greater than zero.

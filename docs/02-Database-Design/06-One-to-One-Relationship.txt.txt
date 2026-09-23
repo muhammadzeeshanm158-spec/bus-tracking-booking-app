@@ -1,0 +1,70 @@
+=========================================
+ONE-TO-ONE (1:1) RELATIONSHIP
+=========================================
+
+1. What is a One-to-One Relationship?
+
+A One-to-One (1:1) Relationship means one record in Table A is related to only one record in Table B, and one record in Table B is related to only one record in Table A.
+
+-----------------------------------------
+2. Why is One-to-One Relationship Used?
+-----------------------------------------
+
+- Separates sensitive information.
+- Improves database organization.
+- Reduces unnecessary columns.
+- Makes data management easier.
+
+-----------------------------------------
+3. Real-Life Example
+-----------------------------------------
+
+Person Table
+
+One Person
+
+↓
+
+One Passport
+
+Each person has only one passport, and each passport belongs to only one person.
+
+-----------------------------------------
+4. Project Example
+-----------------------------------------
+
+Users
+
+↓
+
+Drivers
+
+One Driver account belongs to one User account.
+
+drivers.user_id
+→ references users.id
+
+-----------------------------------------
+5. Relationship Diagram
+-----------------------------------------
+
+Users (1)
+     │
+     │
+     ▼
+Drivers (1)
+
+-----------------------------------------
+6. Advantages
+-----------------------------------------
+
+- Better organization.
+- Easy maintenance.
+- Improved security.
+- Better scalability.
+
+-----------------------------------------
+7. Conclusion
+-----------------------------------------
+
+One-to-One relationships are used when one record should be connected to exactly one record in another table.

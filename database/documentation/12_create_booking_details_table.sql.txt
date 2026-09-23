@@ -1,0 +1,34 @@
+=========================================
+BOOKING DETAILS TABLE
+=========================================
+
+1. What is Booking Details Table?
+
+The booking_details table stores the seats booked in each booking.
+
+-----------------------------------------
+
+2. Why do we need Booking Details Table?
+
+- Store booked seats
+- Support multiple seats
+- Store seat fare
+- Manage seat bookings
+
+-----------------------------------------
+
+3. Columns
+
+id
+booking_id
+seat_id
+seat_fare
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One booking can have many seats.
+- One seat can be booked many times on different schedules.

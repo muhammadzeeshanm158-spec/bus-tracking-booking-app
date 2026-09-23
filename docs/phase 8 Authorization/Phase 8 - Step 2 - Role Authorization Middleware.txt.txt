@@ -1,0 +1,34 @@
+=================================
+
+PHASE 8
+
+STEP 2
+
+Role Authorization Middleware
+
+=================================
+
+Purpose
+
+Check if the logged-in user has permission
+to access a specific route.
+
+=================================
+
+Flow
+
+Request
+   ↓
+Authentication Middleware
+   ↓
+User Logged In
+   ↓
+Role Middleware
+   ↓
+Role Allowed?
+   ↓
+Yes → Controller
+
+No → 403 Forbidden
+
+=================================

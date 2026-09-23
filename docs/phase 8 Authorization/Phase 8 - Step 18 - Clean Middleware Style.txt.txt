@@ -1,0 +1,31 @@
+=================================
+
+PHASE 8
+
+STEP 18
+
+Clean Middleware Style
+
+=================================
+
+Use early return.
+
+Example:
+
+if (...) {
+   return ...
+}
+
+if (...) {
+   return ...
+}
+
+next();
+
+Benefits:
+
+- Cleaner code
+- Better readability
+- Professional coding style
+
+=================================

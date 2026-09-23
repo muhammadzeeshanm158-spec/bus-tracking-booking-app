@@ -1,0 +1,64 @@
+=================================================
+
+PHASE 6
+
+STEP 17
+
+CHECK DUPLICATE USER IN SERVICE
+
+=================================================
+
+Objective
+
+Use checkUserExistsRepository() inside the
+Service Layer.
+
+=================================================
+
+Why?
+
+Repository only returns database data.
+
+Service decides what to do with that data.
+
+=================================================
+
+Flow
+
+Controller
+    ↓
+Service
+    ↓
+Repository
+    ↓
+Database
+
+=================================================
+
+Expected Logic
+
+Repository returns rows.
+
+If rows.length > 0
+
+↓
+
+Return
+
+success: false
+
+message: "Email or Phone Number already exists"
+
+Else
+
+Continue registration process.
+
+=================================================
+
+Learning
+
+Repository = Database
+
+Service = Business Logic
+
+=================================================

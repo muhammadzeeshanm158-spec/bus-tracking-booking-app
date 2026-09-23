@@ -1,0 +1,53 @@
+=================================
+
+PHASE 09
+
+STEP 09
+
+Get User By ID
+&
+Update User
+
+=================================
+
+Features
+
+✓ Get User By ID
+
+✓ Update User
+
+=================================
+
+Flow
+
+Client
+
+↓
+
+Route
+
+↓
+
+Authentication
+
+↓
+
+Authorization
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+=================================

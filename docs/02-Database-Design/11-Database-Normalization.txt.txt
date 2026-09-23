@@ -1,0 +1,103 @@
+=========================================
+DATABASE NORMALIZATION
+=========================================
+
+1. What is Database Normalization?
+
+Database Normalization is the process of organizing data into well-structured tables to reduce data redundancy and improve data integrity.
+
+-----------------------------------------
+2. Why is Normalization Important?
+-----------------------------------------
+
+- Reduces duplicate data.
+- Improves data consistency.
+- Makes updates easier.
+- Prevents insertion, update, and deletion anomalies.
+- Improves database maintenance.
+
+-----------------------------------------
+3. First Normal Form (1NF)
+-----------------------------------------
+
+Rules:
+
+- Each column stores only one value.
+- No repeating groups.
+- Each row must be unique.
+
+Example:
+
+Correct:
+
+id | name | phone
+---------------------
+1  | Ali  | 03001234567
+
+Wrong:
+
+id | name | phone
+------------------------------
+1  | Ali  | 03001234567,03111222333
+
+-----------------------------------------
+4. Second Normal Form (2NF)
+-----------------------------------------
+
+Rules:
+
+- Must already be in 1NF.
+- Every non-key column must depend on the whole Primary Key.
+
+Example:
+
+Store customer data in the users table.
+Store booking data in the bookings table.
+
+Do not mix unrelated data in one table.
+
+-----------------------------------------
+5. Third Normal Form (3NF)
+-----------------------------------------
+
+Rules:
+
+- Must already be in 2NF.
+- Non-key columns should depend only on the Primary Key.
+- Remove unnecessary dependencies.
+
+Example:
+
+Store city information in the cities table.
+
+Do not repeat city names in every user or route record.
+
+-----------------------------------------
+6. Project Example
+-----------------------------------------
+
+Correct Design:
+
+users
+bookings
+payments
+cities
+routes
+
+Each table stores only its own data.
+
+-----------------------------------------
+7. Benefits
+-----------------------------------------
+
+- Less duplicate data.
+- Better performance.
+- Easier maintenance.
+- Better scalability.
+- Cleaner database design.
+
+-----------------------------------------
+8. Conclusion
+-----------------------------------------
+
+Normalization organizes database tables efficiently and reduces redundancy while maintaining data integrity.

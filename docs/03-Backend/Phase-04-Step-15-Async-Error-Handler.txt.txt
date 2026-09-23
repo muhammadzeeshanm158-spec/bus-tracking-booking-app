@@ -1,0 +1,49 @@
+=================================================
+PHASE 4 – STEP 15
+
+ASYNC ERROR HANDLER
+
+=================================================
+
+What is Async Error Handler?
+
+Async Error Handler is a reusable function
+that automatically catches errors from
+async controllers.
+
+-------------------------------------------------
+
+Without Async Handler
+
+Every controller needs
+
+try {
+
+}
+
+catch(error) {
+
+}
+
+Result
+
+Repeated Code
+
+-------------------------------------------------
+
+With Async Handler
+
+Controller only contains business logic.
+
+Errors automatically go to
+Error Middleware.
+
+-------------------------------------------------
+
+Software House Rule
+
+Never write try-catch in every controller.
+
+Use one reusable async handler.
+
+=================================================

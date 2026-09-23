@@ -1,0 +1,89 @@
+=========================================
+FUNCTIONAL REQUIREMENTS SPECIFICATION (FRS)
+=========================================
+
+1. What are Functional Requirements?
+
+Functional Requirements describe what the system should do. They define the features and functions that the software must provide to its users.
+
+-----------------------------------------
+2. Customer Functional Requirements
+-----------------------------------------
+
+FR-01: Customer can register an account.
+
+FR-02: Customer can log in to the system.
+
+FR-03: Customer can update profile information.
+
+FR-04: Customer can search buses by source, destination, and travel date.
+
+FR-05: Customer can view bus details.
+
+FR-06: Customer can view available seats.
+
+FR-07: Customer can select one or more available seats.
+
+FR-08: Customer can book tickets.
+
+FR-09: Customer can make online payments.
+
+FR-10: Customer can view booking history.
+
+FR-11: Customer can cancel a booking (according to cancellation policy).
+
+FR-12: Customer can track the live location of the bus.
+
+FR-13: Customer can download or view the booked ticket.
+
+FR-14: Customer can log out.
+
+-----------------------------------------
+3. Driver Functional Requirements
+-----------------------------------------
+
+FR-15: Driver can log in.
+
+FR-16: Driver can view assigned trips.
+
+FR-17: Driver can start a trip.
+
+FR-18: Driver can update the current bus location.
+
+FR-19: Driver can end a trip.
+
+FR-20: Driver can view passenger list.
+
+FR-21: Driver can log out.
+
+-----------------------------------------
+4. Admin Functional Requirements
+-----------------------------------------
+
+FR-22: Admin can log in.
+
+FR-23: Admin can manage users.
+
+FR-24: Admin can manage drivers.
+
+FR-25: Admin can manage buses.
+
+FR-26: Admin can manage routes.
+
+FR-27: Admin can manage cities.
+
+FR-28: Admin can manage schedules.
+
+FR-29: Admin can manage bookings.
+
+FR-30: Admin can manage payments.
+
+FR-31: Admin can view reports and analytics.
+
+FR-32: Admin can log out.
+
+-----------------------------------------
+5. Conclusion
+-----------------------------------------
+
+Functional Requirements define all the features that the Bus Tracking & Booking System must provide to customers, drivers, and administrators.

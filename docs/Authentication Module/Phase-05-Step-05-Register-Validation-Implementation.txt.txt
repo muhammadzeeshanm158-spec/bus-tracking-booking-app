@@ -1,0 +1,55 @@
+=================================================
+
+PHASE 5 – STEP 5
+
+REGISTER VALIDATION IMPLEMENTATION
+
+=================================================
+
+Purpose
+
+Validate Register Request Data
+
+=================================================
+
+File
+
+src/validations/auth.validation.js
+
+=================================================
+
+Validation Order
+
+1. full_name
+
+↓
+
+2. email
+
+↓
+
+3. phone_number
+
+↓
+
+4. password
+
+↓
+
+5. gender
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Call next()
+
+=================================================

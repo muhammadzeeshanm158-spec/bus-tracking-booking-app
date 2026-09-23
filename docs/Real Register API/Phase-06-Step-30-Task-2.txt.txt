@@ -1,0 +1,40 @@
+=================================================
+
+PHASE 6
+
+STEP 30
+
+FINAL PROJECT REVIEW
+
+=================================================
+
+Objective
+
+Verify project architecture.
+
+=================================================
+
+Checklist
+
+✓ Validation
+
+✓ Controller
+
+✓ Service
+
+✓ Repository
+
+✓ Database
+
+✓ Error Handler
+
+✓ Async Handler
+
+=================================================
+
+Learning
+
+A professional backend separates
+responsibilities into different layers.
+
+=================================================

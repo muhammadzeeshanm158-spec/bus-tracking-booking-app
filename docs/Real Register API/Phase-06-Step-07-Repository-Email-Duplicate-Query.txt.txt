@@ -1,0 +1,42 @@
+=================================================
+
+PHASE 6
+
+STEP 7
+
+FIRST SQL QUERY
+
+CHECK DUPLICATE EMAIL
+
+=================================================
+
+Purpose
+
+Search Email in Database
+
+=================================================
+
+Current Goal
+
+Repository will execute a SELECT query
+
+The query will search the users table
+using the email received from Service.
+
+=================================================
+
+Flow
+
+Client
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+SELECT Query
+   ↓
+MySQL Database
+
+=================================================

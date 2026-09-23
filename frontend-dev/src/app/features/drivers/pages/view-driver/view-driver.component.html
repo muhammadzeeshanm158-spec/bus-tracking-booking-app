@@ -1,0 +1,142 @@
+<!-- ========================================================================= -->
+<!-- DRIVER PROFILE OVERVIEW MODAL COMPONENT TEMPLATE                          -->
+<!-- ========================================================================= -->
+
+<!-- OVERLAY / BACKDROP (Background ko dark aur blur karne ke liye) -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+  
+  <!-- MODAL CONTAINER (Center box jo saare profile content ko hold karega) -->
+  <div class="bg-white rounded-2xl shadow-xl border border-slate-200/80 w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col">
+    
+    <!-- MODAL HEADER (Title aur Close X button) -->
+    <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 shrink-0">
+      <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Driver Profile Overview</span>
+      <a 
+        routerLink="/drivers"
+        class="h-8 w-8 rounded-lg text-slate-400 hover:bg-slate-200/60 hover:text-slate-600 flex items-center justify-center transition cursor-pointer"
+      >
+        <span class="material-symbols-outlined text-lg">close</span>
+      </a>
+    </div>
+
+    <!-- DRIVER PROFILE CARD BODY -->
+    <div class="p-5 space-y-4 overflow-y-auto flex-1">
+      
+      <!-- Loading State (Jab tak server se driver ki details fetch ho rahi hon) -->
+      @if (isLoading) {
+        <div class="py-10 text-center text-slate-500 text-xs flex flex-col items-center justify-center gap-2">
+          <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
+          <p class="font-medium">Loading driver profile...</p>
+        </div>
+      } 
+      <!-- Error State (Agar data load karne mein koi masla aaye) -->
+      @else if (errorMessage) {
+        <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+          {{ errorMessage }}
+        </div>
+      } 
+      <!-- Driver Profile Data View -->
+      @else if (driver) {
+        
+        <!-- Profile Header Avatar & Name Section -->
+        <div class="flex items-center gap-3.5 border-b border-slate-100 pb-4">
+          <!-- Initials Avatar Box -->
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 font-bold text-lg flex items-center justify-center shadow-xs shrink-0">
+            {{ getInitial(driver.name) }}
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-800 capitalize">{{ driver.name }}</h3>
+            <p class="text-[10px] text-slate-400 font-mono mt-0.5">ID: <span class="font-semibold text-slate-700">{{ driver.id }}</span></p>
+            
+            <!-- Status Badge with Indicator Dot -->
+        <!-- Status Badge with Indicator Dot -->
+<!-- Status Badge with Indicator Dot -->
+<span [ngClass]="{
+  'bg-emerald-50 text-emerald-700 border-emerald-200': driver.status === 'On Duty',
+  'bg-blue-50 text-blue-700 border-blue-200': driver.status === 'Available',
+  'bg-amber-50 text-amber-700 border-amber-200': driver.status === 'On Leave',
+  'bg-slate-100 text-slate-700 border-slate-200': driver.status === 'Inactive'
+}" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold mt-1.5 border">
+  <span class="w-1.5 h-1.5 rounded-full" [ngClass]="{
+    'bg-emerald-500': driver.status === 'On Duty',
+    'bg-blue-500': driver.status === 'Available',
+    'bg-amber-500': driver.status === 'On Leave',
+    'bg-slate-400': driver.status === 'Inactive'
+  }"></span>
+  {{ driver.status }}
+</span>
+          </div>
+        </div>
+
+        <!-- Detail Grid Items (Contact, License, Email, Category, Assigned Bus) -->
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <!-- Contact Number -->
+          <div class="p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Contact Number</p>
+            <p class="font-semibold text-slate-800 mt-1">{{ driver.phone }}</p>
+          </div>
+
+          <!-- License Number -->
+          <div class="p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">License Number</p>
+            <p class="font-semibold text-slate-800 mt-1 font-mono text-[11px]">{{ driver.licenseNumber }}</p>
+          </div>
+
+          <!-- Email Address -->
+          <div class="p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Address</p>
+            <p class="font-semibold text-slate-800 mt-1 truncate">{{ driver.email }}</p>
+          </div>
+
+          <!-- License Category -->
+          <div class="p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">License Category</p>
+            <p class="font-semibold text-slate-800 mt-1">{{ driver.licenseCategory }}</p>
+          </div>
+
+          <!-- Assigned Bus (Full width span) -->
+          <div class="p-3 bg-slate-50/70 rounded-xl border border-slate-200/60 col-span-2">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Assigned Bus</p>
+            <div class="flex items-center gap-1.5 mt-1">
+              <span class="material-symbols-outlined text-blue-600 text-base">directions_bus</span>
+              <p class="font-semibold text-slate-800">
+                @if (driver.assignedBusNumber) {
+                  Bus ({{ driver.assignedBusNumber }})
+                } @else {
+                  <span class="text-slate-400 font-normal italic">Unassigned</span>
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+
+      }
+
+    </div>
+
+    <!-- MODAL FOOTER (Edit Details Link & Close Button) -->
+    <div class="px-5 py-3.5 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between shrink-0">
+      <!-- Edit Details Action Link -->
+      @if (driver) {
+        <a 
+          [routerLink]="['/drivers/edit', driver.id]"
+          class="inline-flex items-center gap-1 text-xs text-blue-600 font-semibold hover:text-blue-700 transition cursor-pointer"
+        >
+          <span class="material-symbols-outlined text-base">edit</span>
+          Edit Details
+        </a>
+      } @else {
+        <span></span>
+      }
+
+      <!-- Close Modal Button -->
+      <a 
+        routerLink="/drivers"
+        class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-medium text-xs transition cursor-pointer shadow-xs text-center active:scale-95"
+      >
+        Close
+      </a>
+    </div>
+
+  </div>
+</div>

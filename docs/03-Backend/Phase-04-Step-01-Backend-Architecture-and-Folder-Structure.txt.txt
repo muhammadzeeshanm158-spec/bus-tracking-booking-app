@@ -1,0 +1,50 @@
+=========================================
+PHASE 4 - STEP 1
+
+BACKEND FOLDER STRUCTURE
+
+What is Backend?
+
+Backend is the server-side part of an application.
+
+Responsibilities:
+
+- Business Logic
+- Authentication
+- Authorization
+- Database Communication
+- API Development
+- Validation
+- Error Handling
+
+Backend Flow
+
+Client
+
+↓
+
+Routes
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Repositories
+
+↓
+
+Database
+
+Benefits
+
+- Clean Code
+- Easy Maintenance
+- Reusable Code
+- Scalable
+=========================================

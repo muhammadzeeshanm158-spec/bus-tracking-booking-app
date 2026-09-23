@@ -1,0 +1,32 @@
+=================================================
+
+PHASE 7
+
+STEP 6
+
+LOGIN SUCCESS RESPONSE
+
+=================================================
+
+Objective
+
+Return successful login response.
+
+=================================================
+
+Tasks
+
+✓ Remove password
+
+✓ Return user data
+
+✓ Success message
+
+=================================================
+
+Learning
+
+Never return hashed password
+to the client.
+
+=================================================

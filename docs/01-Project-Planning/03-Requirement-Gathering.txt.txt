@@ -1,0 +1,71 @@
+=========================================
+REQUIREMENT GATHERING
+=========================================
+
+1. What is Requirement Gathering?
+
+Requirement Gathering is the process of collecting and understanding all the needs and expectations of the client before starting the development of a software project.
+
+The main purpose of requirement gathering is to clearly understand what the client wants and how the system should work.
+
+-----------------------------------------
+2. Why is Requirement Gathering Important?
+-----------------------------------------
+
+Requirement Gathering is important because:
+
+- It helps understand the client's needs.
+- It reduces misunderstandings.
+- It prevents unnecessary changes during development.
+- It saves time and cost.
+- It helps build the correct software.
+
+-----------------------------------------
+3. Types of Requirements
+-----------------------------------------
+
+There are two main types of requirements:
+
+1. Functional Requirements
+2. Non-Functional Requirements
+
+-----------------------------------------
+4. Functional Requirements
+-----------------------------------------
+
+Functional Requirements describe what the system should do.
+
+Examples:
+- User Registration
+- User Login
+- Search Bus
+- Book Ticket
+- Cancel Booking
+- Make Payment
+- Live Bus Tracking
+
+-----------------------------------------
+5. Non-Functional Requirements
+-----------------------------------------
+
+Non-Functional Requirements describe how the system should perform.
+
+Examples:
+- Fast Performance
+- Secure Authentication
+- Responsive Design
+- Easy Navigation
+- High Availability
+- Data Security
+
+-----------------------------------------
+6. Goal of Requirement Gathering
+-----------------------------------------
+
+The goal of Requirement Gathering is to collect complete and accurate information before starting the design and development of the software.
+
+-----------------------------------------
+7. Conclusion
+-----------------------------------------
+
+Requirement Gathering is the first and one of the most important activities in software development. A well-defined requirement leads to a successful software project.

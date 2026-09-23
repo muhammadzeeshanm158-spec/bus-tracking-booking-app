@@ -1,0 +1,97 @@
+=================================================
+PHASE 4 – STEP 2
+
+BACKEND PROJECT SETUP
+&
+ENVIRONMENT CONFIGURATION
+=================================================
+
+What is Backend Setup?
+
+Backend setup means preparing the project before writing any code.
+
+Why do we need Backend Setup?
+
+1. To organize the project.
+2. To keep sensitive information secure.
+3. To make the project easy to maintain.
+4. To make the project ready for development.
+5. To follow software house standards.
+
+-------------------------------------------------
+
+What is Environment Configuration?
+
+Environment Configuration means storing project settings in a separate file instead of writing them directly in the code.
+
+These settings include:
+
+- Server Port
+- Database Host
+- Database Name
+- Database Username
+- Database Password
+- JWT Secret Key
+- Node Environment
+
+-------------------------------------------------
+
+What is .env File?
+
+.env is a hidden file that stores sensitive project information.
+
+Examples:
+
+PORT
+DB_HOST
+DB_NAME
+DB_USER
+DB_PASSWORD
+JWT_SECRET
+
+Never upload the .env file to GitHub.
+
+-------------------------------------------------
+
+What is .env.example?
+
+.env.example is a sample file.
+
+It contains only variable names.
+
+Example:
+
+PORT=
+DB_HOST=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+JWT_SECRET=
+
+Every developer creates their own .env file.
+
+-------------------------------------------------
+
+What is .gitignore?
+
+.gitignore tells Git which files or folders should NOT be uploaded.
+
+Examples:
+
+node_modules/
+.env
+uploads/
+
+-------------------------------------------------
+
+Software House Rule
+
+Never hardcode:
+
+- Database Password
+- JWT Secret
+- API Keys
+
+Always use .env file.
+
+=================================================

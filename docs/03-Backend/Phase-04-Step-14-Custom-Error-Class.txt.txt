@@ -1,0 +1,48 @@
+=================================================
+PHASE 4 – STEP 14
+
+CUSTOM ERROR CLASS
+
+=================================================
+
+What is Custom Error Class?
+
+A Custom Error Class is a reusable class
+used to create standard application errors.
+
+-------------------------------------------------
+
+Without Custom Error
+
+Every controller creates errors differently.
+
+Result
+
+Different error formats.
+
+-------------------------------------------------
+
+With Custom Error
+
+Every controller creates errors
+using one standard class.
+
+Result
+
+Clean
+
+Professional
+
+Reusable
+
+Maintainable
+
+-------------------------------------------------
+
+Software House Rule
+
+Never throw random errors.
+
+Always use a standard custom error class.
+
+=================================================

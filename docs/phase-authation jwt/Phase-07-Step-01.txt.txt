@@ -1,0 +1,66 @@
+=================================================
+
+PHASE 7
+
+STEP 1
+
+LOGIN MODULE PLANNING
+
+=================================================
+
+Objective
+
+Understand how Login works.
+
+=================================================
+
+Flow
+
+Client
+
+↓
+
+Login API
+
+↓
+
+Validation
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+↓
+
+Password Verification
+
+↓
+
+JWT Token
+
+↓
+
+Response
+
+=================================================
+
+Learning
+
+Login verifies user credentials.
+
+If credentials are correct,
+the server generates a JWT token.
+
+=================================================

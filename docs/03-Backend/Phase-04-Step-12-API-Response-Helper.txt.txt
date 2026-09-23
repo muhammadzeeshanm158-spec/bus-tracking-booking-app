@@ -1,0 +1,39 @@
+=================================================
+PHASE 4 – STEP 12
+
+API RESPONSE HELPER
+
+=================================================
+
+What is API Response Helper?
+
+API Response Helper is a utility function that
+returns a standard response format.
+
+-------------------------------------------------
+
+Without Response Helper
+
+Every controller writes its own response.
+
+Result
+
+Different Response Formats
+
+-------------------------------------------------
+
+With Response Helper
+
+Every controller uses one helper.
+
+Result
+
+Same Response Format
+
+-------------------------------------------------
+
+Software House Rule
+
+Every API must return the same response format.
+
+=================================================

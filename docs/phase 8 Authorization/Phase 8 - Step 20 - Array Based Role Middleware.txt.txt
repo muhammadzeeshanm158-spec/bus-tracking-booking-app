@@ -1,0 +1,29 @@
+=================================
+
+PHASE 8
+
+STEP 20
+
+Array Based Role Middleware
+
+=================================
+
+Old
+
+roleMiddleware(1)
+
+↓
+
+Only one role allowed
+
+---------------------------------
+
+New
+
+roleMiddleware([1,3])
+
+↓
+
+Multiple roles allowed
+
+=================================

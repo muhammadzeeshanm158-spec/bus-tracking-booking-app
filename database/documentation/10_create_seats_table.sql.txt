@@ -1,0 +1,35 @@
+=========================================
+SEATS TABLE
+=========================================
+
+1. What is Seats Table?
+
+The seats table stores all seats of every bus.
+
+-----------------------------------------
+
+2. Why do we need Seats Table?
+
+- Seat Management
+- Seat Booking
+- Seat Availability
+- Seat Type
+
+-----------------------------------------
+
+3. Columns
+
+id
+bus_id
+seat_number
+seat_type
+is_active
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One bus can have many seats.
+- Seat number should be unique within a bus.

@@ -1,0 +1,68 @@
+=================================================
+
+PHASE 6
+
+STEP 13
+
+INSERT USER INTO DATABASE
+
+=================================================
+
+Purpose
+
+Save New User
+Into MySQL Database
+
+=================================================
+
+Flow
+
+Client
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+INSERT INTO users
+
+↓
+
+MySQL Database
+
+=================================================
+
+Data To Save
+
+role_id
+
+full_name
+
+email
+
+phone_number
+
+hashed_password
+
+gender
+
+=================================================
+
+Important
+
+Repository is responsible
+for database queries.
+
+Service is responsible
+for business logic.
+
+=================================================

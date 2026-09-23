@@ -1,0 +1,196 @@
+<!-- ========================================================================= -->
+<!-- ADD NEW DRIVER MODAL COMPONENT TEMPLATE                                   -->
+<!-- ========================================================================= -->
+
+<!-- 1. OVERLAY / BACKDROP (Peeche background ko blur aur dark karne ke liye) -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+  
+  <!-- 2. MODAL CONTAINER (Main popup box) -->
+  <div class="bg-white rounded-2xl shadow-xl border border-slate-200/80 w-full max-w-xl overflow-hidden max-h-[90vh] flex flex-col">
+    
+    <!-- MODAL HEADER (Title aur Close 'X' button) -->
+    <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 shrink-0">
+      <div>
+        <h3 class="text-sm font-bold text-slate-800">Add New Driver</h3>
+        <p class="text-[10px] text-slate-500 mt-0.5">Enter driver personal and license details</p>
+      </div>
+      <a 
+        routerLink="/drivers"
+        class="h-8 w-8 rounded-lg text-slate-400 hover:bg-slate-200/60 hover:text-slate-600 flex items-center justify-center transition cursor-pointer">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </a>
+    </div>
+
+    <!-- 3. MODAL FORM BODY (Reactive Form aur input fields) -->
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()" class="p-5 space-y-4 overflow-y-auto flex-1">
+      
+      <!-- Error Message Banner (Agar backend ya form submission mein koi error aaye) -->
+      @if (errorMessage) {
+        <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Full Name & Email Input Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div>
+          <label for="name" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Full Name <span class="text-rose-500">*</span></label>
+          <input 
+            id="name"
+            type="text" 
+            formControlName="name"
+            placeholder="e.g. Tariq Mehmood" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+          <!-- Name Validation Error -->
+          @if (f['name'].touched && f['name'].invalid) {
+            <p class="text-[10px] text-rose-500 font-medium mt-1">Name is required (min 3 chars).</p>
+          }
+        </div>
+
+        <div>
+          <label for="email" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Email Address <span class="text-rose-500">*</span></label>
+          <input 
+            id="email"
+            type="email" 
+            formControlName="email"
+            placeholder="e.g. tariq@example.com" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+          <!-- Email Validation Error -->
+          @if (f['email'].touched && f['email'].invalid) {
+            <p class="text-[10px] text-rose-500 font-medium mt-1">Valid email is required.</p>
+          }
+        </div>
+      </div>
+
+      <!-- Phone Number & CNIC Input Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div>
+          <label for="phone" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Phone Number <span class="text-rose-500">*</span></label>
+          <input 
+            id="phone"
+            type="tel" 
+            formControlName="phone"
+            placeholder="+92 301 5551234" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+          <!-- Phone Validation Error -->
+          @if (f['phone'].touched && f['phone'].invalid) {
+            <p class="text-[10px] text-rose-500 font-medium mt-1">Valid phone number is required.</p>
+          }
+        </div>
+
+        <div>
+          <label for="cnic" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">CNIC <span class="text-rose-500">*</span></label>
+          <input 
+            id="cnic"
+            type="text" 
+            formControlName="cnic"
+            placeholder="42101-5544332-1" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 font-mono outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+          <!-- CNIC Validation Error -->
+          @if (f['cnic'].touched && f['cnic'].invalid) {
+            <p class="text-[10px] text-rose-500 font-medium mt-1">Valid CNIC is required.</p>
+          }
+        </div>
+      </div>
+
+      <!-- License Number & Category Dropdown -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div>
+          <label for="licenseNumber" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">License Number</label>
+          <input 
+            id="licenseNumber"
+            type="text" 
+            formControlName="licenseNumber"
+            placeholder="e.g. LHR-9988231" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 font-mono outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+        </div>
+
+        <div>
+          <label for="licenseCategory" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">License Category</label>
+          <select 
+            id="licenseCategory"
+            formControlName="licenseCategory"
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 outline-none cursor-pointer transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+            <option value="HTV">HTV (Heavy Transport)</option>
+            <option value="LTV">LTV (Light Transport)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Experience (Years) & Joining Date Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div>
+          <label for="experienceYears" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Experience (Years)</label>
+          <input 
+            id="experienceYears"
+            type="number" 
+            formControlName="experienceYears"
+            placeholder="e.g. 5" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+        </div>
+
+        <div>
+          <label for="joiningDate" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Joining Date</label>
+          <input 
+            id="joiningDate"
+            type="date" 
+            formControlName="joiningDate"
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+        </div>
+      </div>
+
+      <!-- Status Dropdown & Address Input -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div>
+          <label for="status" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Status</label>
+          <select 
+            id="status"
+            formControlName="status"
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 outline-none cursor-pointer transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20">
+            <option value="Available">Available</option>
+            <option value="On Duty">On Duty</option>
+            <option value="On Leave">On Leave</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="address" class="block text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-1">Address</label>
+          <input 
+            id="address"
+            type="text" 
+            formControlName="address"
+            placeholder="e.g. Lahore, Pakistan" 
+            class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 outline-none transition duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
+          >
+        </div>
+      </div>
+
+      <!-- 4. ACTION BUTTONS (Cancel aur Save Driver buttons) -->
+      <div class="pt-3 flex items-center justify-end gap-2 border-t border-slate-100 mt-5 shrink-0">
+        <a 
+          routerLink="/drivers"
+          type="button" 
+          class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 font-medium text-xs hover:bg-slate-50 transition cursor-pointer text-center shadow-xs">
+          Cancel
+        </a>
+        <button 
+          type="submit" 
+          [disabled]="isSubmitting"
+          class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition shadow-md shadow-blue-600/25 cursor-pointer disabled:opacity-50 active:scale-95">
+          <!-- Loading state handling -->
+          @if (isSubmitting) { Saving... } @else { Save Driver }
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,100 @@
+=========================================
+SQL SCRIPT PLANNING
+=========================================
+
+1. What is SQL Script Planning?
+
+SQL Script Planning is the process of deciding the correct order for creating the database, tables, relationships, indexes, and initial data.
+
+-----------------------------------------
+2. Why is SQL Script Planning Important?
+-----------------------------------------
+
+- Prevents Foreign Key errors.
+- Maintains proper table relationships.
+- Makes database deployment easier.
+- Keeps database scripts organized.
+- Supports future maintenance.
+
+-----------------------------------------
+3. Database Creation Order
+-----------------------------------------
+
+Step 1:
+Create Database
+
+Step 2:
+Use Database
+
+Step 3:
+Create Parent Tables
+
+Step 4:
+Create Child Tables
+
+Step 5:
+Add Foreign Keys
+
+Step 6:
+Create Indexes
+
+Step 7:
+Insert Initial (Seed) Data
+
+-----------------------------------------
+4. Parent Tables
+-----------------------------------------
+
+- roles
+- cities
+- buses
+- routes
+
+-----------------------------------------
+5. Child Tables
+-----------------------------------------
+
+- users
+- drivers
+- bus_stops
+- schedules
+- seats
+- bookings
+- booking_details
+- payments
+- bus_locations
+- notifications
+
+-----------------------------------------
+6. Seed Data
+-----------------------------------------
+
+Insert default records:
+
+roles
+
+- Admin
+- Customer
+- Driver
+
+cities
+
+- Karachi
+- Lahore
+- Islamabad
+
+-----------------------------------------
+7. Benefits
+-----------------------------------------
+
+- Easy deployment.
+- Easy database updates.
+- Better teamwork.
+- Reduced errors.
+- Faster development.
+
+-----------------------------------------
+8. Conclusion
+-----------------------------------------
+
+A proper SQL Script Plan ensures that the database can be created without relationship errors and is easy to maintain.

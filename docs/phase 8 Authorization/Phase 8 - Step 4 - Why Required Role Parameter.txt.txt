@@ -1,0 +1,28 @@
+=================================
+
+PHASE 8
+
+STEP 4
+
+Why Required Role Parameter?
+
+=================================
+
+The middleware does not know
+which role is allowed.
+
+So we pass the required role
+as a parameter.
+
+Examples:
+
+roleMiddleware(1)
+→ Admin only
+
+roleMiddleware(2)
+→ Customer only
+
+roleMiddleware(3)
+→ Driver only
+
+=================================

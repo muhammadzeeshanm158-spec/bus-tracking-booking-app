@@ -1,0 +1,63 @@
+=========================================
+SEED DATA
+=========================================
+
+1. What is Seed Data?
+
+Seed Data is initial data inserted into the database.
+
+-----------------------------------------
+
+2. Why do we need Seed Data?
+
+- API Testing
+- Frontend Testing
+- Development
+- Debugging
+
+-----------------------------------------
+
+3. Best Practice
+
+Always insert parent table data first.
+
+roles
+↓
+
+cities
+↓
+
+users
+↓
+
+drivers
+↓
+
+buses
+↓
+
+routes
+↓
+
+bus_stops
+↓
+
+schedules
+↓
+
+seats
+↓
+
+bookings
+↓
+
+booking_details
+↓
+
+payments
+↓
+
+bus_locations
+↓
+
+notifications

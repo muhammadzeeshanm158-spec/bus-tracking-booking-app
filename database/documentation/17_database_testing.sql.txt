@@ -1,0 +1,17 @@
+=========================================
+DATABASE TESTING
+=========================================
+
+1. Verify Tables
+
+2. Verify Data
+
+3. Verify Relationships
+
+4. Verify CRUD Operations
+
+5. Verify JOIN Queries
+
+6. Verify Constraints
+
+7. Database Ready

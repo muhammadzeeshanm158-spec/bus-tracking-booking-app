@@ -1,0 +1,245 @@
+<!-- ========================================================================= -->
+<!-- REGISTER COMPONENT TEMPLATE (Responsive & Documented)                    -->
+<!-- ========================================================================= -->
+<div class="w-full max-w-sm rounded-2xl bg-white p-5 sm:p-6 border border-slate-200/80 shadow-xl shadow-slate-200/50 transition-all duration-300">
+
+  <!-- 1. HEADER SECTION (Title aur Subtitle) -->
+  <div class="text-center mb-5">
+    <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+      Create Account
+    </h1>
+    <p class="mt-1 text-xs text-slate-500 font-medium">
+      Register to start your journey with us
+    </p>
+  </div>
+
+  <!-- 2. REACTIVE REGISTRATION FORM -->
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-3.5">
+
+    <!-- Error Banner (General API ya Validation error message display karne ke liye) -->
+    @if (errorMessage) {
+      <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold text-center shadow-sm animate-in fade-in duration-200">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <!-- Full Name Field Container -->
+    <div>
+      <label for="fullName" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+        Full Name
+      </label>
+      <div class="relative">
+        <!-- Person Icon -->
+        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+          person
+        </span>
+        <!-- Input with dynamic red border styling on validation error & touched -->
+        <input
+          id="fullName"
+          type="text"
+          formControlName="full_name"
+          placeholder="Enter your full name"
+          [class.border-rose-300]="registerForm.get('full_name')?.invalid && registerForm.get('full_name')?.touched"
+          [class.focus:border-rose-500]="registerForm.get('full_name')?.invalid && registerForm.get('full_name')?.touched"
+          [class.focus:ring-rose-100]="registerForm.get('full_name')?.invalid && registerForm.get('full_name')?.touched"
+          class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-3.5 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium">
+      </div>
+      <!-- Name Validation Error Message -->
+      @if (registerForm.get('full_name')?.invalid && registerForm.get('full_name')?.touched) {
+        <p class="mt-1 text-[10px] text-rose-500 font-medium">Full name is required (min 3 characters).</p>
+      }
+    </div>
+
+    <!-- Email Address Field Container -->
+    <div>
+      <label for="email" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+        Email Address
+      </label>
+      <div class="relative">
+        <!-- Mail Icon -->
+        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+          mail
+        </span>
+        <!-- Email Input Control -->
+        <input
+          id="email"
+          type="email"
+          autocomplete="email"
+          formControlName="email"
+          placeholder="Enter your email address"
+          [class.border-rose-300]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+          [class.focus:border-rose-500]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+          [class.focus:ring-rose-100]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+          class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-3.5 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium">
+      </div>
+      <!-- Email Validation Error Message -->
+      @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+        <p class="mt-1 text-[10px] text-rose-500 font-medium">Please enter a valid email address.</p>
+      }
+    </div>
+
+    <!-- Phone Number & Gender Grid Container (2 Columns on small+ screens) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      
+      <!-- Phone Number Field -->
+      <div>
+        <label for="phone" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+          Phone Number
+        </label>
+        <div class="relative">
+          <!-- Call Icon -->
+          <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+            call
+          </span>
+          <input
+            id="phone"
+            type="tel"
+            formControlName="phone_number"
+            placeholder="Enter phone"
+            [class.border-rose-300]="registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched"
+            [class.focus:border-rose-500]="registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched"
+            [class.focus:ring-rose-100]="registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-3.5 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium">
+        </div>
+        @if (registerForm.get('phone_number')?.invalid && registerForm.get('phone_number')?.touched) {
+          <p class="mt-1 text-[10px] text-rose-500 font-medium">Phone is required.</p>
+        }
+      </div>
+
+      <!-- Gender Selection Field -->
+      <div>
+        <label for="gender" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+          Gender
+        </label>
+        <div class="relative">
+          <!-- Badge Icon -->
+          <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+            badge
+          </span>
+          <select
+            id="gender"
+            formControlName="gender"
+            [class.border-rose-300]="registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched"
+            [class.focus:border-rose-500]="registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched"
+            [class.focus:ring-rose-100]="registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched"
+            class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-8 text-xs text-slate-800 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium appearance-none cursor-pointer">
+            <option value="" disabled selected>Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <!-- Dropdown Arrow Icon -->
+          <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+            expand_more
+          </span>
+        </div>
+        @if (registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched) {
+          <p class="mt-1 text-[10px] text-rose-500 font-medium">Select gender.</p>
+        }
+      </div>
+
+    </div>
+
+    <!-- Password Field Container -->
+    <div>
+      <label for="password" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+        Password
+      </label>
+      <div class="relative">
+        <!-- Lock Icon -->
+        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+          lock
+        </span>
+        <!-- Password Input (Dynamic type based on showPassword state) -->
+        <input
+          id="password"
+          autocomplete="new-password"
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Enter your password"
+          [class.border-rose-300]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          [class.focus:border-rose-500]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          [class.focus:ring-rose-100]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-10 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium">
+
+        <!-- Password Visibility Toggle Button -->
+        <button
+          type="button"
+          tabindex="-1"
+          (click)="togglePassword()"
+          aria-label="Toggle Password Visibility"
+          class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition outline-none cursor-pointer">
+          <span class="material-symbols-outlined select-none block text-base">
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+      @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+        <p class="mt-1 text-[10px] text-rose-500 font-medium">Password must be at least 6 characters.</p>
+      }
+    </div>
+
+    <!-- Confirm Password Field Container -->
+    <div>
+      <label for="confirmPassword" class="block mb-1 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+        Confirm Password
+      </label>
+      <div class="relative">
+        <!-- Lock Icon -->
+        <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base pointer-events-none select-none">
+          lock
+        </span>
+        <!-- Confirm Password Input -->
+        <input
+          id="confirmPassword"
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          formControlName="confirmPassword"
+          placeholder="Confirm your password"
+          autocomplete="new-password"
+          [class.border-rose-300]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+          [class.focus:border-rose-500]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+          [class.focus:ring-rose-100]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+          class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-10 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 font-medium">
+
+        <!-- Confirm Password Visibility Toggle Button -->
+        <button
+          type="button"
+          tabindex="-1"
+          (click)="toggleConfirmPassword()"
+          aria-label="Toggle Confirm Password Visibility"
+          class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition outline-none cursor-pointer">
+          <span class="material-symbols-outlined select-none block text-base">
+            {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
+      @if (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {
+        <p class="mt-1 text-[10px] text-rose-500 font-medium">Please confirm your password.</p>
+      }
+    </div>
+
+    <!-- Submit Button (Dynamic state for Loading vs Normal text) -->
+    <button
+      type="submit"
+      [disabled]="isLoading"
+      class="w-full cursor-pointer rounded-xl bg-blue-600 py-2.5 px-4 font-semibold text-white text-xs transition-all duration-200 hover:bg-blue-700 active:scale-[0.98] shadow-sm shadow-blue-600/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2">
+      @if (isLoading) {
+        <span class="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin inline-block"></span>
+        <span>Creating account...</span>
+      } @else {
+        <span>Create Account</span>
+      }
+    </button>
+
+    <!-- Sign In Redirect Footer -->
+    <div class="mt-4 text-center pt-3 border-t border-slate-100">
+      <p class="text-slate-500 text-xs font-medium">
+        Already have an account?
+        <a href="javascript:void(0)" (click)="goToLogin()" class="text-blue-600 font-semibold hover:text-blue-700 hover:underline ml-1 transition-colors">
+          Sign in
+        </a>
+      </p>
+    </div>
+
+  </form>
+</div>

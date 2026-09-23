@@ -1,0 +1,38 @@
+=========================================
+ROUTES TABLE
+=========================================
+
+1. What is Routes Table?
+
+The routes table stores bus travel routes.
+
+-----------------------------------------
+
+2. Why do we need Routes Table?
+
+- Manage source city
+- Manage destination city
+- Store travel distance
+- Store estimated travel time
+
+-----------------------------------------
+
+3. Columns
+
+id
+route_name
+source_city_id
+destination_city_id
+distance_km
+estimated_duration_minutes
+is_active
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- Source and destination must reference cities table.
+- Distance should always be greater than zero.
+- A route should have a meaningful name.

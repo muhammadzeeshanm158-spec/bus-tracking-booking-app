@@ -1,0 +1,237 @@
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. HEADER SECTION -->
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Schedules Management</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Edit Schedule {{ scheduleCode ? '#' + scheduleCode : '' }}
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Update timings, bus allocation, or ticket pricing for this route.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      routerLink="/schedules"
+      class="flex items-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs shadow-xs"
+    >
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      <span>Back to Schedules</span>
+    </button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-xl text-xs flex items-center gap-2">
+      <span class="material-symbols-outlined text-base">error</span>
+      <p class="font-medium">{{ errorMessage }}</p>
+    </div>
+  }
+
+  <!-- 2. FORM CARD CONTAINER -->
+  <div class="rounded-xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+    
+    <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      
+      <!-- Section 1: Resource Assignments -->
+      <div>
+        <div class="mb-4 flex items-center gap-3 border-b border-slate-100 pb-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+            <span class="material-symbols-outlined text-lg">assignment</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Resource Assignment</h2>
+            <p class="text-[10px] text-slate-400 mt-0.5">Modify route, allocated bus, and assigned driver.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Route Selection -->
+          <div>
+            <label for="routeId" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Route <span class="text-rose-500">*</span>
+            </label>
+            <select 
+              id="routeId" 
+              formControlName="routeId"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30"
+            >
+             @for (route of routes; track route.id) {
+  <option [value]="route.id" class="text-slate-800">
+    {{ route.origin + ' ➔ ' + route.destination }}
+  </option>
+}
+            </select>
+          </div>
+
+          <!-- Bus Selection -->
+          <div>
+            <label for="busId" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Assigned Bus <span class="text-rose-500">*</span>
+            </label>
+            <select 
+              id="busId" 
+              formControlName="busId"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30"
+            >
+           @for (bus of buses; track bus.id) {
+  <option [value]="bus.id" class="text-slate-800">
+    {{ bus.bus_number }} ({{ bus.bus_type }} - {{ bus.total_seats || 'N/A' }} Seats)
+  </option>
+}
+            </select>
+          </div>
+
+          <!-- Driver Selection -->
+          <div>
+            <label for="driverId" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Assigned Driver
+            </label>
+            <select 
+              id="driverId" 
+              formControlName="driverId"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30"
+            >
+              <option value="">-- Select Driver --</option>
+              @for (driver of drivers; track driver.id) {
+                <option [value]="driver.id" class="text-slate-800">
+                  {{ driver.name }} {{ driver.licenseNumber ? '(Lic: ' + driver.licenseNumber + ')' : '' }}
+                </option>
+              }
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Section 2: Timings & Pricing -->
+      <div>
+        <div class="mb-4 flex items-center gap-3 border-b border-slate-100 pb-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+            <span class="material-symbols-outlined text-lg">schedule</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Timings & Pricing</h2>
+            <p class="text-[10px] text-slate-400 mt-0.5">Adjust departure schedule and ticket pricing.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          
+          <div>
+            <label for="departureDate" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Departure Date <span class="text-rose-500">*</span>
+            </label>
+            <input 
+              id="departureDate" 
+              type="date" 
+              formControlName="departureDate"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30" 
+            />
+          </div>
+
+          <div>
+            <label for="departureTime" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Departure Time <span class="text-rose-500">*</span>
+            </label>
+            <input 
+              id="departureTime" 
+              type="time" 
+              formControlName="departureTime"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30" 
+            />
+          </div>
+
+          <div>
+            <label for="arrivalTime" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Expected Arrival <span class="text-rose-500">*</span>
+            </label>
+            <input 
+              id="arrivalTime" 
+              type="time" 
+              formControlName="arrivalTime"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30" 
+            />
+          </div>
+
+          <div>
+            <label for="fare" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Ticket Fare <span class="text-rose-500">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] font-bold pointer-events-none font-mono">PKR</span>
+              <input 
+                id="fare" 
+                type="number" 
+                formControlName="fare"
+                class="w-full pl-12 pr-3.5 py-2 rounded-xl border border-slate-200 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30 font-mono" 
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Section 3: Status & Configuration -->
+      <div>
+        <div class="mb-4 flex items-center gap-3 border-b border-slate-100 pb-3">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+            <span class="material-symbols-outlined text-lg">tune</span>
+          </div>
+          <div>
+            <h2 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Configuration & Status</h2>
+            <p class="text-[10px] text-slate-400 mt-0.5">Manage operational state update.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="status" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Status <span class="text-rose-500">*</span>
+            </label>
+            <select 
+              id="status" 
+              formControlName="status"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30"
+            >
+              <option value="Scheduled">Scheduled</option>
+              <option value="On-Time">On-Time</option>
+              <option value="Delayed">Delayed</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-end pt-4 border-t border-slate-100">
+        <a 
+          routerLink="/schedules" 
+          class="cursor-pointer rounded-xl border border-slate-200 px-4 py-2 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs text-center"
+        >
+          Cancel
+        </a>
+
+        <button 
+          type="submit" 
+          [disabled]="scheduleForm.invalid || isSubmitting"
+          class="flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-4 py-2 font-medium text-white shadow-xs transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:bg-blue-300 disabled:cursor-not-allowed text-xs"
+        >
+          @if (isSubmitting) {
+            <div class="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+            <span>Updating...</span>
+          } @else {
+            <span class="material-symbols-outlined text-base">save</span>
+            <span>Update Schedule</span>
+          }
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

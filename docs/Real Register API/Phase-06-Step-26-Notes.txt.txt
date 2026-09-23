@@ -1,0 +1,54 @@
+=================================================
+
+PHASE 6
+
+STEP 26
+
+HANDLE DATABASE ERRORS
+
+=================================================
+
+Objective
+
+Handle MySQL database errors from one
+central place.
+
+=================================================
+
+Why?
+
+Database can return different errors such as:
+
+✓ Duplicate Entry
+
+✓ Foreign Key Constraint
+
+✓ Data Too Long
+
+✓ Column Cannot Be Null
+
+Instead of sending Internal Server Error
+for every database error, return meaningful
+messages.
+
+=================================================
+
+Benefits
+
+✓ Better API Responses
+
+✓ Easier Debugging
+
+✓ Professional Backend
+
+✓ Consistent Error Handling
+
+=================================================
+
+Learning
+
+Middleware should understand database
+errors and convert them into user-friendly
+responses.
+
+=================================================

@@ -1,0 +1,35 @@
+=================================================
+
+PHASE 5 – STEP 11
+
+PHONE NUMBER REQUIRED VALIDATION
+
+=================================================
+
+Purpose
+
+Validate phone_number field.
+
+=================================================
+
+Validation Rules
+
+1. Phone Number is Required
+
+2. Remove Extra Spaces
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

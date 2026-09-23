@@ -1,0 +1,120 @@
+=========================================
+HIGH-LEVEL DATABASE PLANNING
+=========================================
+
+1. What is Database Planning?
+
+Database Planning is the process of identifying what data the application will store and how that data will be organized before creating the database.
+
+-----------------------------------------
+2. Why is Database Planning Important?
+-----------------------------------------
+
+- Prevents database redesign.
+- Reduces development time.
+- Improves data organization.
+- Makes API development easier.
+- Improves application performance.
+
+-----------------------------------------
+3. Main Database Entities
+-----------------------------------------
+
+The Bus Tracking & Booking System will contain the following main entities:
+
+1. Users
+2. Roles
+3. Buses
+4. Drivers
+5. Routes
+6. Cities
+7. Bus Stops
+8. Schedules
+9. Seats
+10. Bookings
+11. Booking Details
+12. Payments
+13. Bus Locations
+14. Notifications
+
+-----------------------------------------
+4. Purpose of Each Entity
+-----------------------------------------
+
+Users:
+Stores customer, driver, and admin information.
+
+Roles:
+Stores user roles.
+
+Buses:
+Stores bus information.
+
+Drivers:
+Stores driver information.
+
+Routes:
+Stores route information.
+
+Cities:
+Stores city information.
+
+Bus Stops:
+Stores bus stop information.
+
+Schedules:
+Stores departure and arrival schedules.
+
+Seats:
+Stores seat information.
+
+Bookings:
+Stores booking records.
+
+Booking Details:
+Stores booked seat details.
+
+Payments:
+Stores payment information.
+
+Bus Locations:
+Stores live bus locations.
+
+Notifications:
+Stores user notifications.
+
+-----------------------------------------
+5. Database Relationships
+-----------------------------------------
+
+Users -> Bookings
+
+Bookings -> Booking Details
+
+Bookings -> Payments
+
+Buses -> Schedules
+
+Drivers -> Buses
+
+Routes -> Schedules
+
+Cities -> Routes
+
+Schedules -> Bookings
+
+Buses -> Bus Locations
+
+Users -> Notifications
+
+-----------------------------------------
+6. Database Design Goal
+-----------------------------------------
+
+The database should be secure, normalized, scalable, and easy to maintain.
+
+-----------------------------------------
+7. Conclusion
+-----------------------------------------
+
+Database Planning helps developers understand what information the system needs before creating tables and relationships.

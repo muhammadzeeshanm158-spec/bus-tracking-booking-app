@@ -1,0 +1,264 @@
+<!-- ========================================================================= -->
+<!-- CUSTOMER DIRECTORY & LIST VIEW COMPONENT TEMPLATE                         -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER & BREADCRUMBS -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <a routerLink="/dashboard" class="hover:text-slate-600 transition-colors">Dashboard</a>
+        <span>/</span>
+        <span class="text-blue-600">Customers</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight capitalize">
+        Customer Management
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Manage passenger profiles, view booking activity, and account status.
+      </p>
+    </div>
+
+    <!-- Add New Customer Button -->
+    <a
+      routerLink="/customers/add"
+      class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:bg-blue-700 active:scale-95 self-start sm:self-auto">
+      <span class="material-symbols-outlined text-base">add</span>
+      <span>Add New Customer</span>
+    </a>
+  </div>
+
+  <!-- SERVER ERROR ALERT -->
+  @if (errorMessage) {
+    <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">error</span>
+        <span>{{ errorMessage }}</span>
+      </div>
+      <button type="button" (click)="loadCustomers()" class="text-xs font-bold underline hover:text-rose-900 cursor-pointer">
+        Retry
+      </button>
+    </div>
+  }
+
+  <!-- 2. SUMMARY STATS BAR -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    
+    <!-- Total Customers -->
+    <div class="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Customers</p>
+        <p class="text-lg font-bold text-slate-800 mt-0.5">{{ totalCustomersCount }}</p>
+      </div>
+      <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+        <span class="material-symbols-outlined text-base">group</span>
+      </div>
+    </div>
+
+    <!-- Active Members -->
+    <div class="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Active Members</p>
+        <p class="text-lg font-bold text-slate-800 mt-0.5">{{ activeCustomersCount }}</p>
+      </div>
+      <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
+        <span class="material-symbols-outlined text-base">check_circle</span>
+      </div>
+    </div>
+
+    <!-- Inactive / Blocked -->
+    <div class="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs flex items-center justify-between">
+      <div>
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Inactive / Blocked</p>
+        <p class="text-lg font-bold text-slate-800 mt-0.5">{{ inactiveCustomersCount }}</p>
+      </div>
+      <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-500 border border-slate-200">
+        <span class="material-symbols-outlined text-base">block</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. TABLE SECTION CARD -->
+  <div class="rounded-xl border border-slate-200/80 bg-white shadow-xs overflow-hidden">
+    
+    <!-- Search & Filter Controls -->
+    <div class="p-3.5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-50/50">
+      
+      <!-- Search Input -->
+      <div class="relative flex-1 max-w-md">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base">search</span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="applyFilters()"
+          placeholder="Search by name, phone, CNIC, or customer ID..."
+          class="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+        />
+      </div>
+
+      <!-- Status Filter -->
+      <div class="flex items-center gap-2">
+        <select
+          [(ngModel)]="selectedStatus"
+          (ngModelChange)="applyFilters()"
+          class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer">
+          <option value="All">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+            <th class="py-3 px-4">Customer</th>
+            <th class="py-3 px-3">Contact Details</th>
+            <th class="py-3 px-3">CNIC / ID</th>
+            <th class="py-3 px-3">Total Rides</th>
+            <th class="py-3 px-3">Status</th>
+            <th class="py-3 px-4 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-xs">
+          
+          <!-- LOADING SPINNER STATE -->
+          @if (isLoading) {
+            <tr>
+              <td colspan="6" class="py-12 text-center text-slate-500">
+                <div class="flex flex-col items-center justify-center gap-2">
+                  <svg class="animate-spin h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span class="text-xs font-medium text-slate-600">Loading customers data...</span>
+                </div>
+              </td>
+            </tr>
+          } @else {
+            
+            <!-- CUSTOMERS LOOP -->
+            @for (customer of filteredCustomers; track customer.id) {
+              <tr class="hover:bg-slate-50/80 transition-colors duration-150">
+                
+                <!-- Name, Avatar, ID -->
+                <td class="py-3 px-4">
+                  <div class="flex items-center gap-2.5">
+                    <div [class]="'w-8 h-8 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 ' + (customer.avatarBg || 'bg-blue-50 border border-blue-100') + ' ' + (customer.avatarTextBg || 'text-blue-700')">
+                      {{ getInitial(customer.name) }}
+                    </div>
+                    <div>
+                      <a [routerLink]="['/customers/view', customer.id]" class="font-bold text-slate-800 hover:text-blue-600 transition-colors">
+                        {{ customer.name }}
+                      </a>
+                      <p class="text-[10px] font-mono text-slate-400 mt-0.5">#{{ customer.id }}</p>
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Contact Details -->
+             <!-- Contact Details -->
+<td class="py-3 px-3">
+  <div class="flex flex-col gap-1">
+    <!-- Phone Number -->
+    <div class="flex items-center gap-1.5 text-slate-800 font-medium text-[11px]">
+      <span class="material-symbols-outlined text-slate-400 text-sm">call</span>
+      <span>{{ customer.phone || customer.phone_number }}</span>
+    </div>
+    
+    <!-- Email Address -->
+    <div class="flex items-center gap-1.5 text-slate-500 text-[11px]">
+      <span class="material-symbols-outlined text-slate-400 text-sm">mail</span>
+      <span class="truncate max-w-[180px]" [title]="customer.email">{{ customer.email }}</span>
+    </div>
+  </div>
+</td>
+
+                <!-- CNIC -->
+                <td class="py-3 px-3 font-mono text-[11px] text-slate-600 uppercase">
+                  {{ customer.cnic || 'N/A' }}
+                </td>
+
+                <!-- Total Rides -->
+                <td class="py-3 px-3">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold text-[10px]">
+                    {{ customer.totalRides || 0 }} Rides
+                  </span>
+                </td>
+
+                <!-- Status Badge -->
+                <td class="py-3 px-3">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border"
+                    [ngClass]="{
+                      'bg-emerald-50 text-emerald-700 border-emerald-200/60': customer.status === 'Active' || customer.is_active,
+                      'bg-slate-50 text-slate-600 border-slate-200': customer.status === 'Inactive' || !customer.is_active
+                    }">
+                    <span class="h-1.5 w-1.5 rounded-full"
+                          [ngClass]="{
+                            'bg-emerald-500': customer.status === 'Active' || customer.is_active,
+                            'bg-slate-400': customer.status === 'Inactive' || !customer.is_active
+                          }"></span>
+                    {{ (customer.status === 'Active' || customer.is_active) ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+
+                <!-- Actions -->
+                <td class="py-3 px-4 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <a [routerLink]="['/customers/view', customer.id]" title="View Profile" class="p-1 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                      <span class="material-symbols-outlined text-base">visibility</span>
+                    </a>
+                    <a [routerLink]="['/customers/edit', customer.id]" title="Edit Customer" class="p-1 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors">
+                      <span class="material-symbols-outlined text-base">edit</span>
+                    </a>
+                    <button (click)="deleteCustomer(customer.id)" title="Delete Customer" class="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer">
+                      <span class="material-symbols-outlined text-base">delete</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+            
+            <!-- EMPTY STATE -->
+            @empty {
+              <tr>
+                <td colspan="6" class="py-8 text-center text-slate-500 text-xs">
+                  <div class="flex flex-col items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-3xl text-slate-300">search_off</span>
+                    <p class="font-semibold text-slate-700">No customers found</p>
+                    <p class="text-[10px] text-slate-400">Try adjusting your search query or filter criteria.</p>
+                  </div>
+                </td>
+              </tr>
+            }
+
+          }
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4. FOOTER -->
+    <div class="p-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50/50 text-[11px] text-slate-500">
+      <div>
+        Showing <span class="font-semibold text-slate-700">{{ filteredCustomers.length }}</span> of <span class="font-semibold text-slate-700">{{ totalCustomersCount }}</span> customers
+      </div>
+
+      <div class="flex items-center gap-1">
+        <button class="px-2.5 py-1 rounded-lg border border-slate-200 bg-white font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50 transition-colors text-xs" disabled>
+          Previous
+        </button>
+        <button class="w-7 h-7 rounded-lg bg-blue-600 text-white font-semibold text-xs flex items-center justify-center shadow-xs">1</button>
+        <button class="px-2.5 py-1 rounded-lg border border-slate-200 bg-white font-medium text-slate-600 hover:bg-slate-50 transition-colors text-xs">
+          Next
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

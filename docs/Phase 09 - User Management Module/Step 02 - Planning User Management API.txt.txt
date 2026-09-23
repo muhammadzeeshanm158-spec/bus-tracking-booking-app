@@ -1,0 +1,33 @@
+=================================
+
+PHASE 09
+
+STEP 02
+
+Planning User Management API
+
+=================================
+
+User Management APIs
+
+1. Get All Users
+
+2. Get User By ID
+
+3. Update User
+
+4. Delete User
+
+---------------------------------
+
+Security
+
+Only Admin
+
+↓
+
+Can Access
+
+User Management APIs
+
+=================================

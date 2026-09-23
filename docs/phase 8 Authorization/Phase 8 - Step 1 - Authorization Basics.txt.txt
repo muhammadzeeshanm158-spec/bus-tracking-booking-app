@@ -1,0 +1,30 @@
+=================================
+
+PHASE 8
+
+STEP 1
+
+Authorization Basics
+
+=================================
+
+Authentication
+
+Who are you?
+
+Example:
+- Login
+- JWT Verification
+
+---------------------------------
+
+Authorization
+
+What are you allowed to do?
+
+Example:
+- Admin
+- Customer
+- Driver
+
+=================================

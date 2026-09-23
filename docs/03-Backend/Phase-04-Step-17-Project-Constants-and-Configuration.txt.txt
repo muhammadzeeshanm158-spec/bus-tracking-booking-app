@@ -1,0 +1,66 @@
+=================================================
+PHASE 4 – STEP 17
+
+PROJECT CONSTANTS & CONFIGURATION
+
+=================================================
+
+What are Constants?
+
+Constants are fixed values that are used
+multiple times in an application.
+
+-------------------------------------------------
+
+Examples
+
+Roles
+
+Admin
+
+Customer
+
+Driver
+
+-------------------------------------------------
+
+Account Status
+
+Active
+
+Inactive
+
+-------------------------------------------------
+
+Messages
+
+User Created Successfully
+
+Login Successful
+
+Invalid Credentials
+
+Route Not Found
+
+-------------------------------------------------
+
+Why use Constants?
+
+1. Reusable
+
+2. Easy Maintenance
+
+3. Clean Code
+
+4. No Duplicate Strings
+
+-------------------------------------------------
+
+Software House Rule
+
+Never hardcode values in controllers
+or services.
+
+Always use constants.
+
+=================================================

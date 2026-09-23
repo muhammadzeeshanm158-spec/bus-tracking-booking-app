@@ -1,0 +1,55 @@
+=================================================
+
+PHASE 6
+
+STEP 18
+
+RETURN SPECIFIC DUPLICATE MESSAGE
+
+=================================================
+
+Objective
+
+Instead of showing one common message for
+email and phone, return the exact reason.
+
+=================================================
+
+Current
+
+Email or Phone Number already exists.
+
+=================================================
+
+Target
+
+If email exists
+
+↓
+
+"Email already exists"
+
+If phone exists
+
+↓
+
+"Phone number already exists"
+
+=================================================
+
+Why?
+
+Professional APIs provide clear and specific
+error messages.
+
+This improves frontend validation and user
+experience.
+
+=================================================
+
+Learning
+
+Specific error messages are always better
+than generic error messages.
+
+=================================================

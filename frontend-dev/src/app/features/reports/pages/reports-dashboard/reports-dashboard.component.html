@@ -1,0 +1,241 @@
+<!-- ========================================================================= -->
+<!-- REPORTS & ANALYTICS COMPONENT TEMPLATE                                    -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-7xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. HEADER SECTION & PERIOD SELECTOR -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Analytics</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Reports & Analytics
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Comprehensive performance metrics, revenue analysis, and fleet insights
+      </p>
+    </div>
+
+    <!-- Actions & Date Filter Buttons -->
+    <div class="flex flex-wrap items-center gap-2">
+      <!-- Period Selector Tabs (Today, This Week, This Month, This Year) -->
+      <div class="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200 text-[11px] font-semibold">
+        <button type="button" (click)="setPeriod('Today')" [class.bg-white]="selectedPeriod === 'Today'" [class.text-slate-900]="selectedPeriod === 'Today'" [class.shadow-xs]="selectedPeriod === 'Today'" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+          Today
+        </button>
+        <button type="button" (click)="setPeriod('This Week')" [class.bg-white]="selectedPeriod === 'This Week'" [class.text-slate-900]="selectedPeriod === 'This Week'" [class.shadow-xs]="selectedPeriod === 'This Week'" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+          This Week
+        </button>
+        <button type="button" (click)="setPeriod('This Month')" [class.bg-white]="selectedPeriod === 'This Month'" [class.text-slate-900]="selectedPeriod === 'This Month'" [class.shadow-xs]="selectedPeriod === 'This Month'" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+          This Month
+        </button>
+        <button type="button" (click)="setPeriod('This Year')" [class.bg-white]="selectedPeriod === 'This Year'" [class.text-slate-900]="selectedPeriod === 'This Year'" [class.shadow-xs]="selectedPeriod === 'This Year'" class="px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+          This Year
+        </button>
+      </div>
+
+      <!-- Export Report Button (Print/PDF download trigger) -->
+      <button type="button" onclick="window.print()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/20 focus:outline-none text-white font-medium rounded-xl transition text-xs flex items-center gap-1.5 shadow-xs cursor-pointer">
+        <span class="material-symbols-outlined text-base">download</span>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State Spinner (Jab tak server se report summary fetch ho rahi ho) -->
+  @if (isLoading) {
+    <div class="py-12 text-center bg-white rounded-xl border border-slate-200/80 shadow-xs flex flex-col items-center justify-center gap-2">
+      <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
+      <p class="text-slate-500 font-medium text-xs">Loading reports data...</p>
+    </div>
+  } @else {
+
+    <!-- 2. KEY METRICS OVERVIEW GRID (Total Revenue, Tickets Booked, Occupancy, Distance) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+      <!-- Total Revenue Card -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition duration-200">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Revenue</span>
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+            <span class="material-symbols-outlined text-base">payments</span>
+          </div>
+        </div>
+        <p class="text-lg font-bold text-slate-900">PKR {{ summary?.totalRevenue | number }}</p>
+        <div class="flex items-center gap-1 text-[11px] text-emerald-600 font-semibold">
+          <span class="material-symbols-outlined text-sm">trending_up</span>
+          <span>{{ summary?.revenueGrowth }}</span>
+        </div>
+      </div>
+
+      <!-- Tickets Booked / Sold Card -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition duration-200">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tickets Booked</span>
+          <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
+            <span class="material-symbols-outlined text-base">confirmation_number</span>
+          </div>
+        </div>
+        <p class="text-lg font-bold text-slate-900">{{ summary?.totalBookings | number }}</p>
+        <div class="flex items-center gap-1 text-[11px] text-emerald-600 font-semibold">
+          <span class="material-symbols-outlined text-sm">trending_up</span>
+          <span>{{ summary?.bookingGrowth }}</span>
+        </div>
+      </div>
+
+      <!-- Average Occupancy Rate Card -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition duration-200">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Avg Occupancy</span>
+          <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100">
+            <span class="material-symbols-outlined text-base">event_seat</span>
+          </div>
+        </div>
+        <p class="text-lg font-bold text-slate-900">{{ summary?.avgOccupancy }}%</p>
+        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-1">
+          <div class="bg-purple-600 h-full rounded-full" [style.width.%]="summary?.avgOccupancy"></div>
+        </div>
+      </div>
+
+      <!-- Distance Driven & Fuel Used Card -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-1.5 hover:border-slate-300 transition duration-200">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Distance Driven</span>
+          <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100">
+            <span class="material-symbols-outlined text-base">distance</span>
+          </div>
+        </div>
+        <p class="text-lg font-bold text-slate-900">{{ summary?.distanceDriven | number }} <span class="text-[10px] text-slate-400 font-normal">KM</span></p>
+        <div class="flex items-center gap-1 text-[11px] text-slate-500">
+          <span class="material-symbols-outlined text-xs text-amber-500">local_gas_station</span>
+          <span>~{{ summary?.fuelUsed | number }} L Fuel used</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. PERFORMANCE CHARTS & TOP ROUTES GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+
+      <!-- Revenue Trend Chart Placeholder (2 Columns) -->
+      <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200/80 p-4 shadow-xs flex flex-col">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Revenue & Booking Growth</h3>
+            <p class="text-[10px] text-slate-400 mt-0.5">Monthly breakdown of earnings vs booking volume</p>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono bg-slate-100 px-2 py-0.5 rounded-md">Live Sync</span>
+        </div>
+
+        <!-- Mock Bar Visualizer (Monthly trend bars) -->
+        <div class="h-48 flex items-end justify-between gap-2.5 pt-6 pb-2 border-b border-slate-100 flex-1">
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[40%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">Jan</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[55%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">Feb</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[50%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">Mar</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[70%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">Apr</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[65%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">May</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-100 group-hover:bg-blue-500 transition-colors duration-300 rounded-t-md h-[85%]"></div>
+            <span class="text-[10px] text-slate-500 font-medium">Jun</span>
+          </div>
+          <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+            <div class="w-full bg-blue-600 rounded-t-md h-[95%]"></div>
+            <span class="text-[10px] font-bold text-blue-700">Jul</span>
+          </div>
+        </div>
+
+        <!-- Chart Legend -->
+        <div class="flex items-center justify-center gap-4 text-[11px] text-slate-600 pt-3 mt-auto">
+          <span class="flex items-center gap-1.5 font-medium">
+            <span class="w-2.5 h-2.5 rounded-xs bg-blue-600"></span> Online Bookings (72%)
+          </span>
+          <span class="flex items-center gap-1.5 font-medium">
+            <span class="w-2.5 h-2.5 rounded-xs bg-blue-200"></span> Counter Sales (28%)
+          </span>
+        </div>
+      </div>
+
+      <!-- Top Performing Routes Breakdown -->
+      <div class="bg-white rounded-xl border border-slate-200/80 p-4 shadow-xs space-y-3">
+        <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Top Performing Routes</h3>
+
+        <div class="space-y-3">
+          @for (route of summary?.topRoutes; track route.routeName) {
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="font-bold text-slate-700">{{ route.routeName }}</span>
+                <span class="font-semibold text-emerald-600">PKR {{ route.revenue | number }}</span>
+              </div>
+              <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full rounded-full" [style.width.%]="route.percentage"></div>
+              </div>
+              <p class="text-[10px] text-slate-400">Occupancy: {{ route.occupancy }}% • {{ route.passengers }} Passengers</p>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. DETAILED SUMMARY DATA TABLE (Daily Operations Breakdown) -->
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Daily Operations Breakdown</h3>
+        <span class="text-[10px] text-slate-400">Showing recent operational logs</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs whitespace-nowrap">
+          <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200">
+            <tr>
+              <th class="px-4 py-3">Date</th>
+              <th class="px-3 py-3">Trips Completed</th>
+              <th class="px-3 py-3">Total Passengers</th>
+              <th class="px-3 py-3">Avg Occupancy</th>
+              <th class="px-3 py-3">On-Time Rate</th>
+              <th class="px-4 py-3 text-right">Revenue (PKR)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+            @for (op of summary?.dailyOperations; track op.date) {
+              <tr class="hover:bg-slate-50/80 transition-colors duration-150">
+                <td class="px-4 py-3 font-bold text-slate-800 font-mono text-[11px]">{{ op.date }}</td>
+                <td class="px-3 py-3">{{ op.trips }} Trips</td>
+                <td class="px-3 py-3">{{ op.passengers | number }}</td>
+                <td class="px-3 py-3 text-emerald-600 font-bold">{{ op.occupancyRate }}%</td>
+                <td class="px-3 py-3">
+                  <!-- On-time rate badge conditional styling -->
+                  <span [ngClass]="{
+                    'bg-emerald-50 text-emerald-700 border-emerald-200': op.onTimeRate >= 90,
+                    'bg-amber-50 text-amber-700 border-amber-200': op.onTimeRate < 90
+                  }" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border">
+                    {{ op.onTimeRate }}%
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-right font-bold text-slate-900">PKR {{ op.revenue | number }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  }
+
+</div>

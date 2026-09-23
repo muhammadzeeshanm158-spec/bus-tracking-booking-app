@@ -1,0 +1,43 @@
+======================================
+
+PHASE 6
+
+STEP 28
+
+UNDERSTANDING asyncHandler
+
+======================================
+
+Goal
+
+Understand why asyncHandler
+accepts a function.
+
+======================================
+
+Syntax
+
+const asyncHandler = (fn) => {}
+
+======================================
+
+Meaning
+
+fn = Any async controller function
+
+Example
+
+registerController
+
+loginController
+
+profileController
+
+======================================
+
+Learning
+
+Functions can be passed as arguments
+to another function.
+
+======================================

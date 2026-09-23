@@ -1,0 +1,35 @@
+=================================
+
+PHASE 09
+
+STEP 04
+
+Create Get All Users API Route
+
+=================================
+
+Flow
+
+Client
+
+↓
+
+Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+=================================

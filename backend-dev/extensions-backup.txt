@@ -1,0 +1,11 @@
+angular.ng-template
+christian-kohler.path-intellisense
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+hossaini.bootstrap-intellisense
+mikael.angular-beastcode
+ms-vscode.vscode-typescript-next
+rangav.vscode-thunder-client
+ritwickdey.liveserver
+vscode-icons-team.vscode-icons
+xabikos.javascriptsnippets

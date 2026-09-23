@@ -1,0 +1,94 @@
+=========================================
+ENTITY RELATIONSHIP (ER) DIAGRAM
+=========================================
+
+1. What is an ER Diagram?
+
+An Entity Relationship (ER) Diagram is a visual representation of database tables (entities) and the relationships between them.
+
+-----------------------------------------
+2. Why is an ER Diagram Important?
+-----------------------------------------
+
+- Shows all database tables.
+- Shows relationships between tables.
+- Helps developers understand the database.
+- Reduces design mistakes.
+- Acts as a blueprint before development.
+
+-----------------------------------------
+3. Main Entities
+-----------------------------------------
+
+- roles
+- users
+- drivers
+- buses
+- routes
+- cities
+- bus_stops
+- schedules
+- seats
+- bookings
+- booking_details
+- payments
+- bus_locations
+- notifications
+
+-----------------------------------------
+4. Main Relationships
+-----------------------------------------
+
+roles (1)
+    ↓
+users (N)
+
+users (1)
+    ↓
+drivers (1)
+
+users (1)
+    ↓
+bookings (N)
+
+buses (1)
+    ↓
+seats (N)
+
+buses (1)
+    ↓
+schedules (N)
+
+routes (1)
+    ↓
+schedules (N)
+
+drivers (1)
+    ↓
+schedules (N)
+
+bookings (1)
+    ↓
+booking_details (N)
+
+seats (1)
+    ↓
+booking_details (N)
+
+bookings (1)
+    ↓
+payments (N)
+
+buses (1)
+    ↓
+bus_locations (N)
+
+users (1)
+    ↓
+notifications (N)
+
+-----------------------------------------
+5. Conclusion
+-----------------------------------------
+
+The ER Diagram provides a complete visual blueprint of the database before implementation.

@@ -1,0 +1,54 @@
+=================================================
+
+PHASE 6
+
+STEP 28
+
+REMOVE TRY-CATCH FROM CONTROLLERS
+
+=================================================
+
+Objective
+
+Create a reusable asyncHandler.
+
+Automatically catch async errors.
+
+=================================================
+
+Problem
+
+Every controller needs try-catch.
+
+This creates duplicate code.
+
+=================================================
+
+Solution
+
+Create one asyncHandler.
+
+Wrap every controller with it.
+
+=================================================
+
+Benefits
+
+✓ Cleaner Controllers
+
+✓ Less Duplicate Code
+
+✓ Automatic Error Handling
+
+✓ Professional Architecture
+
+=================================================
+
+Learning
+
+Controllers should only contain
+business logic.
+
+Error handling should be centralized.
+
+=================================================

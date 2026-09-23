@@ -1,0 +1,272 @@
+=========================================
+FINAL DATABASE SCHEMA
+=========================================
+
+DATABASE NAME
+
+bus_tracking_booking_db
+
+=========================================
+TABLE 1 : roles
+=========================================
+
+id INT PK AI
+role_name VARCHAR(50) UNIQUE
+description VARCHAR(255)
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 2 : users
+=========================================
+
+id INT PK AI
+role_id INT FK
+
+full_name VARCHAR(100)
+email VARCHAR(100) UNIQUE
+password VARCHAR(255)
+
+phone_number VARCHAR(20) UNIQUE
+gender VARCHAR(20)
+
+date_of_birth DATE
+
+address TEXT
+
+profile_image VARCHAR(255)
+
+account_status ENUM('active','inactive')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 3 : drivers
+=========================================
+
+id INT PK AI
+user_id INT FK UNIQUE
+
+license_number VARCHAR(100) UNIQUE
+
+experience_years INT
+
+joining_date DATE
+
+status ENUM('active','inactive')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 4 : buses
+=========================================
+
+id INT PK AI
+
+bus_number VARCHAR(50) UNIQUE
+
+bus_name VARCHAR(100)
+
+bus_type VARCHAR(50)
+
+registration_number VARCHAR(100) UNIQUE
+
+total_seats INT
+
+model VARCHAR(100)
+
+status ENUM('active','inactive')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 5 : cities
+=========================================
+
+id INT PK AI
+
+city_name VARCHAR(100)
+
+state VARCHAR(100)
+
+country VARCHAR(100)
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 6 : routes
+=========================================
+
+id INT PK AI
+
+source_city_id INT FK
+
+destination_city_id INT FK
+
+distance_km DECIMAL(10,2)
+
+estimated_time VARCHAR(50)
+
+fare DECIMAL(10,2)
+
+status ENUM('active','inactive')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 7 : bus_stops
+=========================================
+
+id INT PK AI
+
+route_id INT FK
+
+stop_name VARCHAR(100)
+
+stop_order INT
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 8 : schedules
+=========================================
+
+id INT PK AI
+
+bus_id INT FK
+
+route_id INT FK
+
+driver_id INT FK
+
+departure_datetime DATETIME
+
+arrival_datetime DATETIME
+
+available_seats INT
+
+status ENUM('scheduled','running','completed','cancelled')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 9 : seats
+=========================================
+
+id INT PK AI
+
+bus_id INT FK
+
+seat_number VARCHAR(20)
+
+seat_type VARCHAR(50)
+
+status ENUM('active','inactive')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 10 : bookings
+=========================================
+
+id INT PK AI
+
+booking_number VARCHAR(100) UNIQUE
+
+user_id INT FK
+
+schedule_id INT FK
+
+booking_date DATETIME
+
+total_amount DECIMAL(10,2)
+
+booking_status ENUM('pending','confirmed','cancelled')
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 11 : booking_details
+=========================================
+
+id INT PK AI
+
+booking_id INT FK
+
+seat_id INT FK
+
+ticket_price DECIMAL(10,2)
+
+passenger_name VARCHAR(100)
+
+passenger_age INT
+
+passenger_gender VARCHAR(20)
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 12 : payments
+=========================================
+
+id INT PK AI
+
+booking_id INT FK
+
+payment_method VARCHAR(50)
+
+payment_status ENUM('pending','paid','failed')
+
+transaction_id VARCHAR(100) UNIQUE
+
+paid_amount DECIMAL(10,2)
+
+payment_date DATETIME
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 13 : bus_locations
+=========================================
+
+id INT PK AI
+
+bus_id INT FK
+
+latitude DECIMAL(10,8)
+
+longitude DECIMAL(11,8)
+
+last_updated DATETIME
+
+created_at DATETIME
+updated_at DATETIME
+
+=========================================
+TABLE 14 : notifications
+=========================================
+
+id INT PK AI
+
+user_id INT FK
+
+title VARCHAR(150)
+
+message TEXT
+
+is_read BOOLEAN
+
+created_at DATETIME
+updated_at DATETIME

@@ -1,0 +1,48 @@
+=================================================
+PHASE 4 – STEP 18
+
+UTILITY FUNCTIONS STRUCTURE
+
+=================================================
+
+What are Utility Functions?
+
+Utility Functions are reusable functions
+that perform common tasks.
+
+-------------------------------------------------
+
+Examples
+
+Date Formatting
+
+Random ID Generation
+
+Pagination
+
+File Name Generator
+
+Password Generator
+
+-------------------------------------------------
+
+Why use Utility Functions?
+
+1. Reusable
+
+2. Clean Code
+
+3. Less Duplicate Code
+
+4. Easy Maintenance
+
+-------------------------------------------------
+
+Software House Rule
+
+If one function is used in multiple places,
+move it into utils.
+
+Do not repeat the same logic in different files.
+
+=================================================

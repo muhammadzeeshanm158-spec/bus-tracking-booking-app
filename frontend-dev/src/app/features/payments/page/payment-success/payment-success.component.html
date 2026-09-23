@@ -1,0 +1,55 @@
+<div class="p-4 max-w-md mx-auto min-h-screen flex items-center justify-center">
+  <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm w-full space-y-5 text-center">
+    
+    <!-- Success Icon -->
+    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-100">
+      <span class="material-symbols-outlined text-2xl font-bold">check_circle</span>
+    </div>
+
+    <div>
+      <h2 class="text-base font-bold text-slate-900">Payment Successful!</h2>
+      <p class="text-xs text-slate-500 mt-0.5">Your booking has been confirmed successfully.</p>
+    </div>
+
+    <!-- Details Box -->
+    <div class="bg-slate-50 rounded-xl p-4 border border-slate-150 space-y-3 text-left">
+      <div class="flex justify-between text-xs py-1 border-b border-slate-200/60">
+        <span class="text-slate-500">Transaction ID</span>
+        <span class="font-mono font-bold text-slate-800">{{ transactionId }}</span>
+      </div>
+
+      <div class="flex justify-between text-xs py-1 border-b border-slate-200/60">
+        <span class="text-slate-500">Booking Reference</span>
+        <span class="font-mono font-semibold text-blue-600">{{ bookingReference || 'N/A' }}</span>
+      </div>
+
+      <div class="flex justify-between text-xs py-1 border-b border-slate-200/60">
+        <span class="text-slate-500">Payment Method</span>
+        <span class="font-medium text-slate-800 uppercase">{{ paymentMethod }}</span>
+      </div>
+
+      <div class="flex justify-between text-xs py-1">
+        <span class="text-slate-500">Paid Amount</span>
+        <span class="font-bold text-slate-900">PKR {{ paidAmount | number }}</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="space-y-2.5 pt-2">
+      <button 
+        (click)="goToDashboard()"
+        class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+        <span class="material-symbols-outlined text-base">dashboard</span>
+        <span>Go to Dashboard</span>
+      </button>
+
+      <button 
+        (click)="printReceipt()"
+        class="w-full py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+        <span class="material-symbols-outlined text-base">receipt</span>
+        <span>Print Receipt</span>
+      </button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,168 @@
+=========================================
+REST API PLANNING
+=========================================
+
+1. What is an API?
+
+API (Application Programming Interface) is a communication bridge between the frontend and the backend. It allows the frontend to send requests and receive responses from the server.
+
+-----------------------------------------
+2. What is REST API?
+
+REST API is an API that follows REST principles and uses HTTP methods such as GET, POST, PUT, PATCH, and DELETE to perform operations on resources.
+
+-----------------------------------------
+3. HTTP Methods
+-----------------------------------------
+
+GET
+Purpose:
+Retrieve data from the server.
+
+Examples:
+- Get all buses
+- Get booking history
+- Get user profile
+
+-----------------------------------------
+
+POST
+Purpose:
+Create new data.
+
+Examples:
+- Register a user
+- Login
+- Create a booking
+- Make a payment
+
+-----------------------------------------
+
+PUT
+Purpose:
+Update an existing resource completely.
+
+Examples:
+- Update user profile
+- Update bus details
+- Update driver information
+
+-----------------------------------------
+
+PATCH
+Purpose:
+Update only specific fields of an existing resource.
+
+Examples:
+- Update booking status
+- Update payment status
+- Update current bus location
+
+-----------------------------------------
+
+DELETE
+Purpose:
+Delete a resource.
+
+Examples:
+- Delete a booking
+- Delete a bus
+- Delete a route
+
+-----------------------------------------
+4. Authentication APIs
+-----------------------------------------
+
+POST   /api/auth/register
+
+POST   /api/auth/login
+
+GET    /api/auth/profile
+
+PUT    /api/auth/profile
+
+-----------------------------------------
+5. Bus APIs
+-----------------------------------------
+
+GET    /api/buses
+
+GET    /api/buses/:id
+
+POST   /api/buses
+
+PUT    /api/buses/:id
+
+DELETE /api/buses/:id
+
+-----------------------------------------
+6. Route APIs
+-----------------------------------------
+
+GET    /api/routes
+
+POST   /api/routes
+
+PUT    /api/routes/:id
+
+DELETE /api/routes/:id
+
+-----------------------------------------
+7. Schedule APIs
+-----------------------------------------
+
+GET    /api/schedules
+
+POST   /api/schedules
+
+PUT    /api/schedules/:id
+
+DELETE /api/schedules/:id
+
+-----------------------------------------
+8. Booking APIs
+-----------------------------------------
+
+GET    /api/bookings
+
+GET    /api/bookings/:id
+
+POST   /api/bookings
+
+PATCH  /api/bookings/:id/status
+
+DELETE /api/bookings/:id
+
+-----------------------------------------
+9. Payment APIs
+-----------------------------------------
+
+POST   /api/payments
+
+GET    /api/payments
+
+GET    /api/payments/:id
+
+PATCH  /api/payments/:id/status
+
+-----------------------------------------
+10. Tracking APIs
+-----------------------------------------
+
+GET    /api/tracking/:busId
+
+PATCH  /api/tracking/:busId
+
+-----------------------------------------
+11. Notification APIs
+-----------------------------------------
+
+GET    /api/notifications
+
+PATCH  /api/notifications/:id/read
+
+-----------------------------------------
+12. Conclusion
+-----------------------------------------
+
+REST APIs provide a standard way for the frontend and backend to communicate. Proper API planning makes development easier and keeps the project organized.

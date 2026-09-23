@@ -1,0 +1,81 @@
+=================================================
+
+PHASE 5 – STEP 3
+
+REGISTER API PLANNING
+
+=================================================
+
+Purpose
+
+Create a new user account.
+
+=================================================
+
+HTTP Method
+
+POST
+
+=================================================
+
+API Endpoint
+
+/api/auth/register
+
+=================================================
+
+Request Body
+
+full_name
+
+email
+
+phone_number
+
+password
+
+gender
+
+=================================================
+
+Default Values
+
+role_id = Customer
+
+is_active = 1
+
+=================================================
+
+Registration Flow
+
+Client
+
+↓
+
+POST /api/auth/register
+
+↓
+
+Validation
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+↓
+
+Success Response
+
+=================================================

@@ -1,0 +1,37 @@
+=================================================
+
+PHASE 5 – STEP 9
+
+EMAIL FORMAT VALIDATION
+
+=================================================
+
+Purpose
+
+Check if email format is valid.
+
+=================================================
+
+Validation Rules
+
+1. Email must contain @
+
+2. Email must contain domain
+
+3. Email format must be valid
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

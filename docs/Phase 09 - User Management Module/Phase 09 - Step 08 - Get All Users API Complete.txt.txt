@@ -1,0 +1,52 @@
+=================================
+
+PHASE 09
+
+STEP 08
+
+Get All Users API Complete
+
+=================================
+
+Goal
+
+Create a complete
+Get All Users API
+
+Flow
+
+Client
+
+↓
+
+Route
+
+↓
+
+Authentication
+
+↓
+
+Authorization
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+↓
+
+Response
+
+=================================

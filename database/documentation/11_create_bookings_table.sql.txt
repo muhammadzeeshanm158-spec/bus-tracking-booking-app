@@ -1,0 +1,38 @@
+=========================================
+BOOKINGS TABLE
+=========================================
+
+1. What is Bookings Table?
+
+The bookings table stores the main booking information.
+
+-----------------------------------------
+
+2. Why do we need Bookings Table?
+
+- Customer booking
+- Booking history
+- Booking status
+- Total amount
+
+-----------------------------------------
+
+3. Columns
+
+id
+booking_number
+user_id
+schedule_id
+booking_date
+total_amount
+booking_status
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- Booking number should be unique.
+- One booking belongs to one customer.
+- One booking belongs to one schedule.

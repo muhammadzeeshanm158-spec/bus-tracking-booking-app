@@ -1,0 +1,36 @@
+=================================================
+
+PHASE 5
+
+AUTHENTICATION MODULE
+
+=================================================
+
+Goal
+
+Build a complete Authentication System
+using Software House Architecture.
+
+Features
+
+1. User Registration
+
+2. User Login
+
+3. Password Hashing
+
+4. JWT Token Generation
+
+5. Protected Routes
+
+6. Authentication Middleware
+
+7. Current User Profile
+
+8. Change Password
+
+9. Logout
+
+10. Authentication Testing
+
+=================================================

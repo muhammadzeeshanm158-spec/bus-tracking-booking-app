@@ -1,0 +1,95 @@
+=========================================
+JUNCTION TABLES (BRIDGE TABLES)
+=========================================
+
+1. What is a Junction Table?
+
+A Junction Table (also called a Bridge Table or Associative Table) is an intermediate table used to implement a Many-to-Many relationship between two tables.
+
+-----------------------------------------
+2. Why Do We Need a Junction Table?
+-----------------------------------------
+
+- Relational databases do not support direct Many-to-Many relationships.
+- It connects two tables using Foreign Keys.
+- It can also store extra information about the relationship.
+
+-----------------------------------------
+3. Structure of a Junction Table
+-----------------------------------------
+
+A Junction Table usually contains:
+
+- Primary Key (optional but recommended)
+- Foreign Key to Table A
+- Foreign Key to Table B
+- Additional business fields
+- created_at
+- updated_at
+
+-----------------------------------------
+4. Project Example
+-----------------------------------------
+
+Bookings
+
+↓
+
+Booking Details
+
+↓
+
+Seats
+
+Booking Details is the Junction Table.
+
+-----------------------------------------
+5. Booking Details Table
+-----------------------------------------
+
+Columns:
+
+- id
+- booking_id
+- seat_id
+- ticket_price
+- passenger_name
+- passenger_age
+- passenger_gender
+- created_at
+- updated_at
+
+-----------------------------------------
+6. Foreign Keys
+-----------------------------------------
+
+booking_id
+→ references bookings.id
+
+seat_id
+→ references seats.id
+
+-----------------------------------------
+7. Benefits
+-----------------------------------------
+
+- Supports Many-to-Many relationships.
+- Stores relationship-specific data.
+- Prevents duplicate data.
+- Makes reporting easier.
+- Improves scalability.
+
+-----------------------------------------
+8. Best Practices
+-----------------------------------------
+
+- Use a Primary Key (id).
+- Use proper Foreign Keys.
+- Add timestamps.
+- Store only relationship-related data.
+
+-----------------------------------------
+9. Conclusion
+-----------------------------------------
+
+A Junction Table connects two tables in a Many-to-Many relationship and can also store additional information related to that relationship.

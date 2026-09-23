@@ -1,0 +1,56 @@
+=================================================
+
+PHASE 7
+
+STEP 3
+
+LOGIN VALIDATION
+
+=================================================
+
+Objective
+
+Validate Login Request.
+
+=================================================
+
+Fields
+
+Email
+
+Password
+
+=================================================
+
+Validation Rules
+
+Email
+
+✓ Required
+
+✓ Trim
+
+✓ Valid Format
+
+✓ Maximum Length 255
+
+---------------------------------
+
+Password
+
+✓ Required
+
+✓ Trim
+
+✓ Minimum Length 8
+
+✓ Maximum Length 64
+
+=================================================
+
+Learning
+
+Login only validates
+Email and Password.
+
+=================================================

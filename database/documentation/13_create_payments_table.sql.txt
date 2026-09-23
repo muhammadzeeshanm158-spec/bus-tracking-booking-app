@@ -1,0 +1,38 @@
+=========================================
+PAYMENTS TABLE
+=========================================
+
+1. What is Payments Table?
+
+The payments table stores all payment information.
+
+-----------------------------------------
+
+2. Why do we need Payments Table?
+
+- Payment History
+- Transaction Details
+- Payment Status
+- Refund Support
+
+-----------------------------------------
+
+3. Columns
+
+id
+booking_id
+transaction_id
+payment_method
+payment_amount
+payment_status
+payment_date
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One booking should have one payment.
+- Transaction ID should be unique.
+- Use DECIMAL for money.

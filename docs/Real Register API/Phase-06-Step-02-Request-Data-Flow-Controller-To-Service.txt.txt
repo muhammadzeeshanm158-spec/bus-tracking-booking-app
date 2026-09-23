@@ -1,0 +1,39 @@
+=================================================
+
+PHASE 6
+
+STEP 2
+
+REQUEST DATA FLOW
+
+CONTROLLER → SERVICE
+
+=================================================
+
+Purpose
+
+Pass Request Data from Controller to Service
+
+=================================================
+
+Current Flow
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+
+=================================================
+
+Current Goal
+
+Controller will send req.body to Service
+
+Service will receive req.body
+
+=================================================

@@ -1,0 +1,53 @@
+=================================================
+
+PHASE 6
+
+STEP 14
+
+EXECUTE INSERT QUERY
+
+=================================================
+
+Purpose
+
+Insert New User
+Into Database
+
+=================================================
+
+Current Goal
+
+Execute SQL INSERT Query
+
+=================================================
+
+Flow
+
+Service
+
+↓
+
+Repository
+
+↓
+
+INSERT INTO users
+
+↓
+
+MySQL Database
+
+↓
+
+User Saved Successfully
+
+=================================================
+
+Important
+
+Always use parameterized queries.
+
+Never concatenate user input
+directly into SQL statements.
+
+=================================================

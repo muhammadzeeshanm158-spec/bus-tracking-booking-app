@@ -1,0 +1,46 @@
+=================================================
+
+PHASE 6
+
+STEP 27
+
+HANDLE VALIDATION ERRORS
+
+=================================================
+
+Objective
+
+Handle validation errors from one central
+place using Error Middleware.
+
+=================================================
+
+Why?
+
+Validation middleware can generate errors.
+
+Instead of sending different response
+formats, Error Middleware should return
+one consistent response format.
+
+=================================================
+
+Benefits
+
+✓ Centralized Validation Handling
+
+✓ Consistent API Responses
+
+✓ Clean Controllers
+
+✓ Professional Architecture
+
+=================================================
+
+Learning
+
+Validation Middleware validates data.
+
+Error Middleware formats the response.
+
+=================================================

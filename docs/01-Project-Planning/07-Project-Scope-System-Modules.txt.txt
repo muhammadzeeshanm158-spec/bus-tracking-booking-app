@@ -1,0 +1,163 @@
+=========================================
+PROJECT SCOPE & SYSTEM MODULES
+=========================================
+
+1. What is Project Scope?
+
+Project Scope defines the boundaries of the project. It clearly explains what features will be included in the system and what the project will deliver.
+
+-----------------------------------------
+2. Project Scope of Bus Tracking & Booking System
+-----------------------------------------
+
+The Bus Tracking & Booking System will provide an online platform where customers can search buses, book tickets, make payments, and track buses. Drivers can manage trips, while administrators can manage the complete system.
+
+-----------------------------------------
+3. Main System Modules
+-----------------------------------------
+
+Module 1: Authentication
+Purpose:
+Manage user registration, login, logout, and password security.
+
+Features:
+- Register
+- Login
+- Logout
+- Forgot Password (Future)
+- Reset Password (Future)
+
+-----------------------------------------
+
+Module 2: Customer Management
+
+Purpose:
+Manage customer profiles and account information.
+
+Features:
+- View Profile
+- Update Profile
+- Change Password
+
+-----------------------------------------
+
+Module 3: Bus Management
+
+Purpose:
+Manage bus information.
+
+Features:
+- Add Bus
+- Update Bus
+- Delete Bus
+- View Bus List
+
+-----------------------------------------
+
+Module 4: Driver Management
+
+Purpose:
+Manage driver information.
+
+Features:
+- Add Driver
+- Update Driver
+- Delete Driver
+- Assign Driver to Bus
+
+-----------------------------------------
+
+Module 5: Route Management
+
+Purpose:
+Manage routes between cities.
+
+Features:
+- Add Route
+- Update Route
+- Delete Route
+- View Route List
+
+-----------------------------------------
+
+Module 6: Schedule Management
+
+Purpose:
+Manage bus schedules.
+
+Features:
+- Add Schedule
+- Update Schedule
+- Delete Schedule
+- View Schedule
+
+-----------------------------------------
+
+Module 7: Booking Management
+
+Purpose:
+Manage seat booking.
+
+Features:
+- Search Bus
+- View Available Seats
+- Book Ticket
+- Cancel Booking
+- Booking History
+
+-----------------------------------------
+
+Module 8: Payment Management
+
+Purpose:
+Manage online payments.
+
+Features:
+- Make Payment
+- View Payment Status
+- Payment History
+
+-----------------------------------------
+
+Module 9: Live Tracking
+
+Purpose:
+Track the current location of buses.
+
+Features:
+- View Live Bus Location
+- Update Bus Location (Driver)
+
+-----------------------------------------
+
+Module 10: Reports & Dashboard
+
+Purpose:
+Provide reports and statistics.
+
+Features:
+- Dashboard
+- Booking Reports
+- Revenue Reports
+- Passenger Reports
+
+-----------------------------------------
+4. Project Deliverables
+-----------------------------------------
+
+After completing the project, the system will include:
+
+- Customer Panel
+- Driver Panel
+- Admin Panel
+- Responsive User Interface
+- Secure REST APIs
+- MySQL Database
+- Authentication System
+- Professional Folder Structure
+
+-----------------------------------------
+5. Conclusion
+-----------------------------------------
+
+Dividing the project into modules makes development easier, more organized, and more maintainable.

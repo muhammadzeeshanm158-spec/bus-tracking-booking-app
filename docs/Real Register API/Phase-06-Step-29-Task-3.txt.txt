@@ -1,0 +1,36 @@
+=====================================
+
+PHASE 6
+
+STEP 29
+
+REMOVE TRY-CATCH
+
+=====================================
+
+Objective
+
+Remove manual try-catch.
+
+Let asyncHandler handle errors.
+
+=====================================
+
+Current
+
+Controller catches errors manually.
+
+Target
+
+asyncHandler catches all async errors.
+
+=====================================
+
+Learning
+
+Controller only performs business logic.
+
+Error handling is delegated to
+asyncHandler.
+
+=====================================

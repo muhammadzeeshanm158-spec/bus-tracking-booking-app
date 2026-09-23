@@ -1,0 +1,59 @@
+=================================================
+
+PHASE 6
+
+REAL REGISTER API
+
+STEP 1
+
+INTRODUCTION
+
+=================================================
+
+Purpose
+
+Build a Production-Level Register API
+
+=================================================
+
+Features
+
+✓ Receive User Data
+
+✓ Validate User Data
+
+✓ Check Duplicate Email
+
+✓ Hash Password
+
+✓ Save User into MySQL
+
+✓ Return Proper Response
+
+=================================================
+
+Architecture
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+MySQL Database
+
+=================================================
+
+Current Goal
+
+Understand Complete Register API Flow
+
+No Database Coding Yet
+
+=================================================

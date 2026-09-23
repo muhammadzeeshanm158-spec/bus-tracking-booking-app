@@ -1,0 +1,95 @@
+=================================================
+PHASE 4 – STEP 5
+
+MYSQL DATABASE CONNECTION
+
+=================================================
+
+What is Database Connection?
+
+Database Connection is a bridge between the Backend
+Application and the MySQL Database.
+
+Without a database connection:
+
+❌ Cannot Read Data
+
+❌ Cannot Insert Data
+
+❌ Cannot Update Data
+
+❌ Cannot Delete Data
+
+-------------------------------------------------
+
+Backend Flow
+
+Client
+
+↓
+
+Express Server
+
+↓
+
+Database Connection
+
+↓
+
+MySQL Database
+
+-------------------------------------------------
+
+What is mysql2?
+
+mysql2 is a Node.js package used to connect with MySQL Database.
+
+-------------------------------------------------
+
+Why do we use mysql2?
+
+1. Fast Performance
+
+2. Promise Support
+
+3. Prepared Statements
+
+4. Secure Queries
+
+5. Widely Used in Software Houses
+
+-------------------------------------------------
+
+Connection Process
+
+Step 1
+
+Read Database Credentials
+
+↓
+
+Step 2
+
+Create Connection
+
+↓
+
+Step 3
+
+Connect to MySQL
+
+↓
+
+Step 4
+
+Show Success Message
+
+-------------------------------------------------
+
+Software House Rule
+
+Never write database credentials directly inside code.
+
+Always read credentials from .env file.
+
+=================================================

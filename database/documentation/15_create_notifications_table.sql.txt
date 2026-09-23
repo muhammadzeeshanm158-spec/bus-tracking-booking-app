@@ -1,0 +1,37 @@
+=========================================
+NOTIFICATIONS TABLE
+=========================================
+
+1. What is Notifications Table?
+
+The notifications table stores notifications for users.
+
+-----------------------------------------
+
+2. Why do we need Notifications Table?
+
+- Booking Notification
+- Payment Notification
+- Bus Delay Notification
+- Bus Cancellation Notification
+
+-----------------------------------------
+
+3. Columns
+
+id
+user_id
+title
+message
+notification_type
+is_read
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- Every notification belongs to one user.
+- Keep message length reasonable.
+- Use read/unread status.

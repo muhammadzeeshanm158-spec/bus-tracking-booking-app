@@ -1,0 +1,462 @@
+<!-- ========================================================================= -->
+<!-- BUS TELEMETRY DETAIL COMPONENT TEMPLATE                                   -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+  <!-- Error / Loading Feedback Messages -->
+  @if (errorMessage) {
+    <div
+      class="p-3 bg-rose-50 border-l-4 border-rose-500 text-rose-700 rounded-xl shadow-xs text-xs font-semibold flex items-center justify-between"
+    >
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div
+      class="text-center py-12 bg-white rounded-xl shadow-xs border border-slate-200/80"
+    >
+      <div
+        class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent mx-auto mb-2"
+      ></div>
+      <p class="text-slate-500 font-medium text-xs">
+        Loading bus telemetry details...
+      </p>
+    </div>
+  } @else if (busDetail) {
+    <!-- 1. HEADER SECTION WITH BREADCRUMBS & STATUS BADGE -->
+    <div
+      class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+    >
+      <div>
+        <!-- Breadcrumb Navigation Links -->
+        <div
+          class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5"
+        >
+          <a
+            routerLink="/tracking"
+            class="hover:text-blue-600 transition-colors duration-150 cursor-pointer"
+            >Live Tracking</a
+          >
+          <span class="text-slate-300">/</span>
+          <span class="text-blue-600 font-bold"
+            >{{ busDetail.busNumber }} Telemetry</span
+          >
+        </div>
+
+        <!-- Title & Dynamic Status Badge -->
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+            Bus Telemetry: {{ busDetail.busNumber }}
+          </h1>
+
+          <!-- Trip Status Indicator Badge -->
+          <span
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border"
+            [ngClass]="{
+              'bg-emerald-50 text-emerald-700 border-emerald-200/60':
+                busDetail.status === 'On Time',
+              'bg-amber-50 text-amber-700 border-amber-200/60':
+                busDetail.status === 'Delayed',
+              'bg-slate-100 text-slate-700 border-slate-200':
+                busDetail.status !== 'On Time' &&
+                busDetail.status !== 'Delayed',
+            }"
+          >
+            <span
+              class="w-1.5 h-1.5 rounded-full"
+              [ngClass]="{
+                'bg-emerald-500 animate-pulse': busDetail.status === 'On Time',
+                'bg-amber-500': busDetail.status === 'Delayed',
+                'bg-slate-400':
+                  busDetail.status !== 'On Time' &&
+                  busDetail.status !== 'Delayed',
+              }"
+            ></span>
+            {{ busDetail.status }} ({{ busDetail.speedKmH }} km/h)
+          </span>
+        </div>
+        <p class="mt-0.5 text-xs text-slate-500">
+          Real-time driver metrics, route timeline, and operational analytics.
+        </p>
+      </div>
+
+      <!-- Back Button -->
+      <a
+        routerLink="/tracking"
+        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-xl hover:bg-slate-50 transition-all duration-200 text-xs shrink-0 cursor-pointer shadow-xs self-start sm:self-auto"
+      >
+        <span class="material-symbols-outlined text-base text-slate-400"
+          >arrow_back</span
+        >
+        <span>Back to All Buses</span>
+      </a>
+    </div>
+
+    <!-- 2. TELEMETRY TOP STAT CARDS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <!-- Stat Card 1: Current Speed -->
+      <div
+        class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between"
+      >
+        <div>
+          <p
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider"
+          >
+            Current Speed
+          </p>
+          <p class="text-xl font-bold text-slate-900 mt-0.5">
+            {{ busDetail.speedKmH }}
+            <span class="text-[10px] text-slate-500 font-medium">km/h</span>
+          </p>
+          <p
+            class="text-[10px] text-emerald-600 font-semibold mt-1 flex items-center gap-1"
+          >
+            <span class="material-symbols-outlined text-xs">check_circle</span>
+            <span>Active telemetry</span>
+          </p>
+        </div>
+        <div
+          class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center ring-1 ring-blue-500/10 shrink-0"
+        >
+          <span class="material-symbols-outlined text-xl">speed</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 2: Route Status & ETA -->
+      <div
+        class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between"
+      >
+        <div>
+          <p
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider"
+          >
+            Route Status
+          </p>
+          <p class="text-xl font-bold text-emerald-600 mt-0.5">
+            {{ busDetail.status }}
+          </p>
+          <p class="text-[10px] text-slate-500 font-medium mt-1">
+            ETA:
+            <strong class="text-slate-700 font-semibold">{{
+              busDetail.estimatedArrivalTime
+            }}</strong>
+          </p>
+        </div>
+        <div
+          class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center ring-1 ring-emerald-500/10 shrink-0"
+        >
+          <span class="material-symbols-outlined text-xl">schedule</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 3: Current City Location & Heading -->
+      <div
+        class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between"
+      >
+        <div>
+          <p
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider"
+          >
+            Current City Location
+          </p>
+          <p
+            class="text-base font-bold text-slate-900 mt-0.5 truncate max-w-36"
+          >
+            {{ busDetail.currentCity }}
+          </p>
+          <p class="text-[10px] text-slate-500 font-medium mt-1">
+            Heading:
+            <strong class="text-slate-800 font-semibold"
+              >{{ busDetail.heading || 0 }}°</strong
+            >
+          </p>
+        </div>
+        <div
+          class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center ring-1 ring-violet-500/10 shrink-0"
+        >
+          <span class="material-symbols-outlined text-xl">my_location</span>
+        </div>
+      </div>
+
+      <!-- Stat Card 4: Distance Remaining & Route Path -->
+      <div
+        class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between"
+      >
+        <div>
+          <p
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider"
+          >
+            Distance Left
+          </p>
+          <p class="text-xl font-bold text-slate-900 mt-0.5">
+            {{ busDetail.distanceRemainingKm }}
+            <span class="text-[10px] text-slate-500 font-medium">km</span>
+          </p>
+          <p
+            class="text-[10px] text-slate-500 font-medium mt-1 truncate max-w-36"
+          >
+            Route: {{ busDetail.routeOrigin }} ➔
+            {{ busDetail.routeDestination }}
+          </p>
+        </div>
+        <div
+          class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center ring-1 ring-amber-500/10 shrink-0"
+        >
+          <span class="material-symbols-outlined text-xl">navigation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAIN CONTENT GRID: LIVE MAP & ROUTE PROGRESS (LEFT) + DRIVER/BUS INFO (RIGHT) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <!-- Left Column: Map & Route Progress Section -->
+      <div class="lg:col-span-2 space-y-4">
+        <!-- Leaflet Single Live Map View Container -->
+        <div
+          class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden h-96 relative flex flex-col"
+        >
+          <div
+            class="p-3 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between z-20"
+          >
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-blue-600 text-base"
+                >map</span
+              >
+              <span class="font-bold text-slate-900 text-xs"
+                >Live Location Track</span
+              >
+            </div>
+            <!-- GPS Coordinates Tag -->
+           <div class="text-[10px] font-mono font-medium text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">
+  GPS Lat: {{ busDetail.currentLocation?.lat || 24.8607 }}°, Long: {{ busDetail.currentLocation?.lng || 67.0011 }}°
+</div>
+          </div>
+
+          <!-- Leaflet Map Container -->
+          <div class="relative flex-1 bg-slate-100 w-full h-full">
+            <div id="busMap" class="w-full h-full z-10"></div>
+          </div>
+        </div>
+
+        <!-- Route Timeline Progress Steps -->
+        <div
+          class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs"
+        >
+          <h3
+            class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-4 flex items-center gap-2 border-b border-slate-100 pb-3"
+          >
+            <span class="material-symbols-outlined text-blue-600 text-sm"
+              >alt_route</span
+            >
+            Route Timeline Progress
+          </h3>
+
+          <div
+            class="relative border-l-2 border-slate-200 ml-3 space-y-5 text-xs"
+          >
+            <!-- Timeline Step 1: Origin Terminal -->
+            <div class="ml-5 relative">
+              <span
+                class="absolute -left-6.5 top-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-50"
+              ></span>
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="font-bold text-slate-900 text-xs">
+                    {{ busDetail.routeOrigin }} Terminal
+                    <span class="text-[10px] font-medium text-slate-400"
+                      >(Origin)</span
+                    >
+                  </p>
+                  <p class="text-[10px] text-slate-500 font-medium mt-0.5">
+                    Route successfully initiated
+                  </p>
+                </div>
+                <span
+                  class="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full border border-emerald-200/60 shrink-0"
+                  >Completed</span
+                >
+              </div>
+            </div>
+
+            <!-- Timeline Step 2: Current Transit City -->
+            <div class="ml-5 relative">
+              <span
+                class="absolute -left-6.5 top-0.5 w-3 h-3 rounded-full bg-blue-600 ring-4 ring-blue-50 animate-pulse"
+              ></span>
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="font-bold text-blue-700 text-xs">
+                    Current Transit City: {{ busDetail.currentCity }}
+                  </p>
+                  <p class="text-[10px] text-slate-500 font-medium mt-0.5">
+                    ETA to destination: {{ busDetail.estimatedArrivalTime }}
+                  </p>
+                </div>
+                <span
+                  class="text-[10px] bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full border border-blue-200/60 shrink-0"
+                  >Active Location</span
+                >
+              </div>
+            </div>
+
+            <!-- Timeline Step 3: Destination Station -->
+            <div class="ml-5 relative">
+              <span
+                class="absolute -left-6.5 top-0.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-slate-100"
+              ></span>
+              <div class="flex items-center justify-between gap-3">
+                <div>
+                  <p class="font-bold text-slate-700 text-xs">
+                    {{ busDetail.routeDestination }} Station
+                    <span class="text-[10px] font-medium text-slate-400"
+                      >(Destination)</span
+                    >
+                  </p>
+                  <p class="text-[10px] text-slate-500 font-medium mt-0.5">
+                    Remaining distance: {{ busDetail.distanceRemainingKm }} km
+                  </p>
+                </div>
+                <span
+                  class="text-[10px] bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-full shrink-0"
+                  >Pending</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column Sidebar Info -->
+      <div class="space-y-4">
+        <!-- Assigned Driver Information Card -->
+        <div
+          class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs space-y-4"
+        >
+          <h3
+            class="font-bold text-slate-800 text-xs uppercase tracking-wider pb-3 border-b border-slate-100 flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-blue-600 text-sm"
+              >badge</span
+            >
+            Assigned Driver
+          </h3>
+
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-200/60"
+            >
+              {{
+                busDetail.driverName
+                  ? busDetail.driverName.substring(0, 2).toUpperCase()
+                  : "DR"
+              }}
+            </div>
+            <div>
+              <p class="font-bold text-slate-900 text-xs">
+                {{ busDetail.driverName }}
+              </p>
+              <p class="text-[10px] font-medium text-slate-400">
+                Tracking ID:
+                <span class="text-slate-700 font-semibold">{{
+                  busDetail.id
+                }}</span>
+              </p>
+              <p
+                class="text-[10px] text-amber-600 font-bold mt-0.5 flex items-center gap-1"
+              >
+                <span>★ 4.9</span>
+                <span class="text-slate-400 font-normal"
+                  >(Verified Driver)</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-2.5 text-xs border-t border-slate-100">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]">Phone:</span>
+              <span class="font-semibold text-slate-800 text-xs font-mono">{{
+                busDetail.driverPhone
+              }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]"
+                >Last GPS Ping:</span
+              >
+              <span
+                class="font-semibold text-slate-800 font-mono text-[10px]"
+                >{{ busDetail.lastUpdated }}</span
+              >
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl text-xs transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <span class="material-symbols-outlined text-sm text-slate-600"
+              >call</span
+            >
+            <span>Contact Driver</span>
+          </button>
+        </div>
+
+        <!-- Bus Technical Specifications Card -->
+        <div
+          class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs space-y-3.5"
+        >
+          <h3
+            class="font-bold text-slate-800 text-xs uppercase tracking-wider pb-3 border-b border-slate-100 flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined text-blue-600 text-sm"
+              >directions_bus</span
+            >
+            Bus Specifications
+          </h3>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]"
+                >Registration:</span
+              >
+              <span
+                class="font-mono font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded text-[10px]"
+                >{{ busDetail.busNumber }}</span
+              >
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]"
+                >Bus ID / Ref:</span
+              >
+              <span class="font-semibold text-slate-800 text-xs">{{
+                busDetail.busId
+              }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]"
+                >Trip Schedule ID:</span
+              >
+              <span class="font-semibold text-slate-800 text-xs">{{
+                busDetail.scheduleId
+              }}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500 font-medium text-[10px]"
+                >GPS Tracker Device:</span
+              >
+              <span
+                class="inline-flex items-center gap-1 font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 text-[10px]"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+                ></span>
+                Online
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

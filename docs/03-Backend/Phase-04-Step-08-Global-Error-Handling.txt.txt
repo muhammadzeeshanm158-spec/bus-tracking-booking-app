@@ -1,0 +1,69 @@
+=================================================
+PHASE 4 – STEP 8
+
+GLOBAL ERROR HANDLING
+
+=================================================
+
+What is Error Handling?
+
+Error Handling means managing application errors
+properly without crashing the server.
+
+-------------------------------------------------
+
+Examples of Errors
+
+1. Database Error
+
+2. Route Not Found
+
+3. Validation Error
+
+4. Authentication Error
+
+5. Internal Server Error
+
+-------------------------------------------------
+
+Why Error Handling?
+
+1. Prevent Server Crash
+
+2. Show Proper Error Message
+
+3. Improve Debugging
+
+4. Professional API Response
+
+-------------------------------------------------
+
+Request Flow
+
+Client
+
+↓
+
+Route
+
+↓
+
+Controller
+
+↓
+
+Error Middleware
+
+↓
+
+Response
+
+-------------------------------------------------
+
+Software House Rule
+
+Never send raw errors to the client.
+
+Always return a structured JSON response.
+
+=================================================

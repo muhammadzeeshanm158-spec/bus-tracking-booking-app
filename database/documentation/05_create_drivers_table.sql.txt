@@ -1,0 +1,36 @@
+=========================================
+DRIVERS TABLE
+=========================================
+
+1. What is Drivers Table?
+
+The drivers table stores additional information about drivers.
+
+-----------------------------------------
+
+2. Why do we need Drivers Table?
+
+- Driver information
+- Driving license
+- Experience
+- Employment status
+
+-----------------------------------------
+
+3. Columns
+
+id
+user_id
+license_number
+experience_years
+joining_date
+is_available
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One user can have only one driver profile.
+- License number must be unique.

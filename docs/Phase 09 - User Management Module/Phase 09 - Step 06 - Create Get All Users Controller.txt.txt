@@ -1,0 +1,41 @@
+=================================
+
+PHASE 09
+
+STEP 06
+
+Create Get All Users Controller
+
+=================================
+
+Flow
+
+Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+=================================
+
+Controller Responsibility
+
+✓ Receive Request
+
+✓ Call Service
+
+✓ Return Response
+
+=================================

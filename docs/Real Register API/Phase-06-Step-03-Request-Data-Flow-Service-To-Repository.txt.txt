@@ -1,0 +1,41 @@
+=================================================
+
+PHASE 6
+
+STEP 3
+
+REQUEST DATA FLOW
+
+SERVICE → REPOSITORY
+
+=================================================
+
+Purpose
+
+Pass Request Data from Service to Repository
+
+=================================================
+
+Current Flow
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+
+=================================================
+
+Current Goal
+
+Service will send userData to Repository
+
+Repository will receive userData
+
+=================================================

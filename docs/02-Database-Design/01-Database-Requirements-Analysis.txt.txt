@@ -1,0 +1,128 @@
+=========================================
+DATABASE REQUIREMENTS ANALYSIS
+=========================================
+
+1. What is Database Requirements Analysis?
+
+Database Requirements Analysis is the process of identifying what data the application needs to store before designing the database.
+
+-----------------------------------------
+2. Purpose
+-----------------------------------------
+
+The main purpose is to understand:
+
+- What information will be stored.
+- Who will use the data.
+- How the data is related.
+- What reports are required.
+
+-----------------------------------------
+3. Users of the Database
+-----------------------------------------
+
+Customer
+
+Driver
+
+Administrator
+
+-----------------------------------------
+4. Information to be Stored
+-----------------------------------------
+
+Customer Information
+
+- Full Name
+- Email
+- Password
+- Phone Number
+- Address
+
+-----------------------------------------
+
+Driver Information
+
+- Driver Name
+- Phone Number
+- License Number
+- Experience
+
+-----------------------------------------
+
+Bus Information
+
+- Bus Number
+- Bus Name
+- Bus Type
+- Total Seats
+
+-----------------------------------------
+
+Route Information
+
+- Source City
+- Destination City
+- Distance
+
+-----------------------------------------
+
+Schedule Information
+
+- Departure Date
+- Departure Time
+- Arrival Time
+
+-----------------------------------------
+
+Booking Information
+
+- Booking Number
+- Booking Date
+- Booking Status
+- Total Amount
+
+-----------------------------------------
+
+Payment Information
+
+- Payment Method
+- Payment Status
+- Paid Amount
+- Transaction ID
+
+-----------------------------------------
+
+Live Tracking Information
+
+- Current Latitude
+- Current Longitude
+- Last Updated Time
+
+-----------------------------------------
+
+Notification Information
+
+- Title
+- Message
+- Read Status
+
+-----------------------------------------
+5. Reports Required
+-----------------------------------------
+
+- Daily Bookings Report
+
+- Monthly Revenue Report
+
+- Bus Occupancy Report
+
+- Customer Booking Report
+
+- Payment Report
+
+-----------------------------------------
+6. Conclusion
+-----------------------------------------
+
+Database Requirements Analysis helps identify all the data needed before creating entities, relationships, and database tables.

@@ -1,0 +1,53 @@
+=================================
+
+PHASE 8
+
+STEP 11
+
+Role Middleware Complete
+
+=================================
+
+Flow
+
+Request
+
+↓
+
+Authentication Middleware
+
+↓
+
+JWT Verified
+
+↓
+
+req.user
+
+↓
+
+Role Middleware
+
+↓
+
+Role Match?
+
+Yes
+
+↓
+
+next()
+
+↓
+
+Controller
+
+-------------------------
+
+Role Not Match
+
+↓
+
+403 Forbidden
+
+=================================

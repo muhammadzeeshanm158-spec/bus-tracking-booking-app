@@ -1,0 +1,78 @@
+=========================================
+NON-FUNCTIONAL REQUIREMENTS (NFR)
+=========================================
+
+1. What are Non-Functional Requirements?
+
+Non-Functional Requirements describe how the system should perform. They define the quality, security, reliability, and performance of the software.
+
+-----------------------------------------
+2. Performance
+-----------------------------------------
+
+- The application should load quickly.
+- API responses should be fast.
+- The system should support multiple users at the same time.
+
+-----------------------------------------
+3. Security
+-----------------------------------------
+
+- Passwords should be encrypted using bcrypt.
+- Authentication should use JWT.
+- Unauthorized users should not access protected pages.
+- User data should be stored securely.
+
+-----------------------------------------
+4. Reliability
+-----------------------------------------
+
+- The system should work without unexpected failures.
+- User data should not be lost.
+- Bookings should be saved correctly.
+
+-----------------------------------------
+5. Scalability
+-----------------------------------------
+
+- The system should support future features.
+- The database should handle increasing records.
+- The application should support more users in the future.
+
+-----------------------------------------
+6. Usability
+-----------------------------------------
+
+- The interface should be simple and user-friendly.
+- Navigation should be easy.
+- Forms should be easy to understand.
+
+-----------------------------------------
+7. Responsive Design
+-----------------------------------------
+
+- The application should work on:
+  - Mobile
+  - Tablet
+  - Laptop
+  - Desktop
+
+-----------------------------------------
+8. Maintainability
+-----------------------------------------
+
+- Code should be clean and organized.
+- Folder structure should be easy to understand.
+- Features should be easy to update.
+
+-----------------------------------------
+9. Availability
+-----------------------------------------
+
+- The application should be available whenever users need it.
+
+-----------------------------------------
+10. Conclusion
+-----------------------------------------
+
+Non-Functional Requirements ensure that the software is secure, fast, reliable, scalable, and easy to maintain.

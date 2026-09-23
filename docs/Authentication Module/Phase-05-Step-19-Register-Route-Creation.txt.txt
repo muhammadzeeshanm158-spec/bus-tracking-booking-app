@@ -1,0 +1,27 @@
+=================================================
+
+PHASE 5 – STEP 19
+
+REGISTER ROUTE CREATION
+
+=================================================
+
+Purpose
+
+Create Register Route
+
+=================================================
+
+Flow
+
+Client
+   ↓
+POST /register
+   ↓
+registerValidation
+   ↓
+registerController
+   ↓
+Response
+
+=================================================

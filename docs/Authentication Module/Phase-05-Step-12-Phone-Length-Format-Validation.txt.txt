@@ -1,0 +1,37 @@
+=================================================
+
+PHASE 5 – STEP 12
+
+PHONE NUMBER LENGTH & FORMAT VALIDATION
+
+=================================================
+
+Purpose
+
+Validate Phone Number
+
+=================================================
+
+Validation Rules
+
+1. Minimum Length = 11
+
+2. Maximum Length = 20
+
+3. Digits Only
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

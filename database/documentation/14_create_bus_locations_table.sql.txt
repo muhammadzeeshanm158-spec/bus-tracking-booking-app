@@ -1,0 +1,38 @@
+=========================================
+BUS LOCATIONS TABLE
+=========================================
+
+1. What is Bus Locations Table?
+
+The bus_locations table stores the current location of buses.
+
+-----------------------------------------
+
+2. Why do we need Bus Locations Table?
+
+- Live Bus Tracking
+- Google Maps Integration
+- Current Bus Position
+- Speed Monitoring
+
+-----------------------------------------
+
+3. Columns
+
+id
+bus_id
+latitude
+longitude
+speed
+heading
+last_updated
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One bus should have one current location.
+- Latitude and Longitude should use DECIMAL.
+- Update location frequently.

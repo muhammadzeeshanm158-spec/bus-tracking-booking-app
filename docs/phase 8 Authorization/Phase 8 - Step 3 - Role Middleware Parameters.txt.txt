@@ -1,0 +1,35 @@
+=================================
+
+PHASE 8
+
+STEP 3
+
+Role Middleware Parameters
+
+=================================
+
+Database stores:
+
+role_id
+
+Examples:
+
+1 = Admin
+
+2 = Customer
+
+3 = Driver
+
+Middleware receives:
+
+roleMiddleware(1)
+
+or
+
+roleMiddleware(2)
+
+or
+
+roleMiddleware(3)
+
+=================================

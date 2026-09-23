@@ -1,0 +1,110 @@
+=========================================
+ONE-TO-MANY (1:N) RELATIONSHIP
+=========================================
+
+1. What is a One-to-Many Relationship?
+
+A One-to-Many (1:N) Relationship means one record in Table A can be related to many records in Table B, but each record in Table B belongs to only one record in Table A.
+
+-----------------------------------------
+2. Why is One-to-Many Relationship Important?
+-----------------------------------------
+
+- It models real-world business scenarios.
+- It reduces duplicate data.
+- It improves database organization.
+- It makes reporting easier.
+
+-----------------------------------------
+3. Real-Life Example
+-----------------------------------------
+
+One Customer
+
+↓
+
+Many Orders
+
+Each customer can place many orders, but each order belongs to only one customer.
+
+-----------------------------------------
+4. Project Examples
+-----------------------------------------
+
+Example 1
+
+One User
+
+↓
+
+Many Bookings
+
+bookings.user_id
+→ references users.id
+
+-----------------------------------------
+
+Example 2
+
+One Bus
+
+↓
+
+Many Seats
+
+seats.bus_id
+→ references buses.id
+
+-----------------------------------------
+
+Example 3
+
+One Bus
+
+↓
+
+Many Schedules
+
+schedules.bus_id
+→ references buses.id
+
+-----------------------------------------
+
+Example 4
+
+One Route
+
+↓
+
+Many Schedules
+
+schedules.route_id
+→ references routes.id
+
+-----------------------------------------
+
+Example 5
+
+One Booking
+
+↓
+
+Many Booking Details
+
+booking_details.booking_id
+→ references bookings.id
+
+-----------------------------------------
+5. Advantages
+-----------------------------------------
+
+- Better data organization.
+- Easy data retrieval.
+- Reduced duplication.
+- Improved scalability.
+
+-----------------------------------------
+6. Conclusion
+-----------------------------------------
+
+One-to-Many is the most common relationship used in relational databases because it accurately represents many real-world scenarios.

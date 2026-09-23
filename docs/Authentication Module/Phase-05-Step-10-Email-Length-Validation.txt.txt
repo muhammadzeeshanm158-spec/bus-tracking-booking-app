@@ -1,0 +1,33 @@
+=================================================
+
+PHASE 5 – STEP 10
+
+EMAIL LENGTH VALIDATION
+
+=================================================
+
+Purpose
+
+Validate Email Length
+
+=================================================
+
+Validation Rules
+
+1. Maximum Length = 255 Characters
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

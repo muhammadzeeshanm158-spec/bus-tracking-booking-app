@@ -1,0 +1,28 @@
+=====================================
+
+PHASE 6
+
+STEP 29
+
+WRAP CONTROLLER
+
+=====================================
+
+Current
+
+const registerController = async (...)
+
+Target
+
+const registerController =
+asyncHandler(async (...))
+
+=====================================
+
+Learning
+
+asyncHandler wraps the controller
+and automatically catches async
+errors.
+
+=====================================

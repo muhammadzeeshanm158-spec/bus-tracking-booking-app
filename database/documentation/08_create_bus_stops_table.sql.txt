@@ -1,0 +1,36 @@
+=========================================
+BUS STOPS TABLE
+=========================================
+
+1. What is Bus Stops Table?
+
+The bus_stops table stores all stops for every route.
+
+-----------------------------------------
+
+2. Why do we need Bus Stops Table?
+
+- Manage route stops
+- Boarding points
+- Drop-off points
+- Bus tracking support
+
+-----------------------------------------
+
+3. Columns
+
+id
+route_id
+city_id
+stop_order
+arrival_time
+departure_time
+created_at
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+- One route can have many stops.
+- Stop order should be unique within a route.

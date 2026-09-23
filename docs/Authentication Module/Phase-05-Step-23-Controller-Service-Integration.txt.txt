@@ -1,0 +1,37 @@
+=================================================
+
+PHASE 5 – STEP 23
+
+CONTROLLER → SERVICE INTEGRATION
+
+=================================================
+
+Purpose
+
+Connect Controller with Service Layer
+
+=================================================
+
+Flow
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+
+=================================================
+
+Current Goal
+
+Controller calls Service
+
+Service returns response
+
+Controller sends response to Client
+
+=================================================

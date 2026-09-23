@@ -1,0 +1,97 @@
+=========================================
+STAKEHOLDERS, USER ROLES & PERMISSIONS
+=========================================
+
+1. What is a Stakeholder?
+
+A stakeholder is any person, group, or organization that uses the system or is affected by the system.
+
+-----------------------------------------
+2. Stakeholders of Bus Tracking & Booking System
+-----------------------------------------
+
+1. Customer
+2. Driver
+3. Admin
+4. Bus Company
+
+-----------------------------------------
+3. What is a User Role?
+
+A user role defines the type of user in the system and determines what actions that user can perform.
+
+Examples:
+- Customer
+- Driver
+- Admin
+
+-----------------------------------------
+4. What is a Permission?
+
+A permission is a specific action that a user is allowed to perform in the system.
+
+Examples:
+- Create Booking
+- Cancel Booking
+- Manage Buses
+- Manage Drivers
+- View Reports
+
+-----------------------------------------
+5. Customer Permissions
+-----------------------------------------
+
+- Register
+- Login
+- Update Profile
+- Search Bus
+- View Bus Details
+- Select Seat
+- Book Ticket
+- Cancel Booking
+- View Booking History
+- Track Bus
+- Logout
+
+-----------------------------------------
+6. Driver Permissions
+-----------------------------------------
+
+- Login
+- View Assigned Trips
+- Start Trip
+- End Trip
+- Update Current Location
+- View Passenger List
+- Logout
+
+-----------------------------------------
+7. Admin Permissions
+-----------------------------------------
+
+- Login
+- Dashboard
+- Manage Users
+- Manage Drivers
+- Manage Buses
+- Manage Routes
+- Manage Schedules
+- Manage Bookings
+- Manage Payments
+- View Reports
+- Logout
+
+-----------------------------------------
+8. Benefits of User Roles
+-----------------------------------------
+
+- Better Security
+- Easy User Management
+- Controlled Access
+- Better System Organization
+
+-----------------------------------------
+9. Conclusion
+-----------------------------------------
+
+Every professional software application uses user roles and permissions to control access and protect the system.

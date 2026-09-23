@@ -1,0 +1,48 @@
+=================================================
+
+PHASE 6
+
+STEP 23
+
+CREATE CUSTOM API ERROR CLASS
+
+=================================================
+
+Objective
+
+Create a reusable custom error class.
+
+=================================================
+
+Why?
+
+Instead of manually returning errors from
+every service, create one standard error
+object.
+
+=================================================
+
+Benefits
+
+✓ Reusable
+
+✓ Cleaner code
+
+✓ Standard error handling
+
+✓ Easy debugging
+
+=================================================
+
+New File
+
+src/utils/apiError.js
+
+=================================================
+
+Learning
+
+Professional backend applications create
+custom error classes to standardize errors.
+
+=================================================

@@ -1,0 +1,37 @@
+=================================================
+
+PHASE 5 – STEP 17
+
+GENDER VALUE VALIDATION
+
+=================================================
+
+Purpose
+
+Allow Only Valid Gender Values
+
+=================================================
+
+Allowed Values
+
+Male
+
+Female
+
+Other
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to next()
+
+=================================================

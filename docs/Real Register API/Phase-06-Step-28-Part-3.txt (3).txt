@@ -1,0 +1,40 @@
+======================================
+
+PHASE 6
+
+STEP 28
+
+RETURNING A NEW FUNCTION
+
+======================================
+
+Goal
+
+Understand why asyncHandler
+returns another function.
+
+======================================
+
+Syntax
+
+return (req, res, next) => {}
+
+======================================
+
+Meaning
+
+Express Router always executes
+
+(req, res, next)
+
+So asyncHandler returns
+a middleware function.
+
+======================================
+
+Learning
+
+One function can return
+another function.
+
+======================================

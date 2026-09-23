@@ -1,0 +1,46 @@
+=========================================
+CITIES TABLE
+=========================================
+
+1. What is Cities Table?
+
+The cities table stores all cities used in the application.
+
+-----------------------------------------
+
+2. Why do we need Cities Table?
+
+- Avoid duplicate city names.
+- Easy city management.
+- Better database normalization.
+- Supports routes and bus stops.
+
+-----------------------------------------
+
+3. Columns
+
+id
+
+city_name
+
+province
+
+is_active
+
+created_at
+
+updated_at
+
+-----------------------------------------
+
+4. Best Practice
+
+Keep city names unique.
+
+Example:
+
+Karachi
+
+Lahore
+
+Islamabad

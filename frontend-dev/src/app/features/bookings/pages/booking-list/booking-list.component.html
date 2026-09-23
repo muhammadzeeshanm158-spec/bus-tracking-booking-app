@@ -1,0 +1,250 @@
+<!-- ========================================================================= -->
+<!-- BOOKING MANAGEMENT LIST COMPONENT TEMPLATE                                -->
+<!-- ========================================================================= -->
+<div class="p-4 sm:p-6 space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER & NEW BOOKING ACTION BUTTON -->
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">Booking Management</h1>
+      <p class="text-slate-500 text-xs mt-0.5">View, issue, and manage passenger ticket bookings and payments.</p>
+    </div>
+    
+    <!-- New Booking Action Button -->
+    <a 
+      routerLink="/bookings/create" 
+      class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 active:scale-95 cursor-pointer w-full md:w-auto text-xs shrink-0">
+      <span class="material-symbols-outlined text-lg">confirmation_number</span>
+      <span>New Ticket Booking</span>
+    </a>
+  </div>
+
+  <!-- 2. STATS CARDS GRID (RESPONSIVE: 1 col on mobile, 2 on tablet, 4 on desktop) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+    
+    <!-- Stat Card 1: Total Bookings -->
+    <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-xl">book_online</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Total Bookings</p>
+        <h3 class="text-lg font-bold text-slate-900 mt-0.5">{{ totalBookingsCount }}</h3>
+      </div>
+    </div>
+
+    <!-- Stat Card 2: Confirmed Bookings -->
+    <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-xl">check_circle</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Confirmed</p>
+        <h3 class="text-lg font-bold text-slate-900 mt-0.5">{{ confirmedBookingsCount }}</h3>
+      </div>
+    </div>
+
+    <!-- Stat Card 3: Pending Payment -->
+    <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-xl">pending</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Pending Payment</p>
+        <h3 class="text-lg font-bold text-slate-900 mt-0.5">{{ pendingPaymentCount }}</h3>
+      </div>
+    </div>
+
+    <!-- Stat Card 4: Cancelled Bookings -->
+    <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-xl">block</span>
+      </div>
+      <div>
+        <p class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Cancelled</p>
+        <h3 class="text-lg font-bold text-slate-900 mt-0.5">{{ cancelledBookingsCount }}</h3>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. SEARCH & FILTERS BAR -->
+  <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      
+      <!-- Search Input -->
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none">search</span>
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm"
+          placeholder="Search PNR, Passenger, Phone..." 
+          class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+      </div>
+
+      <!-- Route Filter -->
+      <div>
+        <input 
+          type="text"
+          [(ngModel)]="selectedRoute"
+          placeholder="Filter by Route (e.g. Lahore)"
+          class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:border-blue-500 focus:bg-white transition" />
+      </div>
+
+      <!-- Status Dropdown Filter -->
+      <div>
+        <select 
+          [(ngModel)]="selectedStatus"
+          class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer">
+          <option value="" class="text-slate-500">All Statuses</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Pending">Pending</option>
+          <option value="Cancelled">Cancelled</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Error Feedback Message Banner -->
+  @if (errorMessage) {
+    <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center justify-between">
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  <!-- 4. DATA TABLE SECTION (RESPONSIVE SCROLL) -->
+  <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden">
+    <div class="overflow-x-auto w-full">
+      <table class="w-full text-left border-collapse whitespace-nowrap sm:whitespace-normal">
+        
+        <!-- Table Header -->
+        <thead>
+          <tr class="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+            <th class="py-3 px-4">PNR & Date</th>
+            <th class="py-3 px-4">Passenger Info</th>
+            <th class="py-3 px-4">Route & Bus</th>
+            <th class="py-3 px-4">Seats</th>
+            <th class="py-3 px-4">Total Fare</th>
+            <th class="py-3 px-4">Status</th>
+            <th class="py-3 px-4 text-right">Actions</th>
+          </tr>
+        </thead>
+        
+        <!-- Table Body -->
+        <tbody class="divide-y divide-slate-100 text-xs">
+          
+          <!-- Loading State Row -->
+          @if (isLoading) {
+            <tr>
+              <td colspan="7" class="py-12 text-center text-slate-500 text-xs">
+                <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent mx-auto mb-2"></div>
+                Loading bookings...
+              </td>
+            </tr>
+          } 
+          <!-- Empty State Row -->
+          @else if (filteredBookings.length === 0) {
+            <tr>
+              <td colspan="7" class="py-12 text-center text-slate-400 text-xs">
+                <span class="material-symbols-outlined text-3xl text-slate-300 block mb-1">folder_off</span>
+                No bookings found matching your search criteria.
+              </td>
+            </tr>
+          } 
+          <!-- Data Rows Loop -->
+          @else {
+            @for (booking of filteredBookings; track booking.id) {
+              <tr class="hover:bg-slate-50/80 transition">
+                
+                <!-- PNR & Booking Date -->
+                <td class="py-3 px-4">
+                  <div class="font-bold text-blue-600 font-mono text-xs">{{ booking.booking_number || booking.id }}</div>
+                  <div class="text-[11px] text-slate-500 mt-0.5">{{ booking.booking_date | date:'mediumDate' }}</div>
+                </td>
+                
+                <!-- Passenger Information -->
+                <td class="py-3 px-4">
+                  <div class="font-semibold text-slate-800">{{ booking.customerName || 'N/A' }}</div>
+                  <div class="text-[11px] text-slate-500 mt-0.5">{{ booking.customerPhone || 'N/A' }}</div>
+                </td>
+                
+                <!-- Route & Bus Number -->
+                <td class="py-3 px-4">
+                  <div class="font-medium text-slate-700">{{ booking.routeOrigin || 'Origin' }} ➔ {{ booking.routeDestination || 'Destination' }}</div>
+                  <div class="text-[11px] text-slate-500 mt-0.5">{{ booking.busNumber || 'Bus #' }}</div>
+                </td>
+                
+                <!-- Seat Numbers Tag -->
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200/60 font-mono">
+                    {{ booking.seat_numbers ? booking.seat_numbers.join(', ') : 'N/A' }}
+                  </span>
+                </td>
+                
+                <!-- Total Fare Amount -->
+                <td class="py-3 px-4">
+                  <span class="font-semibold text-slate-900">PKR {{ booking.totalAmount | number }}</span>
+                </td>
+                
+                <!-- Booking Status Badge -->
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border" [ngClass]="{
+                    'bg-emerald-50 text-emerald-700 border-emerald-200/60': booking.bookingStatus === 'Confirmed',
+                    'bg-rose-50 text-rose-700 border-rose-200/60': booking.bookingStatus === 'Cancelled',
+                    'bg-blue-50 text-blue-700 border-blue-200/60': booking.bookingStatus === 'Completed',
+                    'bg-amber-50 text-amber-700 border-amber-200/60': booking.bookingStatus === 'Pending'
+                  }">
+                    <span class="w-1.5 h-1.5 rounded-full" [ngClass]="{
+                      'bg-emerald-500': booking.bookingStatus === 'Confirmed',
+                      'bg-rose-500': booking.bookingStatus === 'Cancelled',
+                      'bg-blue-500': booking.bookingStatus === 'Completed',
+                      'bg-amber-500': booking.bookingStatus === 'Pending'
+                    }"></span> 
+                    {{ booking.bookingStatus }}
+                  </span>
+                </td>
+                
+                <!-- Actions Column -->
+                <td class="py-3 px-4 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    
+                    <!-- Secure Payment Gateway Button -->
+                    <button (click)="navigateToCheckout(booking.id, booking.totalAmount)" class="p-1.5 text-slate-500 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition cursor-pointer" title="Pay Securely">
+                      <span class="material-symbols-outlined text-base">credit_card</span>
+                    </button>
+                    
+                    <!-- View Ticket / Receipt Invoice -->
+                    <a [routerLink]="['/bookings/view', booking.id]" class="p-1.5 text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-slate-100 transition cursor-pointer" title="Print Ticket / View Invoice">
+                      <span class="material-symbols-outlined text-base">receipt_long</span>
+                    </a>
+                    
+                    <!-- Edit Booking Record -->
+                    <a [routerLink]="['/bookings/edit', booking.id]" class="p-1.5 text-slate-500 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition cursor-pointer" title="Edit Booking">
+                      <span class="material-symbols-outlined text-base">edit</span>
+                    </a>
+                    
+                    <!-- Cancel Booking Status Button -->
+                    <button (click)="cancelBooking(booking.id)" class="p-1.5 text-slate-500 hover:text-rose-600 rounded-lg hover:bg-slate-100 transition cursor-pointer" title="Cancel Booking">
+                      <span class="material-symbols-outlined text-base">cancel</span>
+                    </button>
+                    
+                    <!-- Delete Booking Record Button -->
+                    <button (click)="deleteBooking(booking.id)" class="p-1.5 text-slate-500 hover:text-rose-700 rounded-lg hover:bg-slate-100 transition cursor-pointer" title="Delete Record">
+                      <span class="material-symbols-outlined text-base">delete</span>
+                    </button>
+                  
+                  </div>
+                </td>
+
+              </tr>
+            }
+          }
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,35 @@
+=================================================
+
+PHASE 5 – STEP 8
+
+EMAIL REQUIRED VALIDATION
+
+=================================================
+
+Purpose
+
+Validate email field.
+
+=================================================
+
+Validation Rules
+
+1. Email is Required
+
+2. Remove Extra Spaces
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

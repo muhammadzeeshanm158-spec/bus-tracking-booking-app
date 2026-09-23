@@ -1,0 +1,27 @@
+=================================
+
+PHASE 09
+
+STEP 07
+
+Create Get All Users Service
+
+=================================
+
+Service Responsibility
+
+✓ Business Logic
+
+✓ Call Repository
+
+✓ Return Response
+
+---------------------------------
+
+Service should NOT
+
+✗ Write SQL Queries
+
+✗ Handle HTTP Response
+
+=================================

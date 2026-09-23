@@ -1,0 +1,35 @@
+=================================================
+
+PHASE 5 – STEP 16
+
+GENDER REQUIRED VALIDATION
+
+=================================================
+
+Purpose
+
+Validate Gender Field
+
+=================================================
+
+Validation Rules
+
+1. Gender is Required
+
+2. Remove Extra Spaces
+
+=================================================
+
+If Validation Fails
+
+Return
+
+400 Bad Request
+
+=================================================
+
+If Validation Passes
+
+Continue to Next Validation
+
+=================================================

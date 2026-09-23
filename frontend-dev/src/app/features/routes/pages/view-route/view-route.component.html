@@ -1,0 +1,207 @@
+<!-- ========================================================================= -->
+<!-- VIEW ROUTE COMPONENT TEMPLATE                                             -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. PAGE HEADER -->
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Routes Management</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        View Route
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Detailed view of route mapping and stop specifications.
+      </p>
+    </div>
+
+    <!-- Back Button -->
+    <button
+      type="button"
+      routerLink="/routes"
+      class="flex items-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs shadow-xs"
+    >
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      <span>Back to Routes</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="py-12 text-center bg-white rounded-xl border border-slate-200/80 shadow-xs flex flex-col items-center justify-center gap-2">
+      <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
+      <p class="text-slate-500 font-medium text-xs">Loading route details...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (errorMessage) {
+    <div class="p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-xl text-xs flex items-center gap-2">
+      <span class="material-symbols-outlined text-base">error</span>
+      <p class="font-medium">{{ errorMessage }}</p>
+    </div>
+  }
+
+  <!-- 2. INFORMATION CARD -->
+  @if (!isLoading && routeData) {
+    <div class="rounded-xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+
+      <!-- Card Header Banner -->
+      <div class="mb-5 flex items-center gap-3 border-b border-slate-100 pb-4">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+          <span class="material-symbols-outlined text-xl">visibility</span>
+        </div>
+        <div>
+          <h2 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Route Information</h2>
+          <p class="text-[10px] text-slate-400 mt-0.5">
+            Complete path breakdown and operational status.
+          </p>
+        </div>
+      </div>
+
+      <!-- Details Grid -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+
+        <!-- Route Code Badge -->
+        <div>
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Route Code / ID
+          </div>
+          <div>
+            <span class="inline-flex py-0.5 px-2 rounded-md bg-blue-50 text-blue-700 font-bold font-mono text-[11px] border border-blue-100">
+              {{ getRouteId() }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Status Badge -->
+        <div>
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Status
+          </div>
+          <div>
+            <span 
+              class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-semibold border"
+              [ngClass]="{
+                'bg-emerald-50 text-emerald-700 border-emerald-200': routeData.status === 'Active',
+                'bg-rose-50 text-rose-700 border-rose-200': routeData.status === 'Inactive'
+              }"
+            >
+              <span 
+                class="h-1.5 w-1.5 rounded-full"
+                [ngClass]="{
+                  'bg-emerald-500': routeData.status === 'Active',
+                  'bg-rose-500': routeData.status === 'Inactive'
+                }"
+              ></span> 
+              {{ routeData.status }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Source / Origin City -->
+      <!-- Source / Origin City -->
+<div>
+  <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+    Source / Origin
+  </div>
+  <div class="rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2 text-xs font-semibold text-slate-800 flex items-center gap-2">
+    <span class="text-slate-400">📍</span>
+    <span>{{ routeData.origin || ('City ID: ' + routeData.sourceCityId) }}</span>
+  </div>
+</div>
+        <!-- Destination City -->
+      <!-- Destination City -->
+<div>
+  <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+    Destination
+  </div>
+  <div class="rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2 text-xs font-semibold text-slate-800 flex items-center gap-2">
+    <span class="text-slate-400">🏁</span>
+    <span>{{ routeData.destination || ('City ID: ' + routeData.destinationCityId) }}</span>
+  </div>
+</div>
+        <!-- Total Distance in KM -->
+        <div>
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Total Distance
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2 text-xs font-semibold text-slate-800 font-mono flex items-center gap-2">
+            <span class="text-slate-400">🛣️</span>
+            <span>{{ routeData.distanceKm }} KM</span>
+          </div>
+        </div>
+
+        <!-- Estimated Duration Time -->
+        <div>
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Estimated Duration
+          </div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-2 text-xs font-semibold text-slate-800 flex items-center gap-2">
+            <span class="text-slate-400">⏱️</span>
+            <span>{{ routeData.estimatedHours }}</span>
+          </div>
+        </div>
+
+        <!-- Base Fare Price -->
+        <div class="md:col-span-2">
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Base Fare Price
+          </div>
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50/30 px-3.5 py-2 text-xs font-bold text-emerald-700 flex items-center gap-2">
+            <span>💰</span>
+            <span>Rs. {{ routeData.farePrice }}</span>
+          </div>
+        </div>
+
+        <!-- Intermediate Stops -->
+        <div class="md:col-span-2">
+          <div class="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            Intermediate Stops (Via)
+          </div>
+          <div class="flex items-start gap-2.5 rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-xs text-slate-800">
+            <span class="material-symbols-outlined shrink-0 text-base text-blue-600 mt-0.5">place</span>
+            <div class="flex flex-wrap items-center gap-1.5 leading-relaxed font-semibold text-slate-700">
+              @for (stop of routeData.stops; track stop; let last = $last) {
+                <span>{{ stop }}</span>
+                @if (!last) {
+                  <span class="text-slate-400">&rarr;</span>
+                }
+              } @empty {
+                <span class="text-slate-400 font-normal">No intermediate stops.</span>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Card Action Footer -->
+      <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-between border-t border-slate-100 pt-4">
+        
+        <!-- Edit Route Button (Using getRouteId() safely) -->
+        <a
+          [routerLink]="['/routes/edit', getRouteId()]"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-emerald-600 px-4 py-2 font-medium text-white shadow-xs transition-all duration-200 hover:bg-emerald-700 active:scale-95 text-xs text-decoration-none"
+        >
+          <span class="material-symbols-outlined text-base">edit</span>
+          <span>Edit Route</span>
+        </a>
+
+        <!-- Back to Route List Button -->
+        <button
+          type="button"
+          routerLink="/routes"
+          class="inline-flex items-center justify-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-4 py-2 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs shadow-xs"
+        >
+          <span class="material-symbols-outlined text-base">arrow_back</span>
+          <span>Back to Route List</span>
+        </button>
+      </div>
+
+    </div>
+  }
+
+</div>

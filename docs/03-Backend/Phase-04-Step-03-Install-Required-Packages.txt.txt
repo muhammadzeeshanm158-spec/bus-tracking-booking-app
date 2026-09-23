@@ -1,0 +1,85 @@
+=================================================
+PHASE 4 – STEP 3
+
+INSTALL REQUIRED PACKAGES
+
+=================================================
+
+What are Packages?
+
+Packages are reusable libraries that provide additional functionality.
+
+Instead of writing everything from scratch,
+developers install packages.
+
+Example:
+
+Express → Web Server
+
+MySQL2 → Database Connection
+
+dotenv → Read .env file
+
+bcrypt → Password Hashing
+
+jsonwebtoken → Authentication
+
+cors → Cross-Origin Resource Sharing
+
+nodemon → Auto Restart Server
+
+ESLint → Code Quality
+
+=================================================
+
+Package Types
+
+1. Dependencies
+
+These packages are required to run the application.
+
+Examples
+
+Express
+MySQL2
+bcrypt
+jsonwebtoken
+cors
+dotenv
+
+-------------------------------------------------
+
+2. DevDependencies
+
+These packages are only used during development.
+
+Examples
+
+nodemon
+eslint
+
+=================================================
+
+Installing Packages
+
+npm install package-name
+
+Installing Multiple Packages
+
+npm install package1 package2 package3
+
+Installing Development Packages
+
+npm install --save-dev package-name
+
+=================================================
+
+Software House Rule
+
+Only install packages that the project really needs.
+
+Always keep package versions updated.
+
+Remove unused packages.
+
+=================================================

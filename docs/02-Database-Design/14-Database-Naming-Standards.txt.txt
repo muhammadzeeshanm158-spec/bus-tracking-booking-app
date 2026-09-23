@@ -1,0 +1,145 @@
+=========================================
+DATABASE NAMING STANDARDS
+=========================================
+
+1. What are Database Naming Standards?
+
+Database Naming Standards are a set of rules used to keep database objects consistent, readable, and easy to maintain.
+
+-----------------------------------------
+2. Table Naming Rules
+-----------------------------------------
+
+- Use lowercase letters.
+- Use plural table names.
+- Use snake_case.
+- Use meaningful names.
+
+Correct:
+
+users
+roles
+buses
+bookings
+payments
+
+Wrong:
+
+User
+tblUsers
+USERDATA
+BusTable
+
+-----------------------------------------
+3. Column Naming Rules
+-----------------------------------------
+
+- Use lowercase.
+- Use snake_case.
+- Use meaningful names.
+
+Correct:
+
+full_name
+phone_number
+created_at
+updated_at
+
+Wrong:
+
+FullName
+phoneNo
+Date1
+abc
+
+-----------------------------------------
+4. Primary Key Naming
+-----------------------------------------
+
+Use:
+
+id
+
+Example:
+
+users.id
+buses.id
+bookings.id
+
+-----------------------------------------
+5. Foreign Key Naming
+-----------------------------------------
+
+Use:
+
+parent_table_name_id
+
+Examples:
+
+role_id
+user_id
+bus_id
+route_id
+booking_id
+seat_id
+
+-----------------------------------------
+6. Timestamp Columns
+-----------------------------------------
+
+Use:
+
+created_at
+updated_at
+
+Optional:
+
+deleted_at (for soft delete)
+
+-----------------------------------------
+7. Boolean Columns
+-----------------------------------------
+
+Use clear names:
+
+is_active
+is_verified
+is_available
+
+-----------------------------------------
+8. Status Columns
+-----------------------------------------
+
+Use meaningful names:
+
+status
+booking_status
+payment_status
+
+-----------------------------------------
+9. Index & Constraint Naming
+-----------------------------------------
+
+Examples:
+
+pk_users
+fk_bookings_user
+uq_users_email
+idx_bus_number
+
+-----------------------------------------
+10. Best Practices
+-----------------------------------------
+
+- Use consistent naming.
+- Avoid spaces.
+- Avoid special characters.
+- Avoid reserved SQL keywords.
+- Keep names short and meaningful.
+- Follow one naming style throughout the project.
+
+-----------------------------------------
+11. Conclusion
+-----------------------------------------
+
+Good naming standards make the database easy to understand, maintain, and scale.

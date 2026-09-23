@@ -1,0 +1,164 @@
+<!-- ========================================================================= -->
+<!-- MULTI-ROLE DASHBOARD COMPONENT TEMPLATE                                   -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-7xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. HEADER SECTION (Dynamic based on role) -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600 capitalize">{{ currentUserRole }} Portal</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        {{ currentUserRole === 'admin' ? 'Admin Accounting & Management Dashboard' : currentUserRole === 'driver' ? 'Driver Duty Dashboard' : 'My Dashboard' }}
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Welcome back, {{ currentUserName }}! Here is your overview summary.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. STATS GRID -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    @for (item of stats; track item.title) {
+      <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{{ item.title }}</p>
+          <h3 class="text-lg font-bold text-slate-900 mt-0.5">{{ item.count }}</h3>
+        </div>
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center text-lg shrink-0 shadow-xs text-white" [ngClass]="item.bg">
+          <span>{{ item.icon }}</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- 3. ROLE-SPECIFIC CONTENT SECTIONS -->
+
+  <!-- A. CUSTOMER VIEW: Recent Bookings -->
+  @if (currentUserRole === 'customer') {
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div class="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <h2 class="text-xs font-bold text-slate-800 uppercase tracking-wider">My Recent Bookings</h2>
+        <a routerLink="/bookings" class="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">View All</a>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+              <th class="py-3 px-4">Booking ID</th>
+              <th class="py-3 px-3">Passenger</th>
+              <th class="py-3 px-3">Route</th>
+              <th class="py-3 px-3">Date</th>
+              <th class="py-3 px-3">Amount</th>
+              <th class="py-3 px-4 text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs">
+            @if (recentBookings.length === 0) {
+              <tr>
+                <td colspan="6" class="py-12 text-center text-slate-400 text-xs">You have no recent bookings yet.</td>
+              </tr>
+            } @else {
+              @for (b of recentBookings; track b.id) {
+                <tr class="hover:bg-slate-50/85 transition-colors duration-150">
+                  <td class="py-3 px-4 font-mono font-bold text-slate-800 text-[11px]">#{{ b.id }}</td>
+                  <td class="py-3 px-3 font-medium text-slate-700">{{ b.customerName || currentUserName }}</td>
+                  <td class="py-3 px-3 text-slate-700">{{ b.routeOrigin || 'Origin' }} → {{ b.routeDestination || 'Destination' }}</td>
+                  <td class="py-3 px-3 text-slate-500 text-[11px]">{{ (b.travelDate || b.travel_date) | date:'mediumDate' }}</td>
+                  <td class="py-3 px-3 font-semibold text-slate-900">PKR {{ b.totalAmount | number }}</td>
+                  <td class="py-3 px-4 text-right">
+                    <span [ngClass]="{
+                      'bg-emerald-50 text-emerald-700 border-emerald-200': b.bookingStatus === 'Confirmed' || b.bookingStatus === 'Completed',
+                      'bg-amber-50 text-amber-700 border-amber-200': b.bookingStatus === 'Pending',
+                      'bg-rose-50 text-rose-700 border-rose-200': b.bookingStatus === 'Cancelled'
+                    }" class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border">
+                      {{ b.bookingStatus }}
+                    </span>
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+
+  <!-- B. DRIVER VIEW: Assigned Duties & Quick Tracking -->
+  @if (currentUserRole === 'driver') {
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-xs overflow-hidden p-5 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h2 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Assigned Schedules & Live Tracking</h2>
+          <p class="text-[11px] text-slate-500 mt-0.5">Here are your assigned duties for today. You can track your trips directly.</p>
+        </div>
+        <a routerLink="/schedules" class="text-xs font-semibold text-blue-600 hover:text-blue-700">View All Schedules</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        @if (assignedSchedules.length === 0) {
+          <p class="text-xs text-slate-400 py-6">No active schedules assigned to you currently.</p>
+        } @else {
+          @for (s of assignedSchedules; track s.id) {
+            <div class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3 bg-slate-50/40">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-blue-600">Bus: {{ s.busNumber }}</span>
+                <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">{{ s.status }}</span>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Route: {{ s.routeName }}</p>
+                <p class="text-[11px] text-slate-500 mt-1">Departure: {{ s.departureTime }} | Date: {{ s.departureDate }}</p>
+              </div>
+              <div class="pt-2 flex items-center gap-2">
+                <a routerLink="/tracking" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs py-2 rounded-lg transition-colors">
+                  Open Live Tracking
+                </a>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  }
+
+  <!-- C. ADMIN VIEW: Accounting & Management Shortcuts -->
+  @if (currentUserRole === 'admin') {
+    <div class="space-y-4">
+      <!-- Financial Highlight Banner -->
+      <div class="bg-linear-to-r from-slate-900 to-slate-800 text-white p-5 rounded-xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">Accounting Module Active</span>
+          <h2 class="text-sm font-bold mt-2">Bus Operations & Revenue Summary</h2>
+          <p class="text-xs text-slate-300 mt-0.5">Track real-time system revenue, ticket bookings, and fleet logistics from a single panel.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a routerLink="/reports" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors shadow-xs">
+            View Financial Reports
+          </a>
+        </div>
+      </div>
+
+      <!-- Management Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-2">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Schedule Management</h3>
+          <p class="text-xs text-slate-500">Create, edit, or assign bus schedules and monitor drivers.</p>
+          <a routerLink="/schedules" class="inline-block text-xs font-semibold text-blue-600 hover:text-blue-700 pt-1">Manage Schedules →</a>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-2">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Fleet & Tracking</h3>
+          <p class="text-xs text-slate-500">Monitor live GPS tracking of active buses across all routes.</p>
+          <a routerLink="/tracking" class="inline-block text-xs font-semibold text-blue-600 hover:text-blue-700 pt-1">Open Live Map →</a>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-2">
+          <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Bookings & Accounts</h3>
+          <p class="text-xs text-slate-500">View passenger bookings, total collected revenue, and ticket statuses.</p>
+          <a routerLink="/bookings" class="inline-block text-xs font-semibold text-blue-600 hover:text-blue-700 pt-1">View Bookings & Revenue →</a>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

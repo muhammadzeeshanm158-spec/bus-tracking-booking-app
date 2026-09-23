@@ -1,0 +1,56 @@
+=================================================
+
+PHASE 6
+
+STEP 25
+
+UPDATE ERROR MIDDLEWARE
+
+=================================================
+
+Objective
+
+Handle ApiError from one central place.
+
+=================================================
+
+Current
+
+Errors are thrown from the Service Layer.
+
+=================================================
+
+Target
+
+Error Middleware should detect:
+
+✓ ApiError
+
+✓ Validation Errors
+
+✓ Database Errors
+
+✓ Unknown Errors
+
+=================================================
+
+Benefits
+
+✓ Centralized error handling
+
+✓ Clean Service Layer
+
+✓ Consistent API responses
+
+✓ Easy maintenance
+
+=================================================
+
+Learning
+
+Middleware should be responsible for
+sending error responses.
+
+Services should only throw errors.
+
+=================================================

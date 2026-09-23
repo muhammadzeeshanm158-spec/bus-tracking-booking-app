@@ -1,0 +1,67 @@
+=========================================
+PROJECT INTRODUCTION
+=========================================
+
+Project Name:
+Bus Tracking & Booking System
+
+-----------------------------------------
+1. What is this project?
+-----------------------------------------
+
+Bus Tracking & Booking System is a web application that allows customers to search buses, book seats, make online bookings, and track buses in real time. It also provides separate dashboards for customers, drivers, and administrators.
+
+-----------------------------------------
+2. Project Objective
+-----------------------------------------
+
+The main objective of this project is to make the bus booking process easy, fast, secure, and user-friendly. It also helps bus companies manage buses, drivers, routes, schedules, and bookings from a single system.
+
+-----------------------------------------
+3. Project Goals
+-----------------------------------------
+
+• Allow customers to register and log in.
+• Search buses by source and destination.
+• View available buses and schedules.
+• Select seats and book tickets.
+• View booking history.
+• Track the live location of buses.
+• Allow drivers to manage trips.
+• Allow administrators to manage the complete system.
+
+-----------------------------------------
+4. Users of the System
+-----------------------------------------
+
+1. Customer
+2. Driver
+3. Admin
+
+-----------------------------------------
+5. Technologies Used
+-----------------------------------------
+
+Frontend:
+- Angular 19
+- Bootstrap 5
+
+Backend:
+- Node.js
+- Express.js
+
+Database:
+- MySQL
+
+Authentication:
+- JWT
+- bcrypt
+
+Version Control:
+- Git & GitHub
+
+-----------------------------------------
+6. Expected Outcome
+-----------------------------------------
+
+After completing this project, we will have a professional full-stack web application that follows industry standards and can be added to a portfolio, resume, and GitHub.

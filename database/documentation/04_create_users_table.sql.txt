@@ -1,0 +1,51 @@
+=========================================
+USERS TABLE
+=========================================
+
+1. What is Users Table?
+
+The users table stores all registered users of the system.
+
+-----------------------------------------
+
+2. User Types
+
+Admin
+
+Customer
+
+Driver
+
+-----------------------------------------
+
+3. Why do we need Users Table?
+
+- User Registration
+- User Login
+- User Profile
+- Authentication
+- Authorization
+
+-----------------------------------------
+
+4. Columns
+
+id
+role_id
+full_name
+email
+phone_number
+password
+gender
+is_active
+created_at
+updated_at
+
+-----------------------------------------
+
+5. Best Practice
+
+- Email must be unique.
+- Phone number must be unique.
+- Store only hashed passwords.
+- Use Foreign Key for role_id.

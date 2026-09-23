@@ -1,0 +1,51 @@
+=================================================
+
+PHASE 5 – STEP 22
+
+REPOSITORY LAYER CREATION
+
+=================================================
+
+Purpose
+
+Create Repository Layer
+
+=================================================
+
+Repository Responsibilities
+
+1. Insert Data into Database
+
+2. Fetch Data from Database
+
+3. Update Existing Data
+
+4. Delete Data
+
+=================================================
+
+Architecture
+
+Client
+   ↓
+Route
+   ↓
+Validation
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+MySQL Database
+
+=================================================
+
+Current Goal
+
+Create Repository Layer Structure
+
+No SQL Query Yet
+
+=================================================

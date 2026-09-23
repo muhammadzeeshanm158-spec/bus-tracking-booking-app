@@ -1,0 +1,84 @@
+=================================================
+PHASE 4 – STEP 7
+
+API VERSIONING & ROUTE STRUCTURE
+
+=================================================
+
+What is an API?
+
+API (Application Programming Interface) is a bridge
+between Frontend and Backend.
+
+Frontend sends Request.
+
+Backend processes Request.
+
+Backend sends Response.
+
+-------------------------------------------------
+
+Example
+
+Angular
+
+↓
+
+API Request
+
+↓
+
+Express Backend
+
+↓
+
+MySQL Database
+
+↓
+
+API Response
+
+-------------------------------------------------
+
+What is API Versioning?
+
+API Versioning means managing different versions
+of an API.
+
+Example
+
+/api/v1
+
+/api/v2
+
+-------------------------------------------------
+
+Why use API Versioning?
+
+1. Easy Maintenance
+
+2. Backward Compatibility
+
+3. Safe Updates
+
+4. Professional Architecture
+
+-------------------------------------------------
+
+Software House Rule
+
+Never create routes directly.
+
+Always group routes by version.
+
+Example
+
+/api/v1/users
+
+/api/v1/auth
+
+/api/v1/buses
+
+/api/v1/bookings
+
+=================================================

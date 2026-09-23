@@ -1,0 +1,206 @@
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- 1. HEADER SECTION -->
+  <div class="flex items-center justify-between">
+    <div>
+      <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+        <span class="text-blue-600">Routes Management</span>
+      </div>
+      <h1 class="text-lg font-bold text-slate-900 tracking-tight">
+        Edit Route
+      </h1>
+      <p class="mt-0.5 text-xs text-slate-500">
+        Update route details, cities, distance and fare specifications.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      routerLink="/routes"
+      class="flex items-center gap-1.5 cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs shadow-xs"
+    >
+      <span class="material-symbols-outlined text-base">arrow_back</span>
+      <span>Back to Routes</span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  @if (isFetching) {
+    <div class="py-12 text-center bg-white rounded-xl border border-slate-200/80 shadow-xs flex flex-col items-center justify-center gap-2">
+      <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
+      <p class="text-slate-500 font-medium text-xs">Loading route details...</p>
+    </div>
+  }
+
+  <!-- Error Banner -->
+  @if (errorMessage) {
+    <div class="p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-xl text-xs flex items-center gap-2">
+      <span class="material-symbols-outlined text-base">error</span>
+      <p class="font-medium">{{ errorMessage }}</p>
+    </div>
+  }
+
+  <!-- 2. FORM CARD CONTAINER -->
+  @if (!isFetching) {
+    <div class="rounded-xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+    
+      <div class="mb-5 flex items-center gap-3 border-b border-slate-100 pb-4">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+          <span class="material-symbols-outlined text-xl">edit_note</span>
+        </div>
+        <div>
+          <h2 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Edit Route Information</h2>
+          <p class="text-[10px] text-slate-400 mt-0.5">
+            Modify route configuration for selected bus service.
+          </p>
+        </div>
+      </div>
+
+      <form [formGroup]="routeForm" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          
+          <!-- Route Name / Code Field -->
+          <div>
+            <label for="routeName" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Route Code / Name
+            </label>
+            <input
+              id="routeName"
+              type="text"
+              formControlName="routeName"
+              placeholder="e.g. RT-106 (KHI-LHR)"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Status Dropdown -->
+          <div>
+            <label for="status" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Status
+            </label>
+            <select
+              id="status"
+              formControlName="status"
+              class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30"
+            >
+              <option value="" disabled selected class="text-slate-400">Choose Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <!-- Source City ID Input Field -->
+          <div>
+            <label for="sourceCityId" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Source City ID
+            </label>
+            <input
+              id="sourceCityId"
+              type="number"
+              formControlName="sourceCityId"
+              placeholder="e.g. 1"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Destination City ID Input Field -->
+          <div>
+            <label for="destinationCityId" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Destination City ID
+            </label>
+            <input
+              id="destinationCityId"
+              type="number"
+              formControlName="destinationCityId"
+              placeholder="e.g. 2"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Total Distance (KM) -->
+          <div>
+            <label for="distanceKm" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Total Distance (KM)
+            </label>
+            <input
+              id="distanceKm"
+              type="number"
+              formControlName="distanceKm"
+              placeholder="e.g. 1210"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Estimated Duration -->
+          <div>
+            <label for="estimatedHours" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Estimated Time
+            </label>
+            <input
+              id="estimatedHours"
+              type="text"
+              formControlName="estimatedHours"
+              placeholder="e.g. 16.5 hours"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Fare Price -->
+          <div>
+            <label for="farePrice" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Base Fare Price
+            </label>
+            <input
+              id="farePrice"
+              type="number"
+              formControlName="farePrice"
+              placeholder="e.g. 2500"
+              class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            />
+          </div>
+
+          <!-- Intermediate Stops -->
+          <div class="md:col-span-2">
+            <label for="stops" class="mb-1.5 block text-xs font-semibold text-slate-700">
+              Intermediate Stops (Via Cities - Comma Separated)
+            </label>
+            <textarea
+              id="stops"
+              rows="3"
+              formControlName="stops"
+              placeholder="Hyderabad, Moro, Sukkur..."
+              class="w-full resize-none rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Footer Action Buttons -->
+        <div class="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-end pt-4 border-t border-slate-100">
+          <button
+            type="button"
+            routerLink="/routes"
+            class="cursor-pointer rounded-xl border border-slate-200 px-4 py-2 font-medium text-slate-700 transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs"
+          >
+            Cancel
+          </button>
+
+          <!-- Fixed type="submit" here -->
+          <button
+            type="submit"
+            [disabled]="isLoading"
+            class="flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-4 py-2 font-medium text-white shadow-xs transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:bg-blue-300 text-xs"
+          >
+            @if (isLoading) {
+              <div class="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+              <span>Updating...</span>
+            } @else {
+              <span class="material-symbols-outlined text-base">save</span>
+              <span>Update Route</span>
+            }
+          </button>
+        </div>
+      </form>
+
+    </div>
+  }
+</div>

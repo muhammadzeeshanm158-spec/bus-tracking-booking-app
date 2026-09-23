@@ -1,0 +1,83 @@
+=========================================
+MANY-TO-MANY (M:N) RELATIONSHIP
+=========================================
+
+1. What is a Many-to-Many Relationship?
+
+A Many-to-Many (M:N) Relationship means one record in Table A can be related to many records in Table B, and one record in Table B can also be related to many records in Table A.
+
+-----------------------------------------
+2. Why Can't We Create It Directly?
+-----------------------------------------
+
+Relational databases do not create Many-to-Many relationships directly.
+
+A Junction Table (Bridge Table) is required.
+
+-----------------------------------------
+3. What is a Junction Table?
+
+A Junction Table is an intermediate table that connects two tables using Foreign Keys.
+
+-----------------------------------------
+4. Real-Life Example
+-----------------------------------------
+
+Students
+
+↓
+
+Courses
+
+One Student can enroll in many Courses.
+
+One Course can have many Students.
+
+Junction Table:
+
+Student_Courses
+
+-----------------------------------------
+5. Project Example
+-----------------------------------------
+
+Bookings
+
+↓
+
+Booking Details
+
+↓
+
+Seats
+
+One Booking can contain many Seats.
+
+One Seat can appear in many Bookings over time (different schedules).
+
+Booking Details acts as the Junction Table.
+
+-----------------------------------------
+6. Foreign Keys in Junction Table
+-----------------------------------------
+
+booking_details.booking_id
+→ references bookings.id
+
+booking_details.seat_id
+→ references seats.id
+
+-----------------------------------------
+7. Advantages
+-----------------------------------------
+
+- Supports complex relationships.
+- Eliminates duplicate data.
+- Keeps database normalized.
+- Improves scalability.
+
+-----------------------------------------
+8. Conclusion
+-----------------------------------------
+
+Many-to-Many relationships are implemented using Junction Tables instead of direct connections.

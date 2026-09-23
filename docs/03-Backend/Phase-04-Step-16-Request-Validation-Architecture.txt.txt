@@ -1,0 +1,64 @@
+=================================================
+PHASE 4 – STEP 16
+
+REQUEST VALIDATION ARCHITECTURE
+
+=================================================
+
+What is Request Validation?
+
+Request Validation means checking incoming
+client data before processing it.
+
+-------------------------------------------------
+
+Examples
+
+Register API
+
+Name Required
+
+Email Required
+
+Password Required
+
+-------------------------------------------------
+
+Login API
+
+Email Required
+
+Password Required
+
+-------------------------------------------------
+
+Bus API
+
+Bus Name Required
+
+Bus Number Required
+
+Seats Required
+
+-------------------------------------------------
+
+Why Validation?
+
+1. Prevent Invalid Data
+
+2. Improve Security
+
+3. Clean Database
+
+4. Better Error Messages
+
+-------------------------------------------------
+
+Software House Rule
+
+Never trust client data.
+
+Always validate request before
+business logic.
+
+=================================================

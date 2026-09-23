@@ -1,0 +1,91 @@
+=========================================
+CREATE DATABASE
+=========================================
+
+1. What is a Database?
+
+A database is a collection of related data stored in an organized way.
+
+-----------------------------------------
+
+2. Database Name
+
+bus_tracking_booking_db
+
+-----------------------------------------
+
+3. SQL Commands
+
+CREATE DATABASE
+
+SHOW DATABASES
+
+USE
+
+-----------------------------------------
+
+4. Purpose
+
+- Create a new database.
+- Verify database creation.
+- Select the database for further work.
+
+-----------------------------------------
+
+5. Best Practice
+
+Always use lowercase names with underscores.
+
+Example:
+
+bus_tracking_booking_db  
+
+
+=========================================
+DATABASE CHARACTER SET & COLLATION
+=========================================
+
+1. What is Character Set?
+
+A Character Set defines which characters can be stored in the database.
+
+Example:
+
+English
+Urdu
+Arabic
+Chinese
+Emoji 😊
+
+-----------------------------------------
+
+2. What is Collation?
+
+Collation defines how text is compared and sorted.
+
+-----------------------------------------
+
+3. Recommended Character Set
+
+utf8mb4
+
+-----------------------------------------
+
+4. Recommended Collation
+
+utf8mb4_unicode_ci
+
+-----------------------------------------
+
+5. Benefits
+
+- Supports all languages.
+- Supports emoji.
+- Better compatibility.
+- Production-ready.
+
+-----------------------------------------
+
+6. Best Practice
+
+Always use utf8mb4 with utf8mb4_unicode_ci for modern applications.

@@ -1,0 +1,67 @@
+=================================================
+
+PHASE 6
+
+STEP 16
+
+CHECK DUPLICATE EMAIL & PHONE
+
+=================================================
+
+Objective
+
+Register API me duplicate email aur phone number ko
+database insert se pehle check karna.
+
+=================================================
+
+Why?
+
+Professional software houses kabhi bhi direct database
+duplicate error user ko show nahi karte.
+
+Pehle duplicate check hota hai.
+
+Agar duplicate mile to clean message return hota hai.
+
+=================================================
+
+Repository Function
+
+checkUserExistsRepository()
+
+=================================================
+
+SQL
+
+SELECT id, email, phone_number
+FROM users
+WHERE email = ?
+OR phone_number = ?
+LIMIT 1;
+
+=================================================
+
+Expected Output
+
+User Exists
+↓
+
+Return User Record
+
+User Not Exists
+↓
+
+Return Empty Array
+
+=================================================
+
+Learning
+
+✓ Business validation should happen before INSERT.
+
+✓ Database errors should not be exposed directly to users.
+
+✓ Repository only communicates with database.
+
+=================================================

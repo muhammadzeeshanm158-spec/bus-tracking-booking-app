@@ -1,0 +1,112 @@
+=================================================
+PHASE 4 – STEP 6
+
+MIDDLEWARE CONFIGURATION
+
+=================================================
+
+What is Middleware?
+
+Middleware is a function that runs between the Client Request
+and the Route Handler.
+
+It can:
+
+- Read Request
+- Modify Request
+- Validate Request
+- Authenticate User
+- Log Request
+- Handle Errors
+
+-------------------------------------------------
+
+Request Flow
+
+Client
+
+↓
+
+Middleware
+
+↓
+
+Route
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+↓
+
+Response
+
+-------------------------------------------------
+
+Types of Middleware
+
+1. Application Middleware
+
+Works for the whole application.
+
+Examples
+
+express.json()
+
+cors()
+
+-------------------------------------------------
+
+2. Route Middleware
+
+Works only for specific routes.
+
+Example
+
+Authentication Middleware
+
+-------------------------------------------------
+
+3. Error Middleware
+
+Handles application errors.
+
+-------------------------------------------------
+
+Common Middleware
+
+express.json()
+
+Converts JSON Request Body into JavaScript Object.
+
+-------------------------------------------------
+
+cors()
+
+Allows Frontend and Backend to communicate.
+
+-------------------------------------------------
+
+express.urlencoded()
+
+Reads Form Data.
+
+-------------------------------------------------
+
+Software House Rule
+
+Always register middleware before routes.
+
+=================================================

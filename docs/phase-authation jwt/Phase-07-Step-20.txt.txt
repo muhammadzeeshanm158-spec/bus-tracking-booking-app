@@ -1,0 +1,21 @@
+=================================================
+
+PHASE 7
+
+STEP 20
+
+LOGIN API TESTING
+
+=================================================
+
+Objectives
+
+✓ Test Login API
+
+✓ Verify Response
+
+✓ Verify JWT Token
+
+✓ Verify Error Responses
+
+=================================================

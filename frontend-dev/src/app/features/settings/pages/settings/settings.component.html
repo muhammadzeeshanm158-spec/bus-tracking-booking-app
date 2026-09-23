@@ -1,0 +1,259 @@
+<!-- ========================================================================= -->
+<!-- SYSTEM SETTINGS COMPONENT TEMPLATE                                         -->
+<!-- ========================================================================= -->
+<div class="p-4 max-w-5xl mx-auto space-y-4 bg-slate-50/50 min-h-screen">
+
+  <!-- Success / Error Feedback Alerts -->
+  @if (successMessage) {
+    <div class="p-3 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 rounded-xl shadow-xs text-xs font-semibold flex items-center justify-between">
+      <span>{{ successMessage }}</span>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="p-3 bg-rose-50 border-l-4 border-rose-500 text-rose-700 rounded-xl shadow-xs text-xs font-semibold flex items-center justify-between">
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="text-center py-12 bg-white rounded-xl shadow-xs border border-slate-200/80">
+      <div class="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent mx-auto mb-2"></div>
+      <p class="text-slate-500 font-medium text-xs">Loading system settings...</p>
+    </div>
+  } @else {
+
+    <!-- 1. HEADER SECTION -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">
+          <span class="text-blue-600">Configuration</span>
+        </div>
+        <h1 class="text-lg font-bold text-slate-900 tracking-tight">System Settings</h1>
+        <p class="mt-0.5 text-xs text-slate-500">Manage company profile, fleet operational rules, and preferences.</p>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-2">
+        <button 
+          type="button" 
+          (click)="fetchSettings()"
+          class="cursor-pointer rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 font-medium text-slate-700 shadow-xs transition-all duration-200 hover:bg-slate-50 active:scale-95 text-xs">
+          Cancel Changes
+        </button>
+        
+        <button 
+          type="button" 
+          (click)="onSaveSettings()"
+          [disabled]="isSaving"
+          class="flex items-center justify-center gap-1.5 cursor-pointer rounded-xl bg-blue-600 px-3.5 py-1.5 font-medium text-white shadow-xs transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:bg-blue-300 disabled:cursor-not-allowed text-xs">
+          @if (isSaving) {
+            <div class="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+            <span>Saving...</span>
+          } @else {
+            <span class="material-symbols-outlined text-base">save</span>
+            <span>Save Settings</span>
+          }
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. SETTINGS GRID LAYOUT -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+
+      <!-- Left Navigation Tabs -->
+      <div class="lg:col-span-1 space-y-1 bg-white p-2.5 rounded-xl border border-slate-200/80 shadow-xs h-fit">
+        <button type="button" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-blue-50/80 border border-blue-200/60 text-blue-700 font-bold text-xs transition-all duration-200 cursor-pointer">
+          <span class="material-symbols-outlined text-base text-blue-600">domain</span>
+          <span>Company Profile</span>
+        </button>
+        <button type="button" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-xs transition-all duration-200 cursor-pointer">
+          <span class="material-symbols-outlined text-base text-slate-400">directions_bus</span>
+          <span>Fleet Rules</span>
+        </button>
+        <button type="button" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-xs transition-all duration-200 cursor-pointer">
+          <span class="material-symbols-outlined text-base text-slate-400">notifications</span>
+          <span>Notifications</span>
+        </button>
+        <button type="button" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-xs transition-all duration-200 cursor-pointer">
+          <span class="material-symbols-outlined text-base text-slate-400">shield</span>
+          <span>Security & Auth</span>
+        </button>
+        <button type="button" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-xs transition-all duration-200 cursor-pointer">
+          <span class="material-symbols-outlined text-base text-slate-400">receipt_long</span>
+          <span>Billing & Invoice</span>
+        </button>
+      </div>
+
+      <!-- Right Settings Content Area -->
+      <div class="lg:col-span-3 space-y-4">
+
+        <!-- Section 1: Company Profile -->
+        <div class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs space-y-5">
+          <div class="border-b border-slate-100 pb-3 flex items-center gap-2.5">
+            <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+              <span class="material-symbols-outlined text-sm">domain</span>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Company Information</h3>
+              <p class="text-[10px] text-slate-400 mt-0.5">These details will appear on passenger ticket receipts and invoices.</p>
+            </div>
+          </div>
+
+          <!-- Logo Upload & Basic Info -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 font-bold relative group overflow-hidden shrink-0 shadow-2xs">
+              <span class="material-symbols-outlined text-2xl text-slate-400">directions_bus</span>
+              <div class="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-all duration-200 flex items-center justify-center cursor-pointer text-white">
+                <span class="material-symbols-outlined text-base">photo_camera</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <button type="button" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition-all duration-200 cursor-pointer">
+                Upload New Logo
+              </button>
+              <p class="text-[10px] font-medium text-slate-400">Allowed formats: PNG, JPG (Max 2MB)</p>
+            </div>
+          </div>
+
+          <!-- Form Inputs Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+            
+            <!-- Company Name -->
+            <div>
+              <label for="companyName" class="mb-1.5 block font-semibold text-slate-700 text-xs">
+                Company Name <span class="text-rose-500">*</span>
+              </label>
+              <input 
+                id="companyName"
+                name="companyName"
+                type="text" 
+                [(ngModel)]="settingsData.company_name"
+                class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30">
+            </div>
+
+            <!-- Support Email -->
+            <div>
+              <label for="supportEmail" class="mb-1.5 block font-semibold text-slate-700 text-xs">
+                Support Email <span class="text-rose-500">*</span>
+              </label>
+              <input 
+                id="supportEmail"
+                name="supportEmail"
+                type="email" 
+                [(ngModel)]="settingsData.support_email"
+                class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30 font-mono">
+            </div>
+
+            <!-- Helpline Contact -->
+            <div>
+              <label for="helplineContact" class="mb-1.5 block font-semibold text-slate-700 text-xs">
+                Helpline Contact <span class="text-rose-500">*</span>
+              </label>
+              <input 
+                id="helplineContact"
+                name="helplineContact"
+                type="text" 
+                [(ngModel)]="settingsData.contact_phone"
+                class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30 font-mono">
+            </div>
+
+            <!-- Default Currency -->
+            <div>
+              <label for="defaultCurrency" class="mb-1.5 block font-semibold text-slate-700 text-xs">
+                Default Currency <span class="text-rose-500">*</span>
+              </label>
+              <select 
+                id="defaultCurrency" 
+                name="defaultCurrency" 
+                [(ngModel)]="settingsData.currency"
+                class="w-full cursor-pointer rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/25 bg-slate-50/30">
+                <option value="PKR">PKR - Pakistani Rupee</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="AED">AED - UAE Dirham</option>
+              </select>
+            </div>
+
+            <!-- Head Office Address -->
+            <div class="sm:col-span-2">
+              <label for="headOfficeAddress" class="mb-1.5 block font-semibold text-slate-700 text-xs">
+                Head Office Address
+              </label>
+              <textarea 
+                id="headOfficeAddress"
+                name="headOfficeAddress"
+                rows="2" 
+                [(ngModel)]="settingsData.address"
+                class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-xs text-slate-800 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 bg-slate-50/30"></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Section 2: Fleet & Booking Rules -->
+        <div class="bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs space-y-4">
+          <div class="border-b border-slate-100 pb-3 flex items-center gap-2.5">
+            <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
+              <span class="material-symbols-outlined text-sm">tune</span>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Fleet Operations & Booking Preferences</h3>
+              <p class="text-[10px] text-slate-400 mt-0.5">Configure automatic seat hold times and operational thresholds.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            
+            <!-- Cancellation Limit Hours -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl border border-slate-200/70 bg-slate-50/30 gap-3">
+              <div class="space-y-0.5">
+                <span class="font-bold text-slate-800 text-xs block">Cancellation Limit Hours</span>
+                <p class="text-slate-500 text-[10px]">Hours before departure allowed for booking modifications.</p>
+              </div>
+              <input 
+                type="number"
+                name="cancellationLimit" 
+                [(ngModel)]="settingsData.cancellation_hours_limit"
+                class="w-24 px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-center font-bold text-slate-800 text-xs outline-none transition-all hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 font-mono">
+            </div>
+
+            <!-- Tax Percentage -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl border border-slate-200/70 bg-slate-50/30 gap-3">
+              <div class="space-y-0.5">
+                <span class="font-bold text-slate-800 text-xs block">Tax Percentage (%)</span>
+                <p class="text-slate-500 text-[10px]">Default tax percentage applied on ticket fare calculation.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <input 
+                  type="number" 
+                  name="taxPercentage"
+                  step="0.01" 
+                  [(ngModel)]="settingsData.tax_percentage"
+                  class="w-20 px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-center font-bold text-slate-800 text-xs outline-none transition-all hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 font-mono">
+                <span class="font-bold text-slate-500 text-xs">%</span>
+              </div>
+            </div>
+
+            <!-- Allow Online Booking Toggle -->
+            <div class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200/70 bg-slate-50/30 gap-3">
+              <div class="space-y-0.5">
+                <span class="font-bold text-slate-800 text-xs block">Allow Online Booking</span>
+                <p class="text-slate-500 text-[10px]">Enable or disable public seat booking from passengers portal.</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                <input type="checkbox" name="allowOnlineBooking" [(ngModel)]="settingsData.allow_online_booking" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
