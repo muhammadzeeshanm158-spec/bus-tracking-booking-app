@@ -96,30 +96,19 @@ export class EditRouteComponent implements OnInit {
 
     const formValues = this.routeForm.value;
 
+    // Stops ko string se array mein convert karna service ke mutabiq
     const stopsArray = formValues.stops
       ? formValues.stops.split(',').map((s: string) => s.trim()).filter((s: string) => s.length > 0)
       : [];
 
-    // estimatedHours se minutes calculate karna backend ke liye
-    let durationMinutes = 60; // default fallback
-    if (formValues.estimatedHours) {
-      const hoursNum = parseFloat(formValues.estimatedHours);
-      if (!isNaN(hoursNum)) {
-        durationMinutes = Math.round(hoursNum * 60);
-      }
-    }
-
- const payload = {
-      route_name: formValues.routeName,
-      source_city_id: Number(formValues.sourceCityId),
-      destination_city_id: Number(formValues.destinationCityId),
-      distance_km: Number(formValues.distanceKm),
-      estimated_duration_minutes: durationMinutes,
-      fare_price: Number(formValues.farePrice),
-      stops: stopsArray,
-      is_active: formValues.status === 'Active' ? 1 : 0
+    // Form values mein stops ko array format mein update kar dein taaki service sahi map kare
+    const finalFormValues = {
+      ...formValues,
+      stops: stopsArray
     };
-    this.routeService.updateRoute(this.routeId, payload).subscribe({
+
+    // Seedha form values pass karein, service khud hi mapToBackendPayload chala degi!
+    this.routeService.updateRoute(this.routeId, finalFormValues).subscribe({
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/routes']);
@@ -131,4 +120,6 @@ export class EditRouteComponent implements OnInit {
       }
     });
   }
+
+
 }
