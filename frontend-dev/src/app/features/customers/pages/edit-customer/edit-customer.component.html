@@ -82,14 +82,14 @@
                 formControlName="name"
                 placeholder="e.g. Muhammad Ali"
                 class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['name']?.touched && f['name']?.invalid}" />
+                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['name'].touched && f['name'].invalid}" />
 
-              @if (f['name']?.touched && f['name']?.invalid) {
+              @if (f['name'].touched && f['name'].invalid) {
                 <div class="mt-1 text-[10px] text-rose-500 font-medium">
-                  @if (f['name']?.errors?.['required']) {
+                  @if (f['name'].errors?.['required']) {
                     <span>Full name is required.</span>
                   }
-                  @if (f['name']?.errors?.['minlength']) {
+                  @if (f['name'].errors?.['minlength']) {
                     <span>Minimum 3 characters required.</span>
                   }
                 </div>
@@ -107,14 +107,14 @@
                 formControlName="email"
                 placeholder="e.g. ali@example.com"
                 class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['email']?.touched && f['email']?.invalid}" />
+                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['email'].touched && f['email'].invalid}" />
 
-              @if (f['email']?.touched && f['email']?.invalid) {
+              @if (f['email'].touched && f['email'].invalid) {
                 <div class="mt-1 text-[10px] text-rose-500 font-medium">
-                  @if (f['email']?.errors?.['required']) {
+                  @if (f['email'].errors?.['required']) {
                     <span>Email address is required.</span>
                   }
-                  @if (f['email']?.errors?.['email']) {
+                  @if (f['email'].errors?.['email']) {
                     <span>Enter a valid email address.</span>
                   }
                 </div>
@@ -132,14 +132,14 @@
                 formControlName="phone_number"
                 placeholder="e.g. 03001234567"
                 class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['phone_number']?.touched && f['phone_number']?.invalid}" />
+                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['phone_number'].touched && f['phone_number'].invalid}" />
 
-              @if (f['phone_number']?.touched && f['phone_number']?.invalid) {
+              @if (f['phone_number'].touched && f['phone_number'].invalid) {
                 <div class="mt-1 text-[10px] text-rose-500 font-medium">
-                  @if (f['phone_number']?.errors?.['required']) {
+                  @if (f['phone_number'].errors?.['required']) {
                     <span>Phone number is required.</span>
                   }
-                  @if (f['phone_number']?.errors?.['invalidPhone']) {
+                  @if (f['phone_number'].errors?.['invalidPhone']) {
                     <span>Enter valid Pakistani format (e.g. 03001234567).</span>
                   }
                 </div>
@@ -157,11 +157,11 @@
                 formControlName="cnic"
                 placeholder="e.g. 42101-1234567-1"
                 class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 font-mono outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['cnic']?.touched && f['cnic']?.invalid}" />
+                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['cnic'].touched && f['cnic'].invalid}" />
 
-              @if (f['cnic']?.touched && f['cnic']?.invalid) {
+              @if (f['cnic'].touched && f['cnic'].invalid) {
                 <div class="mt-1 text-[10px] text-rose-500 font-medium">
-                  @if (f['cnic']?.errors?.['invalidCnic']) {
+                  @if (f['cnic'].errors?.['invalidCnic']) {
                     <span>CNIC must be 13 digits (e.g. 42101-1234567-1).</span>
                   }
                 </div>
@@ -236,7 +236,7 @@
                 formControlName="emergency_contact_phone"
                 placeholder="e.g. 03217654321"
                 class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 hover:border-slate-300 focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['emergency_contact_phone']?.touched && f['emergency_contact_phone']?.invalid}" />
+                [ngClass]="{'border-rose-500! bg-rose-50/30!': f['emergency_contact_phone'].touched && f['emergency_contact_phone'].invalid}" />
             </div>
 
             <!-- Account Status Select Control -->
